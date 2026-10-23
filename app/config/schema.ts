@@ -28,6 +28,7 @@ const DEFAULT_POOLS: CardPool[] = ['daily', 'trip'];
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const isStr = (v: unknown): v is string => typeof v === 'string' && v.length > 0;
 const isProb = (v: unknown) => isNum(v) && v >= 0 && v <= 1;
+const isPattern = (v: unknown) => Array.isArray(v) && v.length > 0 && v.every((x) => isNum(x) && x >= 0);
 
 export function parseConfig(src: RawConfigSources): Config {
   const problems: string[] = [];
@@ -51,6 +52,8 @@ export function parseConfig(src: RawConfigSources): Config {
   req(isNum(game?.scoring?.verify_multiplier?.auto), 'game.scoring.verify_multiplier.auto must be a number');
   req(isNum(game?.scoring?.verify_multiplier?.self), 'game.scoring.verify_multiplier.self must be a number');
   req(isNum(game?.scoring?.bonus?.line) && isNum(game?.scoring?.bonus?.blackout), 'game.scoring.bonus.{line,blackout} required');
+  req(isPattern(game?.feedback?.haptic?.line) && isPattern(game?.feedback?.haptic?.blackout), 'game.feedback.haptic.{line,blackout} must be ms lists');
+  req(typeof game?.share?.hashtag === 'string' && typeof game?.share?.url === 'string', 'game.share.{hashtag,url} required');
 
   // ── rarity.yaml
   const rarities = rarity?.rarities ?? [];
@@ -62,6 +65,7 @@ export function parseConfig(src: RawConfigSources): Config {
     req(isNum(r.points) && r.points >= 0, `rarity "${r.id}" needs points`);
     req(isProb(r.probability), `rarity "${r.id}" probability must be in [0,1]`);
     req(isStr(r.color) && isStr(r.share_emoji), `rarity "${r.id}" needs color and share_emoji`);
+    req(isPattern(r.haptic), `rarity "${r.id}" haptic must be a list of ms`);
   });
   for (let i = 1; i < rarities.length; i++) {
     req(rarities[i]!.points > rarities[i - 1]!.points, `rarity points must increase with tier (${rarities[i]!.id})`);

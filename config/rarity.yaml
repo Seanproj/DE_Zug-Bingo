@@ -6,6 +6,7 @@
 #   - 밸런스 리포트(npm run report:balance)가 이 값으로 난이도를 시뮬레이션한다.
 #
 # share_emoji: Wordle식 텍스트 공유에서 체크된 칸 표시.
+# haptic: 체크 시 진동 패턴 (navigator.vibrate, ms). 등급이 높을수록 길고 화려하게.
 
 rarities:
   - id: common
@@ -16,6 +17,7 @@ rarities:
     glow: "rgba(154,164,178,0.35)"
     share_emoji: "🟩"
     probability: 0.55
+    haptic: [12]
 
   - id: uncommon
     tier: 1
@@ -25,6 +27,7 @@ rarities:
     glow: "rgba(61,220,132,0.45)"
     share_emoji: "🟨"
     probability: 0.30
+    haptic: [18]
 
   - id: rare
     tier: 2
@@ -34,6 +37,7 @@ rarities:
     glow: "rgba(59,158,255,0.55)"
     share_emoji: "🟦"
     probability: 0.12
+    haptic: [12, 40, 18]
 
   - id: epic
     tier: 3
@@ -43,6 +47,7 @@ rarities:
     glow: "rgba(166,107,255,0.6)"
     share_emoji: "🟪"
     probability: 0.05
+    haptic: [20, 40, 20, 40, 30]
 
   - id: legendary
     tier: 4
@@ -52,6 +57,7 @@ rarities:
     glow: "rgba(255,159,28,0.65)"
     share_emoji: "🟧"
     probability: 0.02
+    haptic: [30, 50, 30, 50, 60]
 
   - id: mythic
     tier: 5
@@ -62,6 +68,7 @@ rarities:
     glow: "rgba(255,106,213,0.7)"
     share_emoji: "🌈"
     probability: 0.01
+    haptic: [40, 40, 40, 40, 40, 40, 120]
 
 share:
   unchecked_emoji: "⬜"

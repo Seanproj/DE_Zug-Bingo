@@ -12,6 +12,8 @@ export interface Rarity {
   glow: string;
   share_emoji: string;
   probability: number;
+  /** navigator.vibrate pattern on check */
+  haptic: number[];
 }
 
 export type CardPool = 'daily' | 'trip' | 'event' | 'season';
@@ -57,6 +59,8 @@ export interface GameConfig {
     free_square_points: number;
     bonus: { line: number; blackout: number };
   };
+  feedback: { haptic: { line: number[]; blackout: number[] } };
+  share: { hashtag: string; url: string };
 }
 
 export interface BlessedLanes {

@@ -32,3 +32,12 @@ scoring:
   bonus:
     line: 50                  # 빙고 1줄마다
     blackout: 1000            # 25칸 전부
+
+feedback:
+  haptic:
+    line: [30, 60, 30, 60, 90]          # 빙고 줄 완성
+    blackout: [60, 60, 60, 60, 60, 60, 200]
+
+share:
+  hashtag: "#ZugBingo"
+  url: ""                     # 배포 도메인이 정해지면 채운다 (공유 텍스트 마지막 줄)

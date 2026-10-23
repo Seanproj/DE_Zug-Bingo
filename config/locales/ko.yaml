@@ -1,0 +1,285 @@
+# 한국어 (기준 언어). 모든 키는 en/de에도 있어야 한다 — 테스트가 검사.
+# ui.* 의 {n} 등은 치환 변수, *_one/*_other 는 복수형 (Intl.PluralRules).
+meta:
+  name: 한국어
+  short_max: 10
+  show_term: true
+rarities:
+  common: 일반
+  uncommon: 고급
+  rare: 희귀
+  epic: 영웅
+  legendary: 전설
+  mythic: 신화
+free_square:
+  label: 오늘도 기차를 탔다
+  short: 오늘도 탔다
+  flavor: 이것만으로도 이미 용감하다.
+squares:
+  delay_5:
+    label: 5분 이상 지연
+    short: 5분+ 지연
+    flavor: 5분은 지연이 아니라 독일식 여유입니다.
+  delay_20:
+    label: 20분+ 지연, 열차 지정 해제
+    short: 20분+ 지연
+    flavor: 축하합니다, 아무 열차나 타도 되는 자유를 얻었습니다.
+  delay_60:
+    label: 60분+ 지연 (보상금 25%)
+    short: 60분+ 지연
+    flavor: 한 시간짜리 무료 명상 세션이 시작됩니다.
+  delay_120:
+    label: 120분+ 지연 (보상금 50%)
+    short: 120분+ 지연
+    flavor: 영화 한 편 분량. 결말은 아직 미정.
+  platform_change:
+    label: 승강장 변경
+    short: 승강장 변경
+    flavor: 계단 왕복 2회, 오늘의 유산소 완료.
+  cancelled:
+    label: 열차 취소
+    short: 열차 취소
+    flavor: 가장 빠른 열차는 오지 않는 열차입니다.
+  short_turn:
+    label: 중간역 종착
+    short: 중간역 종착
+    flavor: 여기가 종점이라고 하니, 여기가 종점입니다.
+  on_time_ice:
+    label: ICE 정시 도착
+    short: ICE 정시 도착
+    flavor: 목격자 진술서가 필요할 수도 있습니다.
+  ersatzverkehr:
+    label: 대체버스 탑승
+    short: 대체버스
+    flavor: 기차표로 떠나는 고속도로 투어.
+  reverse_order:
+    label: 객차 순서 반대
+    short: 객차 순서 반대
+    flavor: 승강장 A구역의 당신, 이제 G구역으로 달리세요.
+  wifi_dead:
+    label: 와이파이 안 됨
+    short: 와이파이 사망
+    flavor: 로그인 페이지까지는 갔습니다. 거기까지였습니다.
+  bistro_closed:
+    label: 식당칸 영업 안 함
+    short: 식당칸 휴업
+    flavor: 메뉴판은 있습니다. 메뉴판만 있습니다.
+  ac_broken:
+    label: 에어컨/난방 고장
+    short: 에어컨 고장
+    flavor: 사우나 이용료는 승차권에 포함되어 있습니다.
+  repair:
+    label: '"열차 수리 중" 안내'
+    short: '"수리 중"'
+    flavor: 달리는 중에 고치는 건 아니길 바랄 뿐.
+  signal:
+    label: '"신호 장애" 안내'
+    short: '"신호 장애"'
+    flavor: 신호도 오늘은 쉬고 싶었나 봅니다.
+  priority:
+    label: '"타 열차 우선 통과" 안내'
+    short: '"우선 통과"'
+    flavor: 오늘의 주인공은 옆 선로의 열차입니다.
+  apology:
+    label: 사과 방송 3회 이상
+    short: 사과 방송 ×3
+    flavor: 세 번째쯤이면 우리가 먼저 괜찮다고 하고 싶어집니다.
+  standing:
+    label: 지정석 있는데 서서 감
+    short: 예약석 증발
+    flavor: 예약은 했습니다. 좌석이 동의하지 않았을 뿐.
+  missed_conn:
+    label: 환승 놓침
+    short: 환승 놓침
+    flavor: 저 멀리 떠나는 열차의 뒷모습이 아름답습니다.
+  saved_conn:
+    label: 환승 2분 이내 성공
+    short: 2분 환승 성공
+    flavor: 문이 닫히는 소리와 함께 전설이 되었습니다.
+  faster_alt:
+    label: 늦은 열차 버리고 탄 다른 열차가 더 빨리 도착
+    short: 플랜 B 승리
+    flavor: 시간표보다 내 직감이 정확했던 날.
+  funkloch:
+    label: 통신 끊김 구간 진입
+    short: 통신 두절
+    flavor: 디지털 디톡스, 선택이 아닌 필수.
+  strike_day:
+    label: 파업일 탑승
+    short: 파업일 탑승
+    flavor: 그래도 탔다는 사실 자체가 업적입니다.
+  delay_inherited:
+    label: '"이전 운행 지연" 안내'
+    short: '"이전 운행 지연"'
+    flavor: 지연도 상속됩니다. 상속세는 우리가 냅니다.
+  wait_oncoming:
+    label: 반대편 열차 기다리는 중
+    short: 반대편 열차 대기
+    flavor: 단선 구간의 미덕, 양보.
+  construction:
+    label: 공사 구간 서행
+    short: 공사 서행
+    flavor: 미래를 위한 공사. 미래는 2030년 이후 도착 예정.
+  door_broken:
+    label: 하필 내 앞 문만 고장
+    short: 내 앞 문 고장
+    flavor: 옆 문까지 열두 걸음. 짐은 세 개.
+  coffee_out:
+    label: 커피 머신 고장
+    short: 커피 머신 고장
+    flavor: 오늘의 각성은 지연 알림이 대신합니다.
+  speaker_garbled:
+    label: 안내방송이 하나도 안 들림
+    short: 방송 해독 불가
+    flavor: 중요한 내용인 건 확실합니다. 내용은 불확실합니다.
+  backwards_seat:
+    label: 역방향 좌석
+    short: 역방향 좌석
+    flavor: 지나간 풍경을 음미하는 철학적 여행.
+  socket_dead:
+    label: 콘센트에 전기가 안 들어옴
+    short: 콘센트 정전
+    flavor: 배터리 7%, 남은 여정 2시간. 운명을 받아들입니다.
+  toilet_closed:
+    label: 화장실 사용 불가
+    short: 화장실 폐쇄
+    flavor: 다음 화장실까지 3량, 혹은 다음 역.
+  info_follows:
+    label: '"추가 안내 예정"… 끝내 안 옴'
+    short: '"추가 안내 예정"'
+    flavor: 안내는 예정되어 있습니다. 도착 시각은 미정입니다.
+  delay_growing:
+    label: 지연 시간이 계속 늘어남
+    short: 지연 무한 증식
+    flavor: +5 → +12 → +25. 우상향 차트는 여기서만 슬픕니다.
+  overcrowded:
+    label: 만석, 통로까지 꽉 참
+    short: 통로까지 만석
+    flavor: 손잡이 대신 옆 사람 배낭을 잡았습니다.
+  display_mismatch:
+    label: 전광판과 방송이 서로 다른 말
+    short: 전광판 ≠ 방송
+    flavor: 진실은 앱이 알고 있습니다. 앱은 세 번째 의견을 냅니다.
+  coach_missing:
+    label: 내 예약 객차가 아예 없음
+    short: 예약 객차 실종
+    flavor: 21호차는 오늘 영적인 존재로 운행합니다.
+  animals_on_track:
+    label: 선로 위 동물
+    short: 선로 위 동물
+    flavor: 오늘 선로 통행 우선권은 소에게 있습니다.
+  reason_changed:
+    label: 지연 사유가 중간에 바뀜
+    short: 사유 변경
+    flavor: 신호 장애였다가, 선행 열차였다가, 이제는 날씨입니다.
+  stop_skipped:
+    label: 정차 예정역 통과
+    short: 정차역 패싱
+    flavor: 내릴 역이 창밖으로 지나갔습니다. 손은 흔들어 줬습니다.
+  early_arrival:
+    label: 예정보다 일찍 도착
+    short: 조기 도착
+    flavor: 시공간이 뒤틀렸습니다. 스크린샷 필수.
+achievements:
+  first_bingo:
+    name: 첫 빙고
+    description: 처음으로 한 줄을 완성했다. 시작이 반, 나머지 반은 지연.
+  triple_line:
+    name: 트리플 라인
+    description: 카드 한 장에서 3줄 완성.
+  blackout:
+    name: 블랙아웃
+    description: 25칸 전부. 당신의 하루에 깊은 위로를.
+  streak_7:
+    name: 7일 연속 탑승
+    description: 일주일 내내 Daily 카드에 참여했다.
+  streak_30:
+    name: 30일 연속 탑승
+    description: 한 달 개근. 기차보다 당신이 더 성실하다.
+  delay_24h:
+    name: 하루를 기차에 바쳤다
+    description: 누적 지연 24시간 (1,440분).
+  compensation_100:
+    name: 주주급 대우
+    description: 누적 보상금 €100 돌파. 배당금 아니고 보상금입니다.
+  mythic_any:
+    name: 신화를 보았다
+    description: Mythic 칸 획득. 아무도 안 믿어 줄 테니 공유 카드를 남기자.
+  verified_10:
+    name: 데이터는 거짓말하지 않는다
+    description: 자동 인증 칸 10개 획득.
+  collector_half:
+    name: 도감 절반
+    description: 서로 다른 칸 18종 수집.
+  oracle_5:
+    name: 지연 예언자
+    description: 예측 베팅 5회 적중. (게임 포인트 전용)
+titles:
+  sev_master: 대체버스 마스터
+  s3_martyr: S3의 순교자
+  transfer_god: 환승의 신
+  ffm_regular: Frankfurt Hbf 터줏대감
+  on_time_witness: 정시 목격자
+  platform_athlete: 승강장 육상선수
+  zen_commuter: 해탈한 통근자
+levels:
+  fahrgast: 승객
+  pendler: 통근자
+  vielfahrer: 단골 승객
+  bahn_veteran: 철도 베테랑
+  gleis_legende: 선로의 전설
+ui:
+  header.daily: 오늘의 카드
+  header.streak: '{n}일 연속'
+  header.score: 점수
+  header.checked: '{n}/24칸'
+  board.blessed_hint: 금색 줄은 오늘의 축복 라인 — 일반 칸만 모여 있어요
+  board.one_away: 한 칸 남음!
+  board.label: 오늘의 빙고 카드
+  cell.checked: 체크됨
+  cell.auto: 자동 인증 가능
+  sheet.term: 원어
+  sheet.verify_auto: 실시간 데이터로 자동 인증 가능 · 점수 ×{mult} (곧 지원)
+  sheet.verify_self: 셀프 신고 칸 · 점수 ×{mult}
+  sheet.points: '{points}점'
+  sheet.check: 체크하기
+  sheet.uncheck: 체크 해제
+  sheet.close: 닫기
+  sheet.implies: '함께 체크됨: {list}'
+  toast.implied: '{list}도 함께 체크했어요'
+  toast.bingo_one: 빙고! {n}줄 완성
+  toast.bingo_other: 빙고! {n}줄 완성
+  toast.blackout: 블랙아웃! 25칸 전부 달성
+  toast.offline_bonus: 📵 Funkloch 진입! 기록은 저장 중… (보너스 칸 '{square}' 획득)
+  toast.offline: 📵 Funkloch 진입! 기록은 이 기기에 안전하게 저장 중…
+  toast.online: 📶 다시 연결됐어요
+  toast.copied: 결과를 클립보드에 복사했어요
+  toast.share_failed: 공유하지 못했어요
+  toast.new_day: '새 카드 도착 — #{n}'
+  action.share: 결과 공유
+  action.settings: 설정
+  action.help: 도움말
+  settings.title: 설정
+  settings.language: 언어
+  settings.language_auto: 자동 (기기 언어)
+  settings.haptics: 진동 피드백
+  settings.on: 켜짐
+  settings.off: 꺼짐
+  help.title: 플레이 방법
+  help.tap: 겪은 일을 탭해서 체크하세요. 체크한 칸을 다시 탭하면 자세히 볼 수 있어요.
+  help.hold: 길게 누르면 칸 설명과 점수를 볼 수 있어요.
+  help.lines: 가로·세로·대각선 한 줄을 채우면 빙고! 가운데 🫡 칸은 무료예요.
+  help.blessed: 금색 테두리 줄은 🫡 축복 라인 — 일반 칸만 있어 오늘 가장 노려볼 만해요.
+  help.rarity: 희귀한 칸일수록 점수가 높아요. 정시 도착은 무려 신화 등급.
+  help.offline: 오프라인에서도 체크는 계속 저장돼요.
+  help.daily: 독일 시간 자정마다 모두에게 같은 새 카드가 나와요.
+  share.lines_zero: 빙고 도전 중
+  share.lines_one: '{n}줄!'
+  share.lines_other: '{n}줄!'
+  share.blackout: 블랙아웃!
+  share.footer: '{checked}칸 체크 · {score}점'
+  footer.disclaimer: 비공식 팬 프로젝트 · Deutsche Bahn과 무관합니다
+  footer.data: 'Daten: Deutsche Bahn (CC BY 4.0)'
+  onboard.title: 독일 기차, 이제 수집하세요
+  onboard.body: 지연·취소·대체버스… 오늘 겪은 일을 체크하고 빙고를 완성하세요.
+  onboard.cta: 오늘의 카드 시작

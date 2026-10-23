@@ -1,6 +1,5 @@
 // Parse + validate the YAML sources. Throws ConfigError with every problem found,
 // so a broken config fails loudly in tests and at build time instead of mid-game.
-import { parse } from 'yaml';
 import {
   NUMERIC_STATS,
   type AchievementsConfig,
@@ -8,6 +7,7 @@ import {
   type Condition,
   type Config,
   type GameConfig,
+  type LocaleStrings,
   type RarityConfig,
   type RarityId,
   type RawConfigSources,
@@ -35,10 +35,11 @@ export function parseConfig(src: RawConfigSources): Config {
     if (!cond) problems.push(msg);
   };
 
-  const game = parse(src.game) as GameConfig;
-  const rarity = parse(src.rarity) as RarityConfig;
-  const rawSquares = (parse(src.squares) as { squares: Partial<Square>[] }).squares ?? [];
-  const achievements = parse(src.achievements) as AchievementsConfig;
+  const game = src.game as GameConfig;
+  const rarity = src.rarity as RarityConfig;
+  const rawSquares = (src.squares as { squares?: Partial<Square>[] })?.squares ?? [];
+  const achievements = src.achievements as AchievementsConfig;
+  const locales = src.locales as Record<string, LocaleStrings>;
 
   // ── game.yaml
   req(Number.isInteger(game?.generator_version), 'game.generator_version must be an integer');
@@ -78,12 +79,10 @@ export function parseConfig(src: RawConfigSources): Config {
     req(!squareById.has(s.id), `duplicate square id "${s.id}"`);
     req(s.id !== game?.board?.free_square?.id, `square id "${s.id}" collides with the free square`);
     squareById.set(s.id, s);
-    req(isStr(s.label) && isStr(s.short) && isStr(s.de) && isStr(s.emoji), `square "${s.id}" needs label, short, de, emoji`);
-    req((s.short ?? '').length <= 10, `square "${s.id}" short label is longer than 10 chars`);
+    req(isStr(s.term) && isStr(s.emoji), `square "${s.id}" needs term, emoji`);
     req(rarityById.has(s.rarity), `square "${s.id}" has unknown rarity "${s.rarity}"`);
     req(typeof s.verifiable === 'boolean', `square "${s.id}" needs verifiable: true/false`);
     req(!s.verifiable || isStr(s.verify?.type), `verifiable square "${s.id}" needs verify.type`);
-    req(isStr(s.flavor), `square "${s.id}" needs flavor`);
     req(s.origin === 'handoff' || s.origin === 'original', `square "${s.id}" origin must be handoff|original`);
     req(s.pools.every((p) => POOLS.includes(p)), `square "${s.id}" has unknown pool`);
     req(s.probability === undefined || isProb(s.probability), `square "${s.id}" probability must be in [0,1]`);
@@ -170,6 +169,34 @@ export function parseConfig(src: RawConfigSources): Config {
     req(levels[i]!.min_score > levels[i - 1]!.min_score, `levels must be in ascending min_score (${levels[i]!.id})`);
   }
 
+  // ── locales/*.yaml — every supported locale must carry every text, ui keys mirror the reference
+  const supported = game?.locales?.supported ?? [];
+  const reference = locales?.[game?.locales?.reference];
+  req(supported.includes(game?.locales?.reference) && supported.includes(game?.locales?.fallback), 'game.locales.reference/fallback must be supported');
+  for (const code of supported) {
+    const loc = locales?.[code];
+    if (!loc) {
+      problems.push(`locale "${code}" is missing (config/locales/${code}.yaml)`);
+      continue;
+    }
+    const where = `locales/${code}`;
+    req(isStr(loc.meta?.name) && isNum(loc.meta?.short_max), `${where}: meta.name and meta.short_max required`);
+    const text = (t: Partial<{ label: string; short: string; flavor: string }> | undefined, what: string) => {
+      req(isStr(t?.label) && isStr(t?.short) && isStr(t?.flavor), `${where}: ${what} needs label, short, flavor`);
+      req((t?.short ?? '').length <= (loc.meta?.short_max ?? 0), `${where}: ${what} short "${t?.short}" exceeds ${loc.meta?.short_max} chars`);
+    };
+    text(loc.free_square, 'free_square');
+    for (const s of squares) text(loc.squares?.[s.id], `squares.${s.id}`);
+    for (const id of Object.keys(loc.squares ?? {})) req(squareById.has(id), `${where}: text for unknown square "${id}"`);
+    for (const id of RARITY_IDS) req(isStr(loc.rarities?.[id]), `${where}: rarities.${id} missing`);
+    for (const a of achievements?.achievements ?? [])
+      req(isStr(loc.achievements?.[a.id]?.name) && isStr(loc.achievements?.[a.id]?.description), `${where}: achievements.${a.id} needs name, description`);
+    for (const t of achievements?.titles ?? []) req(isStr(loc.titles?.[t.id]), `${where}: titles.${t.id} missing`);
+    for (const l of levels) req(isStr(loc.levels?.[l.id]), `${where}: levels.${l.id} missing`);
+    for (const key of Object.keys(reference?.ui ?? {})) req(isStr(loc.ui?.[key]), `${where}: ui.${key} missing`);
+    for (const key of Object.keys(loc.ui ?? {})) req(key in (reference?.ui ?? {}), `${where}: ui.${key} not in reference locale`);
+  }
+
   if (problems.length) throw new ConfigError(problems);
-  return { game, rarity, squares, achievements, rarityById, squareById };
+  return { game, rarity, squares, achievements, locales, rarityById, squareById };
 }

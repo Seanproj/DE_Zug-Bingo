@@ -7,6 +7,7 @@ import { boardLines } from '../app/game/board.ts';
 import { generateDailyCard } from '../app/game/card.ts';
 import { addDays } from '../app/game/date.ts';
 import { simulateCard, squareProbability } from '../app/game/simulate.ts';
+import { createI18n } from '../app/i18n/index.ts';
 
 const { values } = parseArgs({
   options: {
@@ -18,12 +19,13 @@ const { values } = parseArgs({
 });
 
 const config = loadConfig();
+const i18n = createI18n(config, 'ko');
 const days = Number(values.days);
 const from = values.from ?? config.game.daily.epoch;
 const trials = Number(values.trials);
 const rarities = config.rarity.rarities;
 const pct = (x: number, d = 1) => `${(x * 100).toFixed(d)}%`;
-const label = (id: string) => config.squareById.get(id)?.label ?? id;
+const label = (id: string) => i18n.square(id).label;
 const tierOf = (id: string) => config.rarityById.get(config.squareById.get(id)!.rarity)!.tier;
 
 /** Difficulty bands on P(≥1 line per day). Tuning targets, not config. */
@@ -59,7 +61,7 @@ w('|---|---:|---:|---:|---:|---:|');
 for (const r of rarities) {
   const n = config.rarity.daily_card.composition[r.id];
   const pool = config.squares.filter((s) => s.rarity === r.id && s.pools.includes('daily'));
-  w(`| ${r.emoji} ${r.label} | ${n} | ${r.points} | ${pct(r.probability, 0)} | ${pool.length} | ${((n * days) / pool.length).toFixed(1)}회 |`);
+  w(`| ${r.emoji} ${i18n.rarity(r.id)} | ${n} | ${r.points} | ${pct(r.probability, 0)} | ${pool.length} | ${((n * days) / pool.length).toFixed(1)}회 |`);
 }
 w();
 w('## 2. 요약');
@@ -93,7 +95,7 @@ const daily = config.squares.filter((s) => s.pools.includes('daily'));
 daily.sort((a, b) => tierOf(a.id) - tierOf(b.id) || (appear.get(b.id) ?? 0) - (appear.get(a.id) ?? 0));
 for (const s of daily) {
   const r = config.rarityById.get(s.rarity)!;
-  w(`| ${s.emoji} ${s.label} (${s.de}) | ${r.emoji} ${r.label} | ${pct(squareProbability(config, s.id), 0)} | ${s.verifiable ? '✅' : '🙋'} | ${appear.get(s.id) ?? 0} |`);
+  w(`| ${s.emoji} ${label(s.id)} (${s.term}) | ${r.emoji} ${i18n.rarity(r.id)} | ${pct(squareProbability(config, s.id), 0)} | ${s.verifiable ? '✅' : '🙋'} | ${appear.get(s.id) ?? 0} |`);
 }
 w();
 w('## 5. 첫 카드 미리보기');
@@ -107,9 +109,9 @@ w('|' + ' :---: |'.repeat(size));
 for (let r = 0; r < size; r++) {
   const cells = Array.from({ length: size }, (_, c) => {
     const cell = first.cells[r * size + c]!;
-    if (cell.free) return `${config.game.board.free_square.emoji} **${config.game.board.free_square.label}**`;
+    if (cell.free) return `${config.game.board.free_square.emoji} **${label(cell.squareId)}**`;
     const sq = config.squareById.get(cell.squareId)!;
-    return `${config.rarityById.get(sq.rarity)!.emoji} ${sq.label}`;
+    return `${config.rarityById.get(sq.rarity)!.emoji} ${label(sq.id)}`;
   });
   w(`| ${cells.join(' | ')} |`);
 }

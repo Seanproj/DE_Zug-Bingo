@@ -1,0 +1,284 @@
+# English. Keys must mirror ko.yaml (checked by tests).
+meta:
+  name: English
+  short_max: 16
+  show_term: true
+rarities:
+  common: Common
+  uncommon: Uncommon
+  rare: Rare
+  epic: Epic
+  legendary: Legendary
+  mythic: Mythic
+free_square:
+  label: Rode the train today
+  short: Rode today
+  flavor: That alone is brave.
+squares:
+  delay_5:
+    label: Delayed 5+ minutes
+    short: 5+ min late
+    flavor: Five minutes isn't late. It's German leisure.
+  delay_20:
+    label: 20+ min late, ticket binding lifted
+    short: 20+ min late
+    flavor: 'Congratulations: you may now take any train you like.'
+  delay_60:
+    label: 60+ min late (25% compensation)
+    short: 60+ min late
+    flavor: Your complimentary one-hour meditation begins now.
+  delay_120:
+    label: 120+ min late (50% compensation)
+    short: 120+ min late
+    flavor: Feature-film length. Ending still unknown.
+  platform_change:
+    label: Platform change
+    short: Platform swap
+    flavor: 'Two trips up the stairs. Cardio: done.'
+  cancelled:
+    label: Train cancelled
+    short: Cancelled
+    flavor: The fastest train is the one that never comes.
+  short_turn:
+    label: Train terminates early
+    short: Ends early
+    flavor: This is the last stop, they say. So it is.
+  on_time_ice:
+    label: ICE arrives on time
+    short: ICE on time
+    flavor: You may need a witness statement.
+  ersatzverkehr:
+    label: Took the rail replacement bus
+    short: Replacement bus
+    flavor: A motorway tour, included with your rail ticket.
+  reverse_order:
+    label: Coaches in reverse order
+    short: Reversed coaches
+    flavor: Waiting in section A? Please sprint to G.
+  wifi_dead:
+    label: Wi-Fi not working
+    short: Wi-Fi dead
+    flavor: You reached the login page. That was the journey.
+  bistro_closed:
+    label: On-board bistro closed
+    short: Bistro closed
+    flavor: There is a menu. There is only a menu.
+  ac_broken:
+    label: Air-con / heating broken
+    short: AC broken
+    flavor: Sauna access is included in your fare.
+  repair:
+    label: '"Repairs on the train" announcement'
+    short: '"Repairs"'
+    flavor: Hopefully not while moving.
+  signal:
+    label: '"Signal failure" announcement'
+    short: '"Signal failure"'
+    flavor: The signals needed a day off too.
+  priority:
+    label: '"Another train has priority"'
+    short: '"Priority train"'
+    flavor: Today's lead role goes to the train next door.
+  apology:
+    label: 3+ apology announcements
+    short: Sorry ×3
+    flavor: By the third one, you want to say it's fine.
+  standing:
+    label: Reserved a seat, stood anyway
+    short: Seat vanished
+    flavor: You reserved. The seat did not consent.
+  missed_conn:
+    label: Missed a connection
+    short: Missed transfer
+    flavor: Its departing silhouette is quite beautiful.
+  saved_conn:
+    label: Made a connection with ≤ 2 min
+    short: 2-min transfer
+    flavor: The doors closed behind you. Legend status.
+  faster_alt:
+    label: Ditched the late train — Plan B arrived first
+    short: Plan B won
+    flavor: Your gut beat the timetable today.
+  funkloch:
+    label: Entered a dead zone
+    short: No signal
+    flavor: 'Digital detox: not optional.'
+  strike_day:
+    label: Rode on a strike day
+    short: Strike day
+    flavor: Just showing up is the achievement.
+  delay_inherited:
+    label: '"Delay from a previous journey"'
+    short: '"Prior delay"'
+    flavor: Delays are inherited. We pay the inheritance tax.
+  wait_oncoming:
+    label: Waiting for an oncoming train
+    short: Oncoming wait
+    flavor: 'Single-track virtue: patience.'
+  construction:
+    label: Slow running through track works
+    short: Track works
+    flavor: Building the future. Future arrives after 2030.
+  door_broken:
+    label: Of course it's my door that's broken
+    short: My door broken
+    flavor: Twelve steps to the next door. Three bags.
+  coffee_out:
+    label: Coffee machine broken
+    short: No coffee
+    flavor: 'Today''s caffeine: delay notifications.'
+  speaker_garbled:
+    label: Announcement completely unintelligible
+    short: Garbled PA
+    flavor: It was definitely important. The content, less so.
+  backwards_seat:
+    label: Seat facing backwards
+    short: Backwards seat
+    flavor: A philosophical journey through what has passed.
+  socket_dead:
+    label: Power socket is dead
+    short: Dead socket
+    flavor: Battery 7%, two hours to go. Fate accepted.
+  toilet_closed:
+    label: Toilet out of order
+    short: WC closed
+    flavor: 'Next toilet: three coaches or one station away.'
+  info_follows:
+    label: '"More information to follow"… it never does'
+    short: '"Info to follow"'
+    flavor: Information is scheduled. Arrival time unknown.
+  delay_growing:
+    label: Delay keeps growing
+    short: Growing delay
+    flavor: +5 → +12 → +25. The only sad up-and-to-the-right chart.
+  overcrowded:
+    label: Packed train, even the aisles
+    short: Packed aisles
+    flavor: Grabbed a stranger's backpack instead of a handrail.
+  display_mismatch:
+    label: Display and announcement disagree
+    short: Board ≠ PA
+    flavor: The app knows the truth. It offers a third opinion.
+  coach_missing:
+    label: Your reserved coach doesn't exist
+    short: Coach missing
+    flavor: Coach 21 is running in spirit form today.
+  animals_on_track:
+    label: Animals on the track
+    short: Animals on track
+    flavor: Today the cows have right of way.
+  reason_changed:
+    label: Delay reason changed mid-trip
+    short: Reason changed
+    flavor: Signal fault, then a train ahead, now the weather.
+  stop_skipped:
+    label: Your stop was skipped
+    short: Stop skipped
+    flavor: Your station drifted past the window. You waved.
+  early_arrival:
+    label: Arrived ahead of schedule
+    short: Early arrival
+    flavor: Spacetime is bent. Screenshot required.
+achievements:
+  first_bingo:
+    name: First Bingo
+    description: Completed your first line. Half the battle — the other half is delays.
+  triple_line:
+    name: Triple Line
+    description: Three lines on a single card.
+  blackout:
+    name: Blackout
+    description: All 25 squares. Our deepest sympathies for your day.
+  streak_7:
+    name: 7-Day Streak
+    description: Played the daily card every day for a week.
+  streak_30:
+    name: 30-Day Streak
+    description: A full month. More reliable than the trains.
+  delay_24h:
+    name: A Day Given to the Rails
+    description: 24 hours of accumulated delay (1,440 min).
+  compensation_100:
+    name: Shareholder Treatment
+    description: Over €100 in compensation. Not dividends — compensation.
+  mythic_any:
+    name: Witnessed a Myth
+    description: Collected a Mythic square. Nobody will believe you, so share the card.
+  verified_10:
+    name: Data Doesn't Lie
+    description: 10 auto-verified squares.
+  collector_half:
+    name: Half the Collection
+    description: Collected 18 different squares.
+  oracle_5:
+    name: Delay Oracle
+    description: 5 correct predictions. (Game points only)
+titles:
+  sev_master: Replacement Bus Master
+  s3_martyr: Martyr of the S3
+  transfer_god: God of Transfers
+  ffm_regular: Frankfurt Hbf Regular
+  on_time_witness: Witness of Punctuality
+  platform_athlete: Platform Sprinter
+  zen_commuter: Zen Commuter
+levels:
+  fahrgast: Passenger
+  pendler: Commuter
+  vielfahrer: Frequent Rider
+  bahn_veteran: Rail Veteran
+  gleis_legende: Track Legend
+ui:
+  header.daily: Daily card
+  header.streak: '{n}-day streak'
+  header.score: Score
+  header.checked: '{n}/24'
+  board.blessed_hint: Gold lines are today's blessed lanes — commons only
+  board.one_away: One to go!
+  board.label: Today's bingo card
+  cell.checked: checked
+  cell.auto: auto-verifiable
+  sheet.term: Original term
+  sheet.verify_auto: Auto-verifiable with live data · score ×{mult} (coming soon)
+  sheet.verify_self: Self-reported · score ×{mult}
+  sheet.points: '{points} pts'
+  sheet.check: Check it
+  sheet.uncheck: Uncheck
+  sheet.close: Close
+  sheet.implies: 'Also checks: {list}'
+  toast.implied: Also checked {list}
+  toast.bingo_one: Bingo! {n} line
+  toast.bingo_other: Bingo! {n} lines
+  toast.blackout: Blackout! All 25 squares
+  toast.offline_bonus: 📵 Entered a Funkloch! Saving offline… (bonus square '{square}' unlocked)
+  toast.offline: 📵 Entered a Funkloch! Everything is saved on this device…
+  toast.online: 📶 Back online
+  toast.copied: Result copied to clipboard
+  toast.share_failed: Couldn't share
+  toast.new_day: 'New card arrived — #{n}'
+  action.share: Share result
+  action.settings: Settings
+  action.help: How to play
+  settings.title: Settings
+  settings.language: Language
+  settings.language_auto: Auto (device language)
+  settings.haptics: Haptic feedback
+  settings.on: 'On'
+  settings.off: 'Off'
+  help.title: How to play
+  help.tap: Tap whatever happened to you. Tap a checked square again for details.
+  help.hold: Long-press any square to see its story and points.
+  help.lines: Fill a row, column or diagonal for bingo. The 🫡 center is free.
+  help.blessed: Gold-framed lines are 🫡 blessed lanes — commons only, your best shot today.
+  help.rarity: Rarer squares score more. Arriving on time is Mythic.
+  help.offline: Checks keep saving while you're offline.
+  help.daily: Everyone gets the same new card at midnight, German time.
+  share.lines_zero: still trying
+  share.lines_one: '{n} line!'
+  share.lines_other: '{n} lines!'
+  share.blackout: Blackout!
+  share.footer: '{checked} squares · {score} pts'
+  footer.disclaimer: Unofficial fan project · not affiliated with Deutsche Bahn
+  footer.data: 'Daten: Deutsche Bahn (CC BY 4.0)'
+  onboard.title: German trains. Now collectible.
+  onboard.body: Delays, cancellations, replacement buses — check off what happened today and complete a bingo.
+  onboard.cta: Start today's card

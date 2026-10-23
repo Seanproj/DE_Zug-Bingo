@@ -1,4 +1,4 @@
-# 업적 · 칭호 · 레벨.
+# 업적 · 칭호 · 레벨. (이름/설명 문구는 config/locales/*.yaml)
 #
 # 조건(condition) 문법 — app/game/achievements.ts 가 평가한다.
 #   { type: stat, stat: <PlayerStats 숫자 필드>, gte: N }
@@ -17,114 +17,78 @@ achievements:
   - id: first_bingo
     emoji: "🥉"
     tier: bronze
-    name: 첫 빙고
-    description: 처음으로 한 줄을 완성했다. 시작이 반, 나머지 반은 지연.
     condition: { type: stat, stat: bingoCards, gte: 1 }
 
   - id: triple_line
     emoji: "🥈"
     tier: silver
-    name: 트리플 라인
-    description: 카드 한 장에서 3줄 완성.
     condition: { type: stat, stat: maxLinesOnCard, gte: 3 }
 
   - id: blackout
     emoji: "🥇"
     tier: gold
-    name: 블랙아웃
-    description: 25칸 전부. 당신의 하루에 깊은 위로를.
     condition: { type: stat, stat: blackouts, gte: 1 }
 
   - id: streak_7
     emoji: "🔥"
     tier: silver
-    name: 7일 연속 탑승
-    description: 일주일 내내 Daily 카드에 참여했다.
     condition: { type: stat, stat: dailyStreak, gte: 7 }
 
   - id: streak_30
     emoji: "🌋"
     tier: gold
-    name: 30일 연속 탑승
-    description: 한 달 개근. 기차보다 당신이 더 성실하다.
     condition: { type: stat, stat: dailyStreak, gte: 30 }
 
   - id: delay_24h
     emoji: "🧘"
     tier: gold
-    name: 하루를 기차에 바쳤다
-    description: 누적 지연 24시간 (1,440분).
     condition: { type: stat, stat: totalDelayMinutes, gte: 1440 }
 
   - id: compensation_100
     emoji: "💶"
     tier: gold
-    name: 주주급 대우
-    description: 누적 보상금 €100 돌파. 배당금 아니고 보상금입니다.
     condition: { type: stat, stat: compensationEur, gte: 100 }
 
   - id: mythic_any
     emoji: "🌈"
     tier: special
-    name: 신화를 보았다
-    description: Mythic 칸 획득. 아무도 안 믿어 줄 테니 공유 카드를 남기자.
     condition: { type: rarity, rarity: mythic, gte: 1 }
 
   - id: verified_10
     emoji: "✅"
     tier: bronze
-    name: 데이터는 거짓말하지 않는다
-    description: 자동 인증 칸 10개 획득.
     condition: { type: stat, stat: verifiedCount, gte: 10 }
 
   - id: collector_half
     emoji: "📖"
     tier: silver
-    name: 도감 절반
-    description: 서로 다른 칸 18종 수집.
     condition: { type: stat, stat: distinctSquares, gte: 18 }
 
   - id: oracle_5
     emoji: "🔮"
     tier: silver
-    name: 지연 예언자
-    description: 예측 베팅 5회 적중. (게임 포인트 전용)
     condition: { type: stat, stat: betWins, gte: 5 }
 
 titles:
   - id: sev_master
-    name: 대체버스 마스터
-    de: SEV-Meister
     condition: { type: square, square: ersatzverkehr, gte: 10 }
 
   - id: s3_martyr
-    name: S3의 순교자
-    de: Märtyrer der S3
     condition: { type: line_trips, line: S3, gte: 50 }
 
   - id: transfer_god
-    name: 환승의 신
-    de: Gott des Umstiegs
     condition: { type: square, square: saved_conn, gte: 3 }
 
   - id: ffm_regular
-    name: Frankfurt Hbf 터줏대감
-    de: Stammgast Frankfurt Hbf
     condition: { type: station_visits, station: Frankfurt(Main)Hbf, gte: 30 }
 
   - id: on_time_witness
-    name: 정시 목격자
-    de: Augenzeuge der Pünktlichkeit
     condition: { type: square, square: on_time_ice, gte: 1 }
 
   - id: platform_athlete
-    name: 승강장 육상선수
-    de: Gleiswechsel-Athlet
     condition: { type: square, square: platform_change, gte: 15 }
 
   - id: zen_commuter
-    name: 해탈한 통근자
-    de: Zen-Pendler
     condition:
       type: all
       of:
@@ -133,8 +97,8 @@ titles:
 
 # 누적 점수(totalScore) 기반 레벨. min_score 오름차순.
 levels:
-  - { id: fahrgast, name: Fahrgast, name_ko: 승객, min_score: 0 }
-  - { id: pendler, name: Pendler, name_ko: 통근자, min_score: 500 }
-  - { id: vielfahrer, name: Vielfahrer, name_ko: 단골 승객, min_score: 2000 }
-  - { id: bahn_veteran, name: Bahn-Veteran, name_ko: 철도 베테랑, min_score: 6000 }
-  - { id: gleis_legende, name: Gleis-Legende, name_ko: 선로의 전설, min_score: 15000 }
+  - { id: fahrgast, min_score: 0 }
+  - { id: pendler, min_score: 500 }
+  - { id: vielfahrer, min_score: 2000 }
+  - { id: bahn_veteran, min_score: 6000 }
+  - { id: gleis_legende, min_score: 15000 }

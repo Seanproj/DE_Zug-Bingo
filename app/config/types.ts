@@ -5,8 +5,6 @@ export type RarityId = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | '
 export interface Rarity {
   id: RarityId;
   tier: number;
-  label: string;
-  label_ko: string;
   emoji: string;
   points: number;
   color: string;
@@ -25,15 +23,13 @@ export interface VerifyRule {
 
 export interface Square {
   id: string;
-  label: string;
-  short: string;
-  de: string;
+  /** Original German term as seen on boards/announcements. */
+  term: string;
   emoji: string;
   rarity: RarityId;
   verifiable: boolean;
   verify?: VerifyRule;
   category: string;
-  flavor: string;
   implies: string[];
   pools: CardPool[];
   probability?: number;
@@ -42,10 +38,8 @@ export interface Square {
 
 export interface FreeSquare {
   id: string;
-  label: string;
-  de: string;
+  term: string;
   emoji: string;
-  flavor: string;
 }
 
 export interface LineCap {
@@ -55,6 +49,7 @@ export interface LineCap {
 
 export interface GameConfig {
   generator_version: number;
+  locales: { supported: string[]; reference: string; fallback: string };
   board: { size: number; free_square: FreeSquare };
   daily: { timezone: string; epoch: string; seed_prefix: string };
   scoring: {
@@ -107,23 +102,35 @@ export interface Achievement {
   id: string;
   emoji: string;
   tier: 'bronze' | 'silver' | 'gold' | 'special';
-  name: string;
-  description: string;
   condition: Condition;
 }
 
 export interface Title {
   id: string;
-  name: string;
-  de: string;
   condition: Condition;
 }
 
 export interface Level {
   id: string;
-  name: string;
-  name_ko: string;
   min_score: number;
+}
+
+export interface SquareText {
+  label: string;
+  short: string;
+  flavor: string;
+}
+
+/** config/locales/<code>.yaml */
+export interface LocaleStrings {
+  meta: { name: string; short_max: number; show_term: boolean };
+  rarities: Record<RarityId, string>;
+  free_square: SquareText;
+  squares: Record<string, SquareText>;
+  achievements: Record<string, { name: string; description: string }>;
+  titles: Record<string, string>;
+  levels: Record<string, string>;
+  ui: Record<string, string>;
 }
 
 export interface AchievementsConfig {
@@ -138,14 +145,17 @@ export interface Config {
   rarity: RarityConfig;
   squares: Square[];
   achievements: AchievementsConfig;
+  locales: Record<string, LocaleStrings>;
   /** Lookup helpers built once at parse time. */
   rarityById: Map<RarityId, Rarity>;
   squareById: Map<string, Square>;
 }
 
+/** Parsed-but-unvalidated YAML documents (Vite inlines them as JSON at build time). */
 export interface RawConfigSources {
-  game: string;
-  rarity: string;
-  squares: string;
-  achievements: string;
+  game: unknown;
+  rarity: unknown;
+  squares: unknown;
+  achievements: unknown;
+  locales: Record<string, unknown>;
 }

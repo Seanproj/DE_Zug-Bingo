@@ -1,4 +1,4 @@
-# 희귀도 등급. 순서 = 낮은 등급 → 높은 등급 (tier 값으로 비교).
+# 희귀도 등급. (등급 이름은 config/locales/*.yaml 의 rarities) 순서 = 낮은 등급 → 높은 등급 (tier 값으로 비교).
 #
 # probability: "평범한 통근자가 오늘 하루 이 칸을 겪을 확률" 기본 추정치.
 #   - Bahn-Wetter 확률 JSON이 연결되면(Phase 3) 노선별 값으로 대체된다.
@@ -10,8 +10,6 @@
 rarities:
   - id: common
     tier: 0
-    label: Common
-    label_ko: 흔함
     emoji: "⚪"
     points: 10
     color: "#9AA4B2"
@@ -21,8 +19,6 @@ rarities:
 
   - id: uncommon
     tier: 1
-    label: Uncommon
-    label_ko: 가끔
     emoji: "🟢"
     points: 25
     color: "#3DDC84"
@@ -32,8 +28,6 @@ rarities:
 
   - id: rare
     tier: 2
-    label: Rare
-    label_ko: 희귀
     emoji: "🔵"
     points: 50
     color: "#3B9EFF"
@@ -43,8 +37,6 @@ rarities:
 
   - id: epic
     tier: 3
-    label: Epic
-    label_ko: 에픽
     emoji: "🟣"
     points: 100
     color: "#A66BFF"
@@ -54,8 +46,6 @@ rarities:
 
   - id: legendary
     tier: 4
-    label: Legendary
-    label_ko: 전설
     emoji: "🟠"
     points: 250
     color: "#FF9F1C"
@@ -65,8 +55,6 @@ rarities:
 
   - id: mythic
     tier: 5
-    label: Mythic
-    label_ko: 신화
     emoji: "🌈"
     points: 500
     color: "#FF6AD5"           # 대표색. UI에서는 아래 gradient 사용

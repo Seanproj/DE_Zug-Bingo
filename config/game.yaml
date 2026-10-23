@@ -1,5 +1,12 @@
 # 게임 전역 규칙. 코드에 하드코딩하지 말고 여기서만 바꾼다.
 
+# 지원 언어. 첫 항목이 기준(reference) 언어 — 다른 언어는 같은 키를 모두 가져야 한다.
+# 기기 언어가 목록에 없으면 fallback 사용.
+locales:
+  supported: [ko, en, de]
+  reference: ko
+  fallback: en
+
 # 카드 생성 알고리즘 버전. RNG/생성 순서/배치 규칙을 바꿔서 같은 날짜의 카드가
 # 달라지게 되면 반드시 올린다 (과거 공유 카드와 불일치가 생기기 때문).
 generator_version: 1
@@ -8,10 +15,8 @@ board:
   size: 5                     # 5×5
   free_square:
     id: free_rode_today
-    label: 오늘도 기차를 탔다
-    de: Heute wieder Bahn gefahren
-    emoji: "🫡"
-    flavor: 이것만으로도 이미 용감하다.
+    term: Heute wieder Bahn gefahren
+    emoji: "🫡"                # 문구는 locales/*.yaml 의 free_square
 
 daily:
   timezone: Europe/Berlin     # 독일 기준 00시에 새 카드

@@ -1,0 +1,285 @@
+# Deutsch. Schlüssel müssen ko.yaml entsprechen (wird getestet).
+# meta.show_term: false — der Originalbegriff ist hier ja schon die Sprache.
+meta:
+  name: Deutsch
+  short_max: 16
+  show_term: false
+rarities:
+  common: Gewöhnlich
+  uncommon: Ungewöhnlich
+  rare: Selten
+  epic: Episch
+  legendary: Legendär
+  mythic: Mythisch
+free_square:
+  label: Heute wieder Bahn gefahren
+  short: Heute gefahren
+  flavor: Schon das allein ist mutig.
+squares:
+  delay_5:
+    label: Mehr als 5 Minuten Verspätung
+    short: +5 Min.
+    flavor: Fünf Minuten sind keine Verspätung, sondern Gelassenheit.
+  delay_20:
+    label: 20+ Min. Verspätung, Zugbindung aufgehoben
+    short: +20 Min.
+    flavor: 'Glückwunsch: Sie dürfen jetzt jeden Zug nehmen.'
+  delay_60:
+    label: 60+ Min. Verspätung (25 % Entschädigung)
+    short: +60 Min.
+    flavor: Ihre kostenlose Meditationsstunde beginnt jetzt.
+  delay_120:
+    label: 120+ Min. Verspätung (50 % Entschädigung)
+    short: +120 Min.
+    flavor: Spielfilmlänge. Ende noch offen.
+  platform_change:
+    label: Gleiswechsel
+    short: Gleiswechsel
+    flavor: Zweimal Treppe rauf und runter. Cardio erledigt.
+  cancelled:
+    label: Zugausfall
+    short: Zugausfall
+    flavor: Der schnellste Zug ist der, der gar nicht kommt.
+  short_turn:
+    label: Zug endet vorzeitig
+    short: Endet früher
+    flavor: Hier ist Endstation, heißt es. Also ist es so.
+  on_time_ice:
+    label: ICE pünktlich angekommen
+    short: ICE pünktlich
+    flavor: Eventuell wird eine Zeugenaussage benötigt.
+  ersatzverkehr:
+    label: Mit dem Schienenersatzverkehr gefahren
+    short: SEV-Bus
+    flavor: Autobahn-Rundfahrt, im Bahnticket inklusive.
+  reverse_order:
+    label: Umgekehrte Wagenreihung
+    short: Wagen verdreht
+    flavor: Sie stehen in Abschnitt A? Bitte sprinten Sie nach G.
+  wifi_dead:
+    label: WLAN gestört
+    short: WLAN gestört
+    flavor: Bis zur Login-Seite hat es gereicht. Mehr nicht.
+  bistro_closed:
+    label: Bordbistro geschlossen
+    short: Bistro zu
+    flavor: Es gibt eine Speisekarte. Nur die Speisekarte.
+  ac_broken:
+    label: Klimaanlage / Heizung defekt
+    short: Klima defekt
+    flavor: Saunanutzung ist im Fahrpreis enthalten.
+  repair:
+    label: Durchsage „Reparatur am Zug“
+    short: „Reparatur“
+    flavor: Hoffentlich nicht während der Fahrt.
+  signal:
+    label: Durchsage „Signalstörung“
+    short: „Signalstörung“
+    flavor: Auch Signale brauchen mal einen freien Tag.
+  priority:
+    label: Durchsage „Vorfahrt eines anderen Zuges“
+    short: „Vorfahrt“
+    flavor: Die Hauptrolle spielt heute der Zug nebenan.
+  apology:
+    label: 3+ Entschuldigungsdurchsagen
+    short: Sorry ×3
+    flavor: 'Beim dritten Mal möchte man sagen: Schon gut.'
+  standing:
+    label: Reserviert und trotzdem gestanden
+    short: Platz weg
+    flavor: Reserviert hatten Sie. Der Sitz war nicht einverstanden.
+  missed_conn:
+    label: Anschluss verpasst
+    short: Anschluss weg
+    flavor: Die Rücklichter des Anschlusszugs sind wunderschön.
+  saved_conn:
+    label: Anschluss mit ≤ 2 Min. erreicht
+    short: 2-Min.-Umstieg
+    flavor: Die Türen schlossen sich hinter Ihnen. Legende.
+  faster_alt:
+    label: Späten Zug verlassen — Plan B war schneller
+    short: Plan B gewinnt
+    flavor: Heute war das Bauchgefühl genauer als der Fahrplan.
+  funkloch:
+    label: Ins Funkloch gefahren
+    short: Funkloch
+    flavor: Digital Detox, nicht optional.
+  strike_day:
+    label: Am Streiktag gefahren
+    short: Streiktag
+    flavor: Allein die Fahrt ist schon ein Erfolg.
+  delay_inherited:
+    label: Durchsage „Verspätung aus vorheriger Fahrt“
+    short: „Geerbt“
+    flavor: Verspätungen werden vererbt. Die Erbschaftsteuer zahlen wir.
+  wait_oncoming:
+    label: Warten auf den Gegenzug
+    short: Gegenzug
+    flavor: 'Die Tugend der eingleisigen Strecke: Geduld.'
+  construction:
+    label: Langsamfahrt wegen Bauarbeiten
+    short: Bauarbeiten
+    flavor: Hier wird an der Zukunft gebaut. Ankunft nach 2030.
+  door_broken:
+    label: Ausgerechnet meine Tür ist defekt
+    short: Tür defekt
+    flavor: Zwölf Schritte zur nächsten Tür. Drei Taschen.
+  coffee_out:
+    label: Kaffeemaschine defekt
+    short: Kein Kaffee
+    flavor: Wach hält heute die Verspätungsmeldung.
+  speaker_garbled:
+    label: Durchsage völlig unverständlich
+    short: Durchsage?
+    flavor: Es war sicher wichtig. Was genau, bleibt offen.
+  backwards_seat:
+    label: Platz entgegen der Fahrtrichtung
+    short: Rückwärts
+    flavor: Eine philosophische Reise durch das Vergangene.
+  socket_dead:
+    label: Steckdose ohne Strom
+    short: Kein Strom
+    flavor: Akku 7 %, noch zwei Stunden. Schicksal akzeptiert.
+  toilet_closed:
+    label: WC außer Betrieb
+    short: WC zu
+    flavor: 'Nächstes WC: drei Wagen oder eine Station entfernt.'
+  info_follows:
+    label: „Weitere Informationen folgen“ … folgen nie
+    short: „Infos folgen“
+    flavor: Die Information ist angekündigt. Ankunft unbekannt.
+  delay_growing:
+    label: Die Verspätung wächst und wächst
+    short: Wächst weiter
+    flavor: +5 → +12 → +25. Ein trauriger Aufwärtstrend.
+  overcrowded:
+    label: Zug überfüllt, selbst im Gang
+    short: Überfüllt
+    flavor: 'Statt Haltegriff: der Rucksack des Nachbarn.'
+  display_mismatch:
+    label: Anzeige und Durchsage widersprechen sich
+    short: Anzeige ≠ Ansage
+    flavor: Die App kennt die Wahrheit – und hat eine dritte Meinung.
+  coach_missing:
+    label: Mein reservierter Wagen fehlt
+    short: Wagen fehlt
+    flavor: Wagen 21 verkehrt heute nur im Geiste.
+  animals_on_track:
+    label: Tiere im Gleis
+    short: Tiere im Gleis
+    flavor: Heute haben die Kühe Vorfahrt.
+  reason_changed:
+    label: Verspätungsgrund ändert sich unterwegs
+    short: Neuer Grund
+    flavor: Erst Signal, dann Vorausfahrt, jetzt das Wetter.
+  stop_skipped:
+    label: Halt entfällt
+    short: Halt entfällt
+    flavor: Mein Bahnhof zog am Fenster vorbei. Ich habe gewinkt.
+  early_arrival:
+    label: Zu früh angekommen
+    short: Zu früh!
+    flavor: Die Raumzeit ist verbogen. Screenshot Pflicht.
+achievements:
+  first_bingo:
+    name: Erstes Bingo
+    description: 'Erste Reihe geschafft. Die andere Hälfte: Verspätungen.'
+  triple_line:
+    name: Dreifach-Reihe
+    description: Drei Reihen auf einer einzigen Karte.
+  blackout:
+    name: Blackout
+    description: Alle 25 Felder. Herzliches Beileid zu diesem Tag.
+  streak_7:
+    name: 7 Tage am Stück
+    description: Eine Woche lang jeden Tag die Tageskarte gespielt.
+  streak_30:
+    name: 30 Tage am Stück
+    description: Ein ganzer Monat. Zuverlässiger als die Bahn.
+  delay_24h:
+    name: Ein Tag für die Bahn
+    description: 24 Stunden Verspätung insgesamt (1.440 Min.).
+  compensation_100:
+    name: Aktionärsstatus
+    description: Über 100 € Entschädigung. Keine Dividende – Entschädigung.
+  mythic_any:
+    name: Mythos gesehen
+    description: Ein mythisches Feld gesammelt. Glaubt eh keiner – also teilen.
+  verified_10:
+    name: Daten lügen nicht
+    description: 10 automatisch verifizierte Felder.
+  collector_half:
+    name: Halbe Sammlung
+    description: 18 verschiedene Felder gesammelt.
+  oracle_5:
+    name: Verspätungs-Orakel
+    description: 5 richtige Tipps. (Nur Spielpunkte)
+titles:
+  sev_master: SEV-Meister
+  s3_martyr: Märtyrer der S3
+  transfer_god: Gott des Umstiegs
+  ffm_regular: Stammgast Frankfurt Hbf
+  on_time_witness: Augenzeuge der Pünktlichkeit
+  platform_athlete: Gleiswechsel-Athlet
+  zen_commuter: Zen-Pendler
+levels:
+  fahrgast: Fahrgast
+  pendler: Pendler
+  vielfahrer: Vielfahrer
+  bahn_veteran: Bahn-Veteran
+  gleis_legende: Gleis-Legende
+ui:
+  header.daily: Tageskarte
+  header.streak: '{n} Tage in Folge'
+  header.score: Punkte
+  header.checked: '{n}/24'
+  board.blessed_hint: Goldene Reihen sind heute gesegnet — nur gewöhnliche Felder
+  board.one_away: Noch eins!
+  board.label: Heutige Bingo-Karte
+  cell.checked: abgehakt
+  cell.auto: automatisch prüfbar
+  sheet.term: Originalbegriff
+  sheet.verify_auto: Mit Echtzeitdaten automatisch prüfbar · Punkte ×{mult} (bald verfügbar)
+  sheet.verify_self: Selbst gemeldet · Punkte ×{mult}
+  sheet.points: '{points} Pkt.'
+  sheet.check: Abhaken
+  sheet.uncheck: Haken entfernen
+  sheet.close: Schließen
+  sheet.implies: 'Hakt auch ab: {list}'
+  toast.implied: 'Auch abgehakt: {list}'
+  toast.bingo_one: Bingo! {n} Reihe
+  toast.bingo_other: Bingo! {n} Reihen
+  toast.blackout: Blackout! Alle 25 Felder
+  toast.offline_bonus: 📵 Funkloch! Wird offline gespeichert … (Bonusfeld „{square}“ erhalten)
+  toast.offline: 📵 Funkloch! Alles wird auf diesem Gerät gespeichert …
+  toast.online: 📶 Wieder verbunden
+  toast.copied: Ergebnis in die Zwischenablage kopiert
+  toast.share_failed: Teilen fehlgeschlagen
+  toast.new_day: 'Neue Karte da — #{n}'
+  action.share: Ergebnis teilen
+  action.settings: Einstellungen
+  action.help: Spielanleitung
+  settings.title: Einstellungen
+  settings.language: Sprache
+  settings.language_auto: Automatisch (Gerätesprache)
+  settings.haptics: Vibration
+  settings.on: An
+  settings.off: Aus
+  help.title: So wird gespielt
+  help.tap: Tippe an, was dir passiert ist. Nochmal tippen zeigt Details.
+  help.hold: Lange drücken zeigt Geschichte und Punkte eines Feldes.
+  help.lines: Eine Reihe, Spalte oder Diagonale voll = Bingo. Die 🫡 Mitte ist frei.
+  help.blessed: Gold umrandete Reihen sind 🫡 gesegnet — nur gewöhnliche Felder, deine beste Chance heute.
+  help.rarity: Seltene Felder bringen mehr Punkte. Pünktlichkeit ist mythisch.
+  help.offline: Auch offline wird jeder Haken gespeichert.
+  help.daily: Um Mitternacht (deutsche Zeit) bekommen alle dieselbe neue Karte.
+  share.lines_zero: noch dran
+  share.lines_one: '{n} Reihe!'
+  share.lines_other: '{n} Reihen!'
+  share.blackout: Blackout!
+  share.footer: '{checked} Felder · {score} Pkt.'
+  footer.disclaimer: Inoffizielles Fanprojekt · keine Verbindung zur Deutschen Bahn
+  footer.data: 'Daten: Deutsche Bahn (CC BY 4.0)'
+  onboard.title: Bahnfahren? Jetzt zum Sammeln.
+  onboard.body: Verspätung, Ausfall, Ersatzverkehr — hake ab, was heute passiert ist, und hol dir ein Bingo.
+  onboard.cta: Tageskarte starten

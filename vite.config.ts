@@ -1,8 +1,10 @@
 import { defineConfig } from 'vitest/config';
 import { VitePWA } from 'vite-plugin-pwa';
+import { yamlPlugin } from './scripts/vite-plugin-yaml.ts';
 
 export default defineConfig({
   plugins: [
+    yamlPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['icon.svg'],

@@ -6,6 +6,7 @@
 #   - 밸런스 리포트(npm run report:balance)가 이 값으로 난이도를 시뮬레이션한다.
 #
 # share_emoji: Wordle식 텍스트 공유에서 체크된 칸 표시.
+# effect: 체크 이펙트 tap | pulse | spark | holo | gold | rainbow (app/ui/fx.ts)
 # haptic: 체크 시 진동 패턴 (navigator.vibrate, ms). 등급이 높을수록 길고 화려하게.
 
 rarities:
@@ -18,6 +19,7 @@ rarities:
     share_emoji: "🟩"
     probability: 0.55
     haptic: [12]
+    effect: tap
 
   - id: uncommon
     tier: 1
@@ -28,6 +30,7 @@ rarities:
     share_emoji: "🟨"
     probability: 0.30
     haptic: [18]
+    effect: pulse
 
   - id: rare
     tier: 2
@@ -38,6 +41,7 @@ rarities:
     share_emoji: "🟦"
     probability: 0.12
     haptic: [12, 40, 18]
+    effect: spark
 
   - id: epic
     tier: 3
@@ -48,6 +52,7 @@ rarities:
     share_emoji: "🟪"
     probability: 0.05
     haptic: [20, 40, 20, 40, 30]
+    effect: holo
 
   - id: legendary
     tier: 4
@@ -58,6 +63,7 @@ rarities:
     share_emoji: "🟧"
     probability: 0.02
     haptic: [30, 50, 30, 50, 60]
+    effect: gold
 
   - id: mythic
     tier: 5
@@ -69,6 +75,7 @@ rarities:
     share_emoji: "🌈"
     probability: 0.01
     haptic: [40, 40, 40, 40, 40, 40, 120]
+    effect: rainbow
 
 share:
   unchecked_emoji: "⬜"

@@ -15,6 +15,8 @@ export interface DayRecord {
   key: string;
   marks: MarkRecord[];
   updatedAt: string;
+  /** generator_version the card was played with (lines/score are recomputed from the current generator) */
+  generatorVersion?: number;
 }
 
 /** Saved records → cell marks on `card`. Squares no longer on the card are ignored. */

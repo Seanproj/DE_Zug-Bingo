@@ -14,7 +14,11 @@ export interface Rarity {
   probability: number;
   /** navigator.vibrate pattern on check */
   haptic: number[];
+  effect: RarityEffect;
 }
+
+export const RARITY_EFFECTS = ['tap', 'pulse', 'spark', 'holo', 'gold', 'rainbow'] as const;
+export type RarityEffect = (typeof RARITY_EFFECTS)[number];
 
 export type CardPool = 'daily' | 'trip' | 'event' | 'season';
 

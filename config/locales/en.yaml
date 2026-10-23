@@ -282,3 +282,44 @@ ui:
   onboard.title: German trains. Now collectible.
   onboard.body: Delays, cancellations, replacement buses — check off what happened today and complete a bingo.
   onboard.cta: Start today's card
+  tab.today: Today
+  tab.collection: Collection
+  tab.profile: Profile
+  collection.title: Collection
+  collection.progress: '{n} / {total} collected'
+  collection.locked: ???
+  collection.count: ×{n}
+  collection.first: First seen {date}
+  collection.never: Not encountered yet. Give it time…
+  collection.event_only: Event only
+  collection.hint: Every square you've lived through lands here. Silhouettes are still out there.
+  profile.title: Profile
+  profile.level: Lv.{n}
+  profile.next: '{points} pts to next level'
+  profile.max: Max level reached
+  profile.titles: Titles
+  profile.title_none: No title
+  profile.title_hint: Tap an unlocked title to wear it
+  profile.achievements: Achievements
+  profile.achievements_progress: '{n} / {total}'
+  profile.locked: Locked
+  profile.stats: Stats
+  profile.settings: Settings
+  profile.help: How to play
+  stat.totalScore: Total score
+  stat.cardsPlayed: Days played
+  stat.bingoCards: Bingo days
+  stat.maxLinesOnCard: Most lines
+  stat.blackouts: Blackouts
+  stat.bestStreak: Best streak
+  stat.distinctSquares: Squares found
+  stat.verifiedCount: Auto-verified
+  toast.achievement: 🏅 Achievement — {name}
+  toast.title_unlocked: 🎖️ New title — {name}
+  toast.level_up: ⬆️ Level up! Lv.{n} {name}
+  share.sheet_title: Share result
+  share.image: Share as image
+  share.text: Share as text
+  share.saved: Image saved
+  share.img_unofficial: Unofficial fan project
+  sheet.collected: Collected {n} times so far

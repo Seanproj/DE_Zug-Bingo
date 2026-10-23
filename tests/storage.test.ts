@@ -29,8 +29,21 @@ const suite = (name: string, make: () => Promise<Store>) =>
     it('returns defaults, then saved settings', async () => {
       const s = await make();
       expect(await s.getSettings()).toEqual(DEFAULT_SETTINGS);
-      await s.putSettings({ locale: 'de', haptics: false, onboarded: true });
-      expect(await s.getSettings()).toEqual({ locale: 'de', haptics: false, onboarded: true });
+      await s.putSettings({ locale: 'de', haptics: false, onboarded: true, title: 'sev_master' });
+      expect(await s.getSettings()).toEqual({ locale: 'de', haptics: false, onboarded: true, title: 'sev_master' });
+    });
+
+    it('fills new settings fields with defaults for old saves', async () => {
+      const s = await make();
+      await s.putSettings({ locale: 'ko', haptics: true, onboarded: true } as never);
+      expect((await s.getSettings()).title).toBeNull();
+    });
+
+    it('stores meta blobs', async () => {
+      const s = await make();
+      expect(await s.getMeta('unlocks')).toBeUndefined();
+      await s.putMeta('unlocks', { first_bingo: '2026-10-23' });
+      expect(await s.getMeta('unlocks')).toEqual({ first_bingo: '2026-10-23' });
     });
   });
 

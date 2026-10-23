@@ -283,3 +283,44 @@ ui:
   onboard.title: 독일 기차, 이제 수집하세요
   onboard.body: 지연·취소·대체버스… 오늘 겪은 일을 체크하고 빙고를 완성하세요.
   onboard.cta: 오늘의 카드 시작
+  tab.today: 오늘
+  tab.collection: 도감
+  tab.profile: 프로필
+  collection.title: 도감
+  collection.progress: '{n} / {total} 수집'
+  collection.locked: ???
+  collection.count: ×{n}
+  collection.first: 첫 획득 {date}
+  collection.never: 아직 만나지 못한 칸이에요. 언젠가는…
+  collection.event_only: 이벤트 한정
+  collection.hint: 겪은 칸은 모두 여기에 모여요. 회색 실루엣은 아직 못 만난 칸.
+  profile.title: 프로필
+  profile.level: Lv.{n}
+  profile.next: 다음 레벨까지 {points}점
+  profile.max: 최고 레벨 달성
+  profile.titles: 칭호
+  profile.title_none: 칭호 없음
+  profile.title_hint: 획득한 칭호를 탭해서 장착하세요
+  profile.achievements: 업적
+  profile.achievements_progress: '{n} / {total}'
+  profile.locked: 잠김
+  profile.stats: 기록
+  profile.settings: 설정
+  profile.help: 플레이 방법
+  stat.totalScore: 누적 점수
+  stat.cardsPlayed: 참여한 날
+  stat.bingoCards: 빙고한 날
+  stat.maxLinesOnCard: 최다 줄
+  stat.blackouts: 블랙아웃
+  stat.bestStreak: 최장 연속
+  stat.distinctSquares: 수집한 칸
+  stat.verifiedCount: 자동 인증
+  toast.achievement: 🏅 업적 달성 — {name}
+  toast.title_unlocked: 🎖️ 새 칭호 — {name}
+  toast.level_up: ⬆️ 레벨 업! Lv.{n} {name}
+  share.sheet_title: 결과 공유
+  share.image: 이미지로 공유
+  share.text: 텍스트로 공유
+  share.saved: 이미지를 저장했어요
+  share.img_unofficial: 비공식 팬 프로젝트
+  sheet.collected: 지금까지 {n}회 획득

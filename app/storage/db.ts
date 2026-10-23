@@ -7,9 +7,11 @@ export interface Settings {
   locale: string | null;
   haptics: boolean;
   onboarded: boolean;
+  /** equipped title id */
+  title: string | null;
 }
 
-export const DEFAULT_SETTINGS: Settings = { locale: null, haptics: true, onboarded: false };
+export const DEFAULT_SETTINGS: Settings = { locale: null, haptics: true, onboarded: false, title: null };
 
 export interface Store {
   readonly persistent: boolean;
@@ -18,6 +20,9 @@ export interface Store {
   allDays(): Promise<DayRecord[]>;
   getSettings(): Promise<Settings>;
   putSettings(settings: Settings): Promise<void>;
+  /** Small JSON blobs (e.g. unlocked achievements). */
+  getMeta<T>(key: string): Promise<T | undefined>;
+  putMeta<T>(key: string, value: T): Promise<void>;
 }
 
 const DB_NAME = 'zug-bingo';
@@ -52,19 +57,24 @@ export function idbStore(db: IDBDatabase): Store {
     allDays: () => req(tx('days', 'readonly').getAll()) as Promise<DayRecord[]>,
     getSettings: async () => ({ ...DEFAULT_SETTINGS, ...((await req(tx('kv', 'readonly').get('settings'))) as Partial<Settings> | undefined) }),
     putSettings: async (s) => void (await req(tx('kv', 'readwrite').put(s, 'settings'))),
+    getMeta: async <T,>(key: string) => (await req(tx('kv', 'readonly').get(`meta:${key}`))) as T | undefined,
+    putMeta: async (key, value) => void (await req(tx('kv', 'readwrite').put(value, `meta:${key}`))),
   };
 }
 
 export function memoryStore(): Store {
   const days = new Map<string, DayRecord>();
   let settings = { ...DEFAULT_SETTINGS };
+  const meta = new Map<string, unknown>();
   return {
     persistent: false,
     getDay: async (key) => structuredClone(days.get(key)),
     putDay: async (day) => void days.set(day.key, structuredClone(day)),
     allDays: async () => [...days.values()].map((d) => structuredClone(d)),
-    getSettings: async () => ({ ...settings }),
+    getSettings: async () => ({ ...DEFAULT_SETTINGS, ...settings }),
     putSettings: async (s) => void (settings = { ...s }),
+    getMeta: async <T,>(key: string) => structuredClone(meta.get(key)) as T | undefined,
+    putMeta: async (key, value) => void meta.set(key, structuredClone(value)),
   };
 }
 

@@ -2,6 +2,7 @@
 // so a broken config fails loudly in tests and at build time instead of mid-game.
 import {
   NUMERIC_STATS,
+  RARITY_EFFECTS,
   type AchievementsConfig,
   type CardPool,
   type Condition,
@@ -66,6 +67,7 @@ export function parseConfig(src: RawConfigSources): Config {
     req(isProb(r.probability), `rarity "${r.id}" probability must be in [0,1]`);
     req(isStr(r.color) && isStr(r.share_emoji), `rarity "${r.id}" needs color and share_emoji`);
     req(isPattern(r.haptic), `rarity "${r.id}" haptic must be a list of ms`);
+    req((RARITY_EFFECTS as readonly string[]).includes(r.effect), `rarity "${r.id}" effect must be one of ${RARITY_EFFECTS.join('|')}`);
   });
   for (let i = 1; i < rarities.length; i++) {
     req(rarities[i]!.points > rarities[i - 1]!.points, `rarity points must increase with tier (${rarities[i]!.id})`);

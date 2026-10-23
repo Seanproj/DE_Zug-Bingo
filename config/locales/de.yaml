@@ -283,3 +283,44 @@ ui:
   onboard.title: Bahnfahren? Jetzt zum Sammeln.
   onboard.body: Verspätung, Ausfall, Ersatzverkehr — hake ab, was heute passiert ist, und hol dir ein Bingo.
   onboard.cta: Tageskarte starten
+  tab.today: Heute
+  tab.collection: Sammlung
+  tab.profile: Profil
+  collection.title: Sammlung
+  collection.progress: '{n} / {total} gesammelt'
+  collection.locked: ???
+  collection.count: ×{n}
+  collection.first: Zuerst am {date}
+  collection.never: Noch nicht erlebt. Nur eine Frage der Zeit …
+  collection.event_only: Nur bei Events
+  collection.hint: Jedes erlebte Feld landet hier. Silhouetten warten noch auf dich.
+  profile.title: Profil
+  profile.level: Lv.{n}
+  profile.next: Noch {points} Pkt. bis zum nächsten Level
+  profile.max: Höchstes Level erreicht
+  profile.titles: Titel
+  profile.title_none: Kein Titel
+  profile.title_hint: Tippe einen freigeschalteten Titel an, um ihn zu tragen
+  profile.achievements: Erfolge
+  profile.achievements_progress: '{n} / {total}'
+  profile.locked: Gesperrt
+  profile.stats: Statistik
+  profile.settings: Einstellungen
+  profile.help: Spielanleitung
+  stat.totalScore: Gesamtpunkte
+  stat.cardsPlayed: Gespielte Tage
+  stat.bingoCards: Bingo-Tage
+  stat.maxLinesOnCard: Meiste Reihen
+  stat.blackouts: Blackouts
+  stat.bestStreak: Längste Serie
+  stat.distinctSquares: Gefundene Felder
+  stat.verifiedCount: Auto-verifiziert
+  toast.achievement: 🏅 Erfolg — {name}
+  toast.title_unlocked: 🎖️ Neuer Titel — {name}
+  toast.level_up: ⬆️ Level-Up! Lv.{n} {name}
+  share.sheet_title: Ergebnis teilen
+  share.image: Als Bild teilen
+  share.text: Als Text teilen
+  share.saved: Bild gespeichert
+  share.img_unofficial: Inoffizielles Fanprojekt
+  sheet.collected: Bisher {n}× gesammelt

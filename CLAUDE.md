@@ -55,11 +55,12 @@ app/
     score.ts            #   점수 계산
     achievements.ts     #   업적/칭호/레벨 조건 평가
     day.ts / streak.ts  #   일별 기록(칸 id 기준 저장), 연속 참여
+    stats.ts            #   저장된 날들 → PlayerStats + 도감(획득 횟수, 첫 획득일)
     simulate.ts         #   밸런스 Monte Carlo
   i18n/                 # 언어 감지 + t()/plural()/square() — 순수 함수
-  share/                # Wordle식 텍스트 공유 (Phase 2: PNG)
+  share/                # Wordle식 텍스트 공유 + 1080×1350 PNG (canvas)
   storage/              # IndexedDB (실패 시 메모리 폴백)
-  ui/                   # Preact 컴포넌트 (App, Board, Sheets, fx, hooks)
+  ui/                   # Preact 컴포넌트 (App, Board, Collection, Profile, Sheets, fx, hooks)
   verify/               # (Phase 3) 자동 인증 클라이언트
 worker/                 # (Phase 3) Cloudflare Workers — Timetables API 프록시
 scripts/                # 리포트 등 Node 스크립트 (tsx)
@@ -111,6 +112,7 @@ reports/                # Phase별 보고서
 - **접근성**: 색만으로 등급 구분 금지 — 이모지/라벨 병기. `prefers-reduced-motion` 존중. 대비 WCAG AA.
 - **오프라인은 기능이자 농담**: Funkloch 토스트는 사과가 아니라 보너스처럼 보이게.
 - **체크 상태**: 칸이 등급 색으로 "점등"된다. Common은 회색 대신 전광판 램프처럼 밝게(다크) / 진하게(라이트) — 회색 채움은 비활성처럼 보이므로 금지.
+- **등급 이펙트**는 `rarity.yaml`의 `effect`(tap·pulse·spark·holo·gold·rainbow)로 정한다. 셀 애니메이션은 CSS `[data-fx]`, 파티클·화면 연출은 `fx.ts`.
 - **움직이는 탭 타깃 금지**: 힌트 애니메이션은 위치 이동 없이 빛/투명도로만.
 - 색 토큰은 `app/styles.css`의 `:root` (다크) / `prefers-color-scheme: light`. 등급 색은 인라인 `--rc`/`--rg`로 주입.
 - 필수 고지(footer): 비공식 팬 프로젝트 + `Daten: Deutsche Bahn (CC BY 4.0)`. 보상금 화면에 "정보 제공용이며 신청은 공식 채널에서" 고정.

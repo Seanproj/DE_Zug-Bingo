@@ -22,3 +22,29 @@ describe('shareLayout', () => {
     expect(l.cells[0]!.x).toBeCloseTo(SHARE_W - (last.x + last.w));
   });
 });
+
+import { wrapText } from '../app/share/image.ts';
+
+describe('wrapText', () => {
+  const measure = (s: string) => s.length * 10; // 10px per char
+
+  it('wraps Latin text on spaces, never inside words', () => {
+    expect(wrapText(measure, 'Anschluss weg', 100, 2)).toEqual(['Anschluss', 'weg']);
+  });
+
+  it('refuses when a word cannot fit (caller shrinks the font)', () => {
+    expect(wrapText(measure, 'Bauarbeiten', 100, 2)).toBeNull();
+  });
+
+  it('breaks at soft hyphens and shows a hyphen', () => {
+    expect(wrapText(measure, '„Signal\u00ADstörung“', 100, 2)).toEqual(['„Signal-', 'störung“']);
+  });
+
+  it('wraps Korean by character', () => {
+    expect(wrapText(measure, '반대편열차대기', 50, 2)).toEqual(['반대편열차', '대기']);
+  });
+
+  it('keeps Korean words together when there are spaces', () => {
+    expect(wrapText(measure, '반대편 열차 대기', 60, 2)).toEqual(['반대편 열차', '대기']);
+  });
+});

@@ -43,26 +43,37 @@ function roundRect(ctx: CanvasRenderingContext2D, { x, y, w, h }: Rect, r: numbe
   ctx.roundRect(x, y, w, h, r);
 }
 
-function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number, maxLines: number): string[] {
-  const words = text.includes(' ') ? text.split(' ') : [...text];
-  const joiner = text.includes(' ') ? ' ' : '';
+const CJK = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
+
+/** Break into ≤ maxLines lines: words for Latin text (soft hyphens allowed), characters for CJK. */
+export function wrapText(measure: (s: string) => number, text: string, maxW: number, maxLines: number): string[] | null {
+  const cjk = CJK.test(text) && !text.includes(' ');
+  const tokens = cjk ? [...text] : text.split(/(?<= )|(?<=\u00AD)/);
   const lines: string[] = [];
   let line = '';
-  for (const w of words) {
-    const next = line ? line + joiner + w : w;
-    if (ctx.measureText(next).width <= maxW || !line) line = next;
+  for (const tok of tokens) {
+    const next = line + tok;
+    if (measure(next.replace(/\u00AD/g, '').trimEnd()) <= maxW || !line) line = next;
     else {
       lines.push(line);
-      line = w;
+      line = tok;
     }
   }
   if (line) lines.push(line);
-  if (lines.length > maxLines) {
-    const kept = lines.slice(0, maxLines);
-    kept[maxLines - 1] = kept[maxLines - 1]!.replace(/.$/, '…');
-    return kept;
+  const clean = lines.map((l) => (l.endsWith('\u00AD') ? l.replace(/\u00AD/g, '') + '-' : l.replace(/\u00AD/g, '')).trim());
+  if (clean.length > maxLines || clean.some((l) => measure(l) > maxW)) return null;
+  return clean;
+}
+
+/** Largest font size (≤ start) at which `text` fits in maxLines; returns lines + size. */
+function fitText(ctx: CanvasRenderingContext2D, text: string, maxW: number, maxLines: number, start: number, min: number) {
+  for (let size = start; size >= min; size--) {
+    ctx.font = `800 ${size}px ${FONT}`;
+    const lines = wrapText((s) => ctx.measureText(s).width, text, maxW, maxLines);
+    if (lines) return { lines, size };
   }
-  return lines;
+  ctx.font = `800 ${min}px ${FONT}`;
+  return { lines: [text.replace(/\u00AD/g, '')], size: min };
 }
 
 export interface ShareImageInput {
@@ -161,9 +172,8 @@ export function drawShareImage(ctx: CanvasRenderingContext2D, { config, i18n, ca
     // label
     ctx.globalAlpha = isChecked ? 1 : 0.6;
     ctx.fillStyle = cell.free ? '#ffd36a' : isChecked ? '#0b0f17' : '#e9eef7';
-    ctx.font = `800 25px ${FONT}`;
-    const lines = wrap(ctx, i18n.square(cell.squareId).short.replace(/­/g, ''), rect.w - 20, 2);
-    lines.forEach((l, k) => ctx.fillText(l, rect.x + rect.w / 2, rect.y + 124 + k * 28 - (lines.length - 1) * 8));
+    const { lines, size } = fitText(ctx, i18n.square(cell.squareId).short, rect.w - 18, 2, 25, 17);
+    lines.forEach((l, k) => ctx.fillText(l, rect.x + rect.w / 2, rect.y + 124 + k * (size + 3) - (lines.length - 1) * 8));
     ctx.globalAlpha = 1;
     ctx.textAlign = 'left';
   });

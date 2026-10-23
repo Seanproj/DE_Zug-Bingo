@@ -33,7 +33,7 @@
 | `npm test` | Vitest 단위 테스트 1회 실행 |
 | `npm run test:watch` | Vitest watch |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run report:balance` | 30일치 Daily 카드 밸런스 리포트 출력 (`-- --days 60 --out reports/x.md` 옵션) |
+| `npm run report:balance` | 밸런스 리포트 (`-- --period week --count 12 --out reports/balance-weekly.md`, `--period day --count 30`) |
 
 ## 4. 구조
 
@@ -74,7 +74,9 @@ reports/                # Phase별 보고서
 
 ## 5. 게임 코어 계약
 
-- **결정성**: Daily 카드는 `seed = "daily:" + YYYY-MM-DD(Europe/Berlin)` 로 생성. 같은 날짜 + 같은 config ⇒ 전 세계 동일 카드. RNG 알고리즘이나 생성 순서를 바꾸면 **모든 과거 카드가 바뀌므로** `game.yaml`의 `generator_version`을 올리고 리포트에 기록.
+- **메인 카드는 주간 카드** (`game.yaml` `card.period: week`, 사용자 승인으로 HANDOFF의 Daily에서 변경 — `reports/phase2-weekly.md`). 월요일 00시(Europe/Berlin)에 새 카드, 체크는 매일 하고 그날 기록(DayRecord)에 저장되며 카드 상태는 그 주 기록들의 합집합. 가운데 🫡 칸 탭 = 그날 체크인(연속 참여 유지, 0점).
+- 칸 `probability`는 **현실 추정치**로 유지한다 (게임을 쉽게 만들려고 부풀리지 않는다). 난이도는 카드 구성·축복 라인·주기로 조절.
+- **결정성**: 주간 카드는 `seed = "week:" + 월요일 YYYY-MM-DD`, Daily 카드는 `seed = "daily:" + YYYY-MM-DD(Europe/Berlin)` 로 생성. 같은 날짜 + 같은 config ⇒ 전 세계 동일 카드. RNG 알고리즘이나 생성 순서를 바꾸면 **모든 과거 카드가 바뀌므로** `game.yaml`의 `generator_version`을 올리고 리포트에 기록.
 - **보드 인덱스**: row-major, `index = row * size + col`. 중앙(5×5에서 12)은 무료 칸.
 - **점수**: `round(등급 점수 × 인증 배수)` 를 칸마다 합산 + 빙고 보너스(config). 무료 칸 0점.
 - **implies**: 상위 칸 체크 시 하위 칸 자동 체크 (예: 120분 지연 ⇒ 60/20/5분 지연).

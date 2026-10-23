@@ -1,3 +1,5 @@
+> ⚠️ 기록용 (generator v1, 부풀린 확률). 현재 기준은 [`balance-weekly.md`](./balance-weekly.md) / [`balance-daily-realistic.md`](./balance-daily-realistic.md).
+
 # Daily 카드 밸런스 리포트 — 30일 (2026-10-23 ~ 2026-11-21)
 
 - generator_version: 1 · 시뮬레이션: 카드당 20,000회 Monte Carlo

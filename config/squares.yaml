@@ -1,0 +1,420 @@
+# 칸 풀. 문구 규칙은 CLAUDE.md §6 톤 가이드 참고 — 시스템을 풍자, 사람은 탓하지 않는다.
+#
+# 필드
+#   id          고유 id (snake_case). 저장 데이터의 키이므로 한 번 배포하면 바꾸지 않는다.
+#   label       한국어 칸 이름
+#   de          독일어 원어 병기
+#   emoji       칸 아이콘
+#   rarity      rarity.yaml의 id
+#   verifiable  true = 실시간 데이터로 자동 인증 가능 (×1.5), false = 셀프 신고 (×1.0)
+#   verify      (verifiable일 때) Phase 3 자동 인증 규칙 힌트
+#   category    delay | cancel | platform | connection | onboard | announcement | network | event | luck
+#   flavor      한 줄 위트 (20~40자)
+#   implies     이 칸을 체크하면 함께 체크되는 칸 id 목록
+#   pools       등장하는 카드 종류 (기본: [daily, trip]). event 전용 칸은 Daily에 안 나온다.
+#   probability (선택) 등급 기본 확률 대신 쓸 칸별 발생 확률
+#   origin      handoff = HANDOFF 3장 초안 / original = Phase 0 추가 제안
+
+squares:
+  # ─────────────── HANDOFF 3장 초안 (23) ───────────────
+  - id: delay_5
+    label: 5분 이상 지연
+    de: Verspätung +5
+    emoji: "⏱️"
+    rarity: common
+    verifiable: true
+    verify: { type: delay_min, minutes: 5 }
+    category: delay
+    flavor: 5분은 지연이 아니라 독일식 여유입니다.
+    origin: handoff
+
+  - id: delay_20
+    label: 20분+ 지연, 열차 지정 해제
+    de: Zugbindung aufgehoben
+    emoji: "🔓"
+    rarity: uncommon
+    verifiable: true
+    verify: { type: delay_min, minutes: 20 }
+    category: delay
+    implies: [delay_5]
+    flavor: 축하합니다, 아무 열차나 타도 되는 자유를 얻었습니다.
+    origin: handoff
+
+  - id: delay_60
+    label: 60분+ 지연 (보상금 25%)
+    de: Verspätung +60
+    emoji: "💶"
+    rarity: rare
+    verifiable: true
+    verify: { type: delay_min, minutes: 60 }
+    category: delay
+    implies: [delay_20, delay_5]
+    flavor: 한 시간짜리 무료 명상 세션이 시작됩니다.
+    origin: handoff
+
+  - id: delay_120
+    label: 120분+ 지연 (보상금 50%)
+    de: Verspätung +120
+    emoji: "💰"
+    rarity: legendary
+    verifiable: true
+    verify: { type: delay_min, minutes: 120 }
+    category: delay
+    implies: [delay_60, delay_20, delay_5]
+    flavor: 영화 한 편 분량. 결말은 아직 미정.
+    origin: handoff
+
+  - id: platform_change
+    label: 승강장 변경
+    de: Gleiswechsel
+    emoji: "🔀"
+    rarity: uncommon
+    verifiable: true
+    verify: { type: platform_change }
+    category: platform
+    flavor: 계단 왕복 2회, 오늘의 유산소 완료.
+    origin: handoff
+
+  - id: cancelled
+    label: 열차 취소
+    de: Zugausfall
+    emoji: "❌"
+    rarity: epic
+    verifiable: true
+    verify: { type: cancelled }
+    category: cancel
+    flavor: 가장 빠른 열차는 오지 않는 열차입니다.
+    origin: handoff
+
+  - id: short_turn
+    label: 중간역 종착
+    de: endet vorzeitig
+    emoji: "🛑"
+    rarity: epic
+    verifiable: true
+    verify: { type: short_turn }
+    category: cancel
+    flavor: 여기가 종점이라고 하니, 여기가 종점입니다.
+    origin: handoff
+
+  - id: on_time_ice
+    label: ICE 정시 도착
+    de: pünktlich
+    emoji: "✨"
+    rarity: mythic
+    verifiable: true
+    verify: { type: on_time, train_types: [ICE], max_delay_min: 0 }
+    category: luck
+    flavor: 목격자 진술서가 필요할 수도 있습니다.
+    origin: handoff
+
+  - id: ersatzverkehr
+    label: 대체버스 탑승
+    de: SEV / Ersatzverkehr
+    emoji: "🚌"
+    rarity: epic
+    verifiable: false
+    category: cancel
+    flavor: 기차표로 떠나는 고속도로 투어.
+    origin: handoff
+
+  - id: reverse_order
+    label: 객차 순서 반대
+    de: umgekehrte Wagenreihung
+    emoji: "🔁"
+    rarity: rare
+    verifiable: false
+    category: platform
+    flavor: 승강장 A구역의 당신, 이제 G구역으로 달리세요.
+    origin: handoff
+
+  - id: wifi_dead
+    label: 와이파이 안 됨
+    de: WLAN gestört
+    emoji: "📶"
+    rarity: common
+    verifiable: false
+    category: network
+    flavor: 로그인 페이지까지는 갔습니다. 거기까지였습니다.
+    origin: handoff
+
+  - id: bistro_closed
+    label: 식당칸 영업 안 함
+    de: Bordbistro geschlossen
+    emoji: "🥨"
+    rarity: uncommon
+    verifiable: false
+    category: onboard
+    flavor: 메뉴판은 있습니다. 메뉴판만 있습니다.
+    origin: handoff
+
+  - id: ac_broken
+    label: 에어컨/난방 고장
+    de: Klimaanlage defekt
+    emoji: "🥵"
+    rarity: rare
+    verifiable: false
+    category: onboard
+    flavor: 사우나 이용료는 승차권에 포함되어 있습니다.
+    origin: handoff
+
+  - id: repair
+    label: "\"열차 수리 중\" 안내"
+    de: Reparatur am Zug
+    emoji: "🔧"
+    rarity: uncommon
+    verifiable: false
+    category: announcement
+    flavor: 달리는 중에 고치는 건 아니길 바랄 뿐.
+    origin: handoff
+
+  - id: signal
+    label: "\"신호 장애\" 안내"
+    de: Signalstörung
+    emoji: "🚦"
+    rarity: uncommon
+    verifiable: false
+    category: announcement
+    flavor: 신호도 오늘은 쉬고 싶었나 봅니다.
+    origin: handoff
+
+  - id: priority
+    label: "\"타 열차 우선 통과\" 안내"
+    de: Vorfahrt eines anderen Zuges
+    emoji: "🚄"
+    rarity: common
+    verifiable: false
+    category: announcement
+    flavor: 오늘의 주인공은 옆 선로의 열차입니다.
+    origin: handoff
+
+  - id: apology
+    label: 사과 방송 3회 이상
+    de: Wir bitten um Entschuldigung
+    emoji: "🙇"
+    rarity: common
+    verifiable: false
+    category: announcement
+    flavor: 세 번째쯤이면 우리가 먼저 괜찮다고 하고 싶어집니다.
+    origin: handoff
+
+  - id: standing
+    label: 지정석 있는데 서서 감
+    de: Reservierung weg
+    emoji: "🧍"
+    rarity: rare
+    verifiable: false
+    category: onboard
+    flavor: 예약은 했습니다. 좌석이 동의하지 않았을 뿐.
+    origin: handoff
+
+  - id: missed_conn
+    label: 환승 놓침
+    de: Anschluss verpasst
+    emoji: "🏃"
+    rarity: rare
+    verifiable: true
+    verify: { type: missed_connection }
+    category: connection
+    flavor: 저 멀리 떠나는 열차의 뒷모습이 아름답습니다.
+    origin: handoff
+
+  - id: saved_conn
+    label: 환승 2분 이내 성공
+    de: Anschluss erreicht
+    emoji: "⚡"
+    rarity: legendary
+    verifiable: true
+    verify: { type: connection_made, max_buffer_min: 2 }
+    category: connection
+    flavor: 문이 닫히는 소리와 함께 전설이 되었습니다.
+    origin: handoff
+
+  - id: faster_alt
+    label: 늦은 열차 버리고 탄 다른 열차가 더 빨리 도착
+    de: Plan B war schneller
+    emoji: "🧠"
+    rarity: epic
+    verifiable: true
+    verify: { type: faster_alternative }
+    category: connection
+    flavor: 시간표보다 내 직감이 정확했던 날.
+    origin: handoff
+
+  - id: funkloch
+    label: 통신 끊김 구간 진입
+    de: Funkloch
+    emoji: "📵"
+    rarity: common
+    verifiable: false
+    verify: { type: offline_auto }    # 앱이 오프라인을 감지하면 자동 체크 (셀프 배수)
+    category: network
+    flavor: 디지털 디톡스, 선택이 아닌 필수.
+    origin: handoff
+
+  - id: strike_day
+    label: 파업일 탑승
+    de: Streik
+    emoji: "🪧"
+    rarity: legendary
+    verifiable: true
+    verify: { type: event, event: strike }
+    category: event
+    pools: [event]
+    flavor: 그래도 탔다는 사실 자체가 업적입니다.
+    origin: handoff
+
+  # ─────────────── Phase 0 오리지널 제안 (15) ───────────────
+  - id: delay_inherited
+    label: "\"이전 운행 지연\" 안내"
+    de: Verspätung aus vorheriger Fahrt
+    emoji: "🧳"
+    rarity: common
+    verifiable: false
+    category: announcement
+    flavor: 지연도 상속됩니다. 상속세는 우리가 냅니다.
+    origin: original
+
+  - id: wait_oncoming
+    label: 반대편 열차 기다리는 중
+    de: Warten auf Gegenzug
+    emoji: "↔️"
+    rarity: common
+    verifiable: false
+    category: announcement
+    flavor: 단선 구간의 미덕, 양보.
+    origin: original
+
+  - id: construction
+    label: 공사 구간 서행
+    de: Bauarbeiten
+    emoji: "🚧"
+    rarity: common
+    verifiable: false
+    category: announcement
+    flavor: 미래를 위한 공사. 미래는 2030년 이후 도착 예정.
+    origin: original
+
+  - id: door_broken
+    label: 하필 내 앞 문만 고장
+    de: Tür defekt
+    emoji: "🚪"
+    rarity: common
+    verifiable: false
+    category: onboard
+    flavor: 옆 문까지 열두 걸음. 짐은 세 개.
+    origin: original
+
+  - id: coffee_out
+    label: 커피 머신 고장
+    de: Kaffeemaschine defekt
+    emoji: "☕"
+    rarity: common
+    verifiable: false
+    category: onboard
+    flavor: 오늘의 각성은 지연 알림이 대신합니다.
+    origin: original
+
+  - id: toilet_closed
+    label: 화장실 사용 불가
+    de: WC außer Betrieb
+    emoji: "🚻"
+    rarity: uncommon
+    verifiable: false
+    category: onboard
+    flavor: 다음 화장실까지 3량, 혹은 다음 역.
+    origin: original
+
+  - id: info_follows
+    label: "\"추가 안내 예정\"… 끝내 안 옴"
+    de: Weitere Informationen folgen
+    emoji: "📢"
+    rarity: uncommon
+    verifiable: false
+    category: announcement
+    flavor: 안내는 예정되어 있습니다. 도착 시각은 미정입니다.
+    origin: original
+
+  - id: delay_growing
+    label: 지연 시간이 계속 늘어남
+    de: Verspätung wächst
+    emoji: "📈"
+    rarity: uncommon
+    verifiable: true
+    verify: { type: delay_growing, min_updates: 3 }
+    category: delay
+    implies: [delay_5]
+    flavor: +5 → +12 → +25. 우상향 차트는 여기서만 슬픕니다.
+    origin: original
+
+  - id: overcrowded
+    label: 만석, 통로까지 꽉 참
+    de: Zug überfüllt
+    emoji: "🥫"
+    rarity: uncommon
+    verifiable: false
+    category: onboard
+    flavor: 손잡이 대신 옆 사람 배낭을 잡았습니다.
+    origin: original
+
+  - id: display_mismatch
+    label: 전광판과 방송이 서로 다른 말
+    de: Anzeige ≠ Durchsage
+    emoji: "🤷"
+    rarity: rare
+    verifiable: false
+    category: platform
+    flavor: 진실은 앱이 알고 있습니다. 앱은 세 번째 의견을 냅니다.
+    origin: original
+
+  - id: coach_missing
+    label: 내 예약 객차가 아예 없음
+    de: Wagen fehlt
+    emoji: "👻"
+    rarity: rare
+    verifiable: false
+    category: platform
+    flavor: 21호차는 오늘 영적인 존재로 운행합니다.
+    origin: original
+
+  - id: animals_on_track
+    label: 선로 위 동물
+    de: Tiere im Gleis
+    emoji: "🐄"
+    rarity: rare
+    verifiable: false
+    category: announcement
+    flavor: 오늘 선로 통행 우선권은 소에게 있습니다.
+    origin: original
+
+  - id: reason_changed
+    label: 지연 사유가 중간에 바뀜
+    de: neuer Verspätungsgrund
+    emoji: "🔄"
+    rarity: rare
+    verifiable: false
+    category: announcement
+    flavor: 신호 장애였다가, 선행 열차였다가, 이제는 날씨입니다.
+    origin: original
+
+  - id: stop_skipped
+    label: 정차 예정역 통과
+    de: Halt entfällt
+    emoji: "💨"
+    rarity: epic
+    verifiable: true
+    verify: { type: stop_skipped }
+    category: cancel
+    flavor: 내릴 역이 창밖으로 지나갔습니다. 손은 흔들어 줬습니다.
+    origin: original
+
+  - id: early_arrival
+    label: 예정보다 일찍 도착
+    de: zu früh angekommen
+    emoji: "🦄"
+    rarity: mythic
+    verifiable: true
+    verify: { type: early_arrival, min_early_min: 1 }
+    category: luck
+    flavor: 시공간이 뒤틀렸습니다. 스크린샷 필수.
+    origin: original

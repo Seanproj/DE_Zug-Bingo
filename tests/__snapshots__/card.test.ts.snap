@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`daily card generation > is pinned (regression guard — bump generator_version if this changes on purpose) 1`] = `
+[
+  "on_time_ice",
+  "overcrowded",
+  "display_mismatch",
+  "toilet_closed",
+  "reverse_order",
+  "bistro_closed",
+  "wifi_dead",
+  "apology",
+  "funkloch",
+  "cancelled",
+  "animals_on_track",
+  "short_turn",
+  "free_rode_today",
+  "delay_5",
+  "info_follows",
+  "wait_oncoming",
+  "standing",
+  "faster_alt",
+  "signal",
+  "coffee_out",
+  "ac_broken",
+  "repair",
+  "delay_60",
+  "saved_conn",
+  "door_broken",
+]
+`;

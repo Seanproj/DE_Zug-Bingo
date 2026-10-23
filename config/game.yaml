@@ -1,0 +1,29 @@
+# 게임 전역 규칙. 코드에 하드코딩하지 말고 여기서만 바꾼다.
+
+# 카드 생성 알고리즘 버전. RNG/생성 순서/배치 규칙을 바꿔서 같은 날짜의 카드가
+# 달라지게 되면 반드시 올린다 (과거 공유 카드와 불일치가 생기기 때문).
+generator_version: 1
+
+board:
+  size: 5                     # 5×5
+  free_square:
+    id: free_rode_today
+    label: 오늘도 기차를 탔다
+    de: Heute wieder Bahn gefahren
+    emoji: "🫡"
+    flavor: 이것만으로도 이미 용감하다.
+
+daily:
+  timezone: Europe/Berlin     # 독일 기준 00시에 새 카드
+  epoch: "2026-10-23"         # 이 날짜가 Zug-Bingo #1
+  seed_prefix: "daily"
+
+scoring:
+  # 칸 점수 = round(등급 점수 × 배수)
+  verify_multiplier:
+    auto: 1.5                 # ✅ 실시간 데이터로 자동 인증
+    self: 1.0                 # 🙋 셀프 신고
+  free_square_points: 0
+  bonus:
+    line: 50                  # 빙고 1줄마다
+    blackout: 1000            # 25칸 전부

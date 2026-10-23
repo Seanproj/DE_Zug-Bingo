@@ -104,6 +104,7 @@ function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, on
       aria-label={aria}
       aria-selected={checked}
       class={cls}
+      data-fx={rarity?.effect}
       style={{ '--i': index, '--rc': rarity?.color, '--rg': rarity?.glow }}
       {...(free ? {} : press)}
     >

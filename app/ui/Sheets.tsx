@@ -1,7 +1,8 @@
 import type { ComponentChildren } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import type { Config } from '../config/types.ts';
 import { squarePoints } from '../game/score.ts';
+import type { CollectionEntry } from '../game/stats.ts';
 import type { I18n } from '../i18n/index.ts';
 import type { Settings } from '../storage/db.ts';
 
@@ -34,11 +35,17 @@ interface SquareSheetProps {
   squareId: string;
   checked: boolean;
   free: boolean;
-  onToggle(): void;
+  /** collection mode: no check button, shows how often it was collected */
+  entry?: CollectionEntry | null;
+  onToggle?(): void;
   onClose(): void;
 }
 
-export function SquareSheet({ config, i18n, squareId, checked, free, onToggle, onClose }: SquareSheetProps) {
+export const formatDay = (i18n: I18n, key: string) =>
+  new Intl.DateTimeFormat(i18n.locale, { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${key}T12:00:00Z`));
+
+export function SquareSheet({ config, i18n, squareId, checked, free, entry, onToggle, onClose }: SquareSheetProps) {
+  const collectionMode = entry !== undefined;
   const text = i18n.square(squareId);
   const square = config.squareById.get(squareId);
   const rarity = square && config.rarityById.get(square.rarity)!;
@@ -46,7 +53,7 @@ export function SquareSheet({ config, i18n, squareId, checked, free, onToggle, o
   const implied = (square?.implies ?? []).map((id) => i18n.square(id).short);
   return (
     <Sheet onClose={onClose} label={text.label}>
-      <div class={`detail ${rarity ? `r-${rarity.id}` : 'detail--free'}`} style={{ '--rc': rarity?.color, '--rg': rarity?.glow }}>
+      <div class={`detail ${rarity ? `r-${rarity.id}` : 'detail--free'} ${collectionMode && !entry ? 'is-missing' : ''}`} style={{ '--rc': rarity?.color, '--rg': rarity?.glow }}>
         <div class="detail__art">
           <span class="detail__emoji">{square?.emoji ?? config.game.board.free_square.emoji}</span>
           {rarity && (
@@ -68,6 +75,20 @@ export function SquareSheet({ config, i18n, squareId, checked, free, onToggle, o
               <span aria-hidden="true">🎯</span>
               {i18n.t('sheet.points', { points: i18n.number(squarePoints(config, squareId, 'self')) })}
             </li>
+            {collectionMode && (
+              <li>
+                <span aria-hidden="true">📖</span>
+                {entry
+                  ? `${i18n.t('sheet.collected', { n: i18n.number(entry.count) })} · ${i18n.t('collection.first', { date: formatDay(i18n, entry.first) })}`
+                  : i18n.t('collection.never')}
+              </li>
+            )}
+            {square.pools.length === 1 && square.pools[0] === 'event' && (
+              <li>
+                <span aria-hidden="true">⚡</span>
+                {i18n.t('collection.event_only')}
+              </li>
+            )}
             {implied.length > 0 && (
               <li>
                 <span aria-hidden="true">🔗</span>
@@ -78,12 +99,12 @@ export function SquareSheet({ config, i18n, squareId, checked, free, onToggle, o
         )}
       </div>
       <div class="sheet__actions">
-        {!free && (
+        {!free && !collectionMode && onToggle && (
           <button class={`btn ${checked ? 'btn--ghost' : 'btn--primary'}`} data-autofocus onClick={onToggle}>
             {checked ? i18n.t('sheet.uncheck') : i18n.t('sheet.check')}
           </button>
         )}
-        <button class="btn btn--ghost" onClick={onClose} data-autofocus={free || undefined}>
+        <button class="btn btn--ghost" onClick={onClose} data-autofocus={free || collectionMode || undefined}>
           {i18n.t('sheet.close')}
         </button>
       </div>
@@ -194,6 +215,38 @@ export function HelpSheet({ config, i18n, onboarding, onClose }: { config: Confi
       <div class="sheet__actions">
         <button class="btn btn--primary" data-autofocus onClick={onClose}>
           {onboarding ? i18n.t('onboard.cta') : i18n.t('sheet.close')}
+        </button>
+      </div>
+    </Sheet>
+  );
+}
+
+interface ShareSheetProps {
+  i18n: I18n;
+  image: Blob | null;
+  onImage(): void;
+  onText(): void;
+  onClose(): void;
+}
+
+export function ShareSheet({ i18n, image, onImage, onText, onClose }: ShareSheetProps) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!image) return;
+    const u = URL.createObjectURL(image);
+    setUrl(u);
+    return () => URL.revokeObjectURL(u);
+  }, [image]);
+  return (
+    <Sheet onClose={onClose} label={i18n.t('share.sheet_title')}>
+      <h2 class="sheet__title">{i18n.t('share.sheet_title')}</h2>
+      <div class="share-preview">{url ? <img src={url} alt="" width={1080} height={1350} /> : <div class="share-preview__loading" />}</div>
+      <div class="sheet__actions">
+        <button class="btn btn--primary" data-autofocus disabled={!image} onClick={onImage}>
+          🖼️ {i18n.t('share.image')}
+        </button>
+        <button class="btn btn--ghost" onClick={onText}>
+          🔤 {i18n.t('share.text')}
         </button>
       </div>
     </Sheet>

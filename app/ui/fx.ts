@@ -1,3 +1,5 @@
+import type { Rarity } from '../config/types.ts';
+
 // Feedback effects: haptics + a tiny canvas confetti engine (no dependencies).
 
 export const prefersReducedMotion = () =>
@@ -110,4 +112,60 @@ export function burst(x: number, y: number, { count, colors, power = 7, spread =
 export function centerOf(el: Element): [number, number] {
   const r = el.getBoundingClientRect();
   return [r.left + r.width / 2, r.top + r.height / 2];
+}
+
+
+export interface EffectHooks {
+  /** full-screen overlay (title, subtitle) — used by mythic */
+  announce?(title: string, subtitle: string): void;
+}
+
+/**
+ * Check effect by rarity tier (config: rarity.effect). CSS handles the cell itself
+ * (punch, ripple, holo flip via .fx-<effect>); this adds particles and screen-level flair.
+ */
+export function rarityEffect(rarity: Rarity, el: HTMLElement | undefined, label: string, hooks: EffectHooks = {}): void {
+  const [x, y] = el ? centerOf(el) : [innerWidth / 2, innerHeight / 2];
+  const colors = rarity.gradient ?? [rarity.color, '#ffffff'];
+  switch (rarity.effect) {
+    case 'tap':
+      return;
+    case 'pulse':
+      return burst(x, y, { count: 8, colors, power: 3 });
+    case 'spark':
+      return burst(x, y, { count: 28, colors, power: 5.5 });
+    case 'holo':
+      burst(x, y, { count: 44, colors: [rarity.color, '#ffffff', '#c9b3ff'], power: 7 });
+      return;
+    case 'gold':
+      screenFlash('gold');
+      burst(x, y, { count: 80, colors: [rarity.color, '#ffd36a', '#fff3c4'], power: 9 });
+      return;
+    case 'rainbow':
+      screenFlash('rainbow');
+      hooks.announce?.('MYTHIC', label);
+      fireworks(colors);
+      return;
+  }
+}
+
+/** Several staggered bursts across the screen. */
+export function fireworks(colors: string[], shots = 6): void {
+  if (prefersReducedMotion()) return;
+  for (let i = 0; i < shots; i++) {
+    setTimeout(() => {
+      const x = innerWidth * (0.15 + Math.random() * 0.7);
+      const y = innerHeight * (0.15 + Math.random() * 0.45);
+      burst(x, y, { count: 70, colors, power: 9 + Math.random() * 4 });
+    }, i * 260);
+  }
+}
+
+function screenFlash(kind: 'gold' | 'rainbow'): void {
+  if (prefersReducedMotion() || typeof document === 'undefined') return;
+  const el = document.createElement('div');
+  el.className = `fx-flash fx-flash--${kind}`;
+  el.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(el);
+  el.addEventListener('animationend', () => el.remove(), { once: true });
 }

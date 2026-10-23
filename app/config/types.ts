@@ -68,6 +68,24 @@ export interface GameConfig {
   };
   feedback: { haptic: { line: number[]; blackout: number[] } };
   share: { hashtag: string; url: string };
+  verify: { endpoint: string; timeout_ms: number; settle_grace_min: number };
+  prediction: PredictionConfig;
+}
+
+export interface PredictionBucket {
+  id: string;
+  /** inclusive delay range in minutes (arrival at the chosen station) */
+  min?: number;
+  max?: number;
+  cancelled?: boolean;
+  probability: number;
+}
+
+export interface PredictionConfig {
+  start_points: number;
+  daily_bonus: number;
+  stakes: number[];
+  buckets: PredictionBucket[];
 }
 
 export interface BlessedLanes {

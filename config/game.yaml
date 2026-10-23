@@ -51,3 +51,24 @@ feedback:
 share:
   hashtag: "#ZugBingo"
   url: ""                     # 배포 도메인이 정해지면 채운다 (공유 텍스트 마지막 줄)
+
+# ── Phase 3: 실시간 인증 (Cloudflare Workers 프록시 경유) ──
+verify:
+  endpoint: "/api"            # 프록시 경로. dev/preview는 vite가 127.0.0.1:8787 로 넘긴다
+  timeout_ms: 8000
+  # on_time / early_arrival / delay 칸은 실제 도착(변경 시각 또는 계획 시각) 이후에만 확정
+  settle_grace_min: 0
+
+# ── 예측 베팅 (게임 포인트 전용 — 실제 돈 없음) ──
+# probability: 도착역 기준 지연 구간 추정치 (DB 장거리 정시율 ~60%, 6분 기준).
+#   Bahn-Wetter 확률 JSON이 연결되면 노선별 값으로 대체. 배당 = 1 / probability (소수 1자리).
+prediction:
+  start_points: 100
+  daily_bonus: 10             # 🫡 체크인할 때마다 지급
+  stakes: [10, 25, 50]
+  buckets:
+    - { id: on_time,   max: 4,           probability: 0.60 }
+    - { id: d5,        min: 5,  max: 19, probability: 0.25 }
+    - { id: d20,       min: 20, max: 59, probability: 0.10 }
+    - { id: d60,       min: 60,          probability: 0.03 }
+    - { id: cancelled, cancelled: true,  probability: 0.02 }

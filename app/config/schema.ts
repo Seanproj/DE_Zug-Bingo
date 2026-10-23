@@ -56,6 +56,22 @@ export function parseConfig(src: RawConfigSources): Config {
   req(isNum(game?.scoring?.bonus?.line) && isNum(game?.scoring?.bonus?.blackout), 'game.scoring.bonus.{line,blackout} required');
   req(isPattern(game?.feedback?.haptic?.line) && isPattern(game?.feedback?.haptic?.blackout), 'game.feedback.haptic.{line,blackout} must be ms lists');
   req(typeof game?.share?.hashtag === 'string' && typeof game?.share?.url === 'string', 'game.share.{hashtag,url} required');
+  req(typeof game?.verify?.endpoint === 'string' && isNum(game?.verify?.timeout_ms), 'game.verify.{endpoint,timeout_ms} required');
+  const pred = game?.prediction;
+  req(isNum(pred?.start_points) && isNum(pred?.daily_bonus), 'game.prediction.{start_points,daily_bonus} required');
+  req(Array.isArray(pred?.stakes) && pred.stakes.length > 0 && pred.stakes.every((n) => isNum(n) && n > 0), 'game.prediction.stakes must be positive numbers');
+  const buckets = pred?.buckets ?? [];
+  req(buckets.length > 0 && buckets.every((b) => isStr(b.id) && isProb(b.probability) && b.probability > 0), 'game.prediction.buckets need id and probability in (0,1]');
+  req(Math.abs(buckets.reduce((n, b) => n + (b.probability ?? 0), 0) - 1) < 1e-6, 'game.prediction.buckets probabilities must sum to 1');
+  req(buckets.filter((b) => b.cancelled).length === 1, 'game.prediction.buckets need exactly one cancelled bucket');
+  // delay buckets must tile 0..∞ without gaps or overlaps (negative delays count as the first bucket)
+  const ranges = buckets.filter((b) => !b.cancelled).sort((a, b) => (a.min ?? -Infinity) - (b.min ?? -Infinity));
+  ranges.forEach((b, i) => {
+    const next = ranges[i + 1];
+    if (next) req(b.max !== undefined && next.min === b.max + 1, `game.prediction.buckets: gap/overlap between ${b.id} and ${next.id}`);
+    else req(b.max === undefined, `game.prediction.buckets: last delay bucket ${b.id} must be open-ended`);
+  });
+  req(ranges[0]?.min === undefined, 'game.prediction.buckets: first delay bucket must have no min');
 
   // ── rarity.yaml
   const rarities = rarity?.rarities ?? [];

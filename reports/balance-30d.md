@@ -8,12 +8,12 @@
 
 | 등급 | 칸 수 | 점수 | 기본 확률/일 | 풀 크기 (daily) | 30일 내 칸당 평균 등장 |
 |---|---:|---:|---:|---:|---:|
-| ⚪ Common | 9 | 10 | 55% | 13 | 20.8회 |
-| 🟢 Uncommon | 6 | 25 | 30% | 9 | 20.0회 |
-| 🔵 Rare | 5 | 50 | 12% | 9 | 16.7회 |
-| 🟣 Epic | 2 | 100 | 5% | 5 | 12.0회 |
-| 🟠 Legendary | 1 | 250 | 2% | 2 | 15.0회 |
-| 🌈 Mythic | 1 | 500 | 1% | 2 | 15.0회 |
+| ⚪ 일반 | 9 | 10 | 55% | 13 | 20.8회 |
+| 🟢 고급 | 6 | 25 | 30% | 9 | 20.0회 |
+| 🔵 희귀 | 5 | 50 | 12% | 9 | 16.7회 |
+| 🟣 영웅 | 2 | 100 | 5% | 5 | 12.0회 |
+| 🟠 전설 | 1 | 250 | 2% | 2 | 15.0회 |
+| 🌈 신화 | 1 | 500 | 1% | 2 | 15.0회 |
 
 ## 2. 요약
 
@@ -66,46 +66,46 @@
 
 | 칸 | 등급 | 확률/일 | 자동인증 | 30일 중 등장 |
 |---|---|---:|:---:|---:|
-| 📶 와이파이 안 됨 (WLAN gestört) | ⚪ Common | 55% | 🙋 | 25 |
-| ☕ 커피 머신 고장 (Kaffeemaschine defekt) | ⚪ Common | 55% | 🙋 | 25 |
-| 🔊 안내방송이 하나도 안 들림 (Durchsage unverständlich) | ⚪ Common | 55% | 🙋 | 25 |
-| 🚄 "타 열차 우선 통과" 안내 (Vorfahrt eines anderen Zuges) | ⚪ Common | 55% | 🙋 | 24 |
-| ⏱️ 5분 이상 지연 (Verspätung +5) | ⚪ Common | 55% | ✅ | 22 |
-| 🔙 역방향 좌석 (entgegen der Fahrtrichtung) | ⚪ Common | 55% | 🙋 | 22 |
-| 🙇 사과 방송 3회 이상 (Wir bitten um Entschuldigung) | ⚪ Common | 55% | 🙋 | 21 |
-| 🧳 "이전 운행 지연" 안내 (Verspätung aus vorheriger Fahrt) | ⚪ Common | 55% | 🙋 | 21 |
-| 🚪 하필 내 앞 문만 고장 (Tür defekt) | ⚪ Common | 55% | 🙋 | 21 |
-| 🚧 공사 구간 서행 (Bauarbeiten) | ⚪ Common | 55% | 🙋 | 17 |
-| 📵 통신 끊김 구간 진입 (Funkloch) | ⚪ Common | 55% | 🙋 | 16 |
-| 🔌 콘센트에 전기가 안 들어옴 (Steckdose ohne Strom) | ⚪ Common | 55% | 🙋 | 16 |
-| ↔️ 반대편 열차 기다리는 중 (Warten auf Gegenzug) | ⚪ Common | 55% | 🙋 | 15 |
-| 🔓 20분+ 지연, 열차 지정 해제 (Zugbindung aufgehoben) | 🟢 Uncommon | 30% | ✅ | 26 |
-| 🥨 식당칸 영업 안 함 (Bordbistro geschlossen) | 🟢 Uncommon | 30% | 🙋 | 23 |
-| 📢 "추가 안내 예정"… 끝내 안 옴 (Weitere Informationen folgen) | 🟢 Uncommon | 30% | 🙋 | 22 |
-| 📈 지연 시간이 계속 늘어남 (Verspätung wächst) | 🟢 Uncommon | 30% | ✅ | 22 |
-| 🔧 "열차 수리 중" 안내 (Reparatur am Zug) | 🟢 Uncommon | 30% | 🙋 | 19 |
-| 🚻 화장실 사용 불가 (WC außer Betrieb) | 🟢 Uncommon | 30% | 🙋 | 19 |
-| 🥫 만석, 통로까지 꽉 참 (Zug überfüllt) | 🟢 Uncommon | 30% | 🙋 | 17 |
-| 🔀 승강장 변경 (Gleiswechsel) | 🟢 Uncommon | 30% | ✅ | 16 |
-| 🚦 "신호 장애" 안내 (Signalstörung) | 🟢 Uncommon | 30% | 🙋 | 16 |
-| 🧍 지정석 있는데 서서 감 (Reservierung weg) | 🔵 Rare | 12% | 🙋 | 21 |
-| 🤷 전광판과 방송이 서로 다른 말 (Anzeige ≠ Durchsage) | 🔵 Rare | 12% | 🙋 | 20 |
-| 🐄 선로 위 동물 (Tiere im Gleis) | 🔵 Rare | 12% | 🙋 | 18 |
-| 💶 60분+ 지연 (보상금 25%) (Verspätung +60) | 🔵 Rare | 12% | ✅ | 17 |
-| 🏃 환승 놓침 (Anschluss verpasst) | 🔵 Rare | 12% | ✅ | 17 |
-| 🔁 객차 순서 반대 (umgekehrte Wagenreihung) | 🔵 Rare | 12% | 🙋 | 16 |
-| 🔄 지연 사유가 중간에 바뀜 (neuer Verspätungsgrund) | 🔵 Rare | 12% | 🙋 | 15 |
-| 🥵 에어컨/난방 고장 (Klimaanlage defekt) | 🔵 Rare | 12% | 🙋 | 13 |
-| 👻 내 예약 객차가 아예 없음 (Wagen fehlt) | 🔵 Rare | 12% | 🙋 | 13 |
-| 🧠 늦은 열차 버리고 탄 다른 열차가 더 빨리 도착 (Plan B war schneller) | 🟣 Epic | 5% | ✅ | 14 |
-| ❌ 열차 취소 (Zugausfall) | 🟣 Epic | 5% | ✅ | 13 |
-| 💨 정차 예정역 통과 (Halt entfällt) | 🟣 Epic | 5% | ✅ | 12 |
-| 🚌 대체버스 탑승 (SEV / Ersatzverkehr) | 🟣 Epic | 5% | 🙋 | 11 |
-| 🛑 중간역 종착 (endet vorzeitig) | 🟣 Epic | 5% | ✅ | 10 |
-| ⚡ 환승 2분 이내 성공 (Anschluss erreicht) | 🟠 Legendary | 2% | ✅ | 17 |
-| 💰 120분+ 지연 (보상금 50%) (Verspätung +120) | 🟠 Legendary | 2% | ✅ | 13 |
-| 🦄 예정보다 일찍 도착 (zu früh angekommen) | 🌈 Mythic | 1% | ✅ | 16 |
-| ✨ ICE 정시 도착 (pünktlich) | 🌈 Mythic | 1% | ✅ | 14 |
+| 📶 와이파이 안 됨 (WLAN gestört) | ⚪ 일반 | 55% | 🙋 | 25 |
+| ☕ 커피 머신 고장 (Kaffeemaschine defekt) | ⚪ 일반 | 55% | 🙋 | 25 |
+| 🔊 안내방송이 하나도 안 들림 (Durchsage unverständlich) | ⚪ 일반 | 55% | 🙋 | 25 |
+| 🚄 "타 열차 우선 통과" 안내 (Vorfahrt eines anderen Zuges) | ⚪ 일반 | 55% | 🙋 | 24 |
+| ⏱️ 5분 이상 지연 (Verspätung +5) | ⚪ 일반 | 55% | ✅ | 22 |
+| 🔙 역방향 좌석 (entgegen der Fahrtrichtung) | ⚪ 일반 | 55% | 🙋 | 22 |
+| 🙇 사과 방송 3회 이상 (Wir bitten um Entschuldigung) | ⚪ 일반 | 55% | 🙋 | 21 |
+| 🧳 "이전 운행 지연" 안내 (Verspätung aus vorheriger Fahrt) | ⚪ 일반 | 55% | 🙋 | 21 |
+| 🚪 하필 내 앞 문만 고장 (Tür defekt) | ⚪ 일반 | 55% | 🙋 | 21 |
+| 🚧 공사 구간 서행 (Bauarbeiten) | ⚪ 일반 | 55% | 🙋 | 17 |
+| 📵 통신 끊김 구간 진입 (Funkloch) | ⚪ 일반 | 55% | 🙋 | 16 |
+| 🔌 콘센트에 전기가 안 들어옴 (Steckdose ohne Strom) | ⚪ 일반 | 55% | 🙋 | 16 |
+| ↔️ 반대편 열차 기다리는 중 (Warten auf Gegenzug) | ⚪ 일반 | 55% | 🙋 | 15 |
+| 🔓 20분+ 지연, 열차 지정 해제 (Zugbindung aufgehoben) | 🟢 고급 | 30% | ✅ | 26 |
+| 🥨 식당칸 영업 안 함 (Bordbistro geschlossen) | 🟢 고급 | 30% | 🙋 | 23 |
+| 📢 "추가 안내 예정"… 끝내 안 옴 (Weitere Informationen folgen) | 🟢 고급 | 30% | 🙋 | 22 |
+| 📈 지연 시간이 계속 늘어남 (Verspätung wächst) | 🟢 고급 | 30% | ✅ | 22 |
+| 🔧 "열차 수리 중" 안내 (Reparatur am Zug) | 🟢 고급 | 30% | 🙋 | 19 |
+| 🚻 화장실 사용 불가 (WC außer Betrieb) | 🟢 고급 | 30% | 🙋 | 19 |
+| 🥫 만석, 통로까지 꽉 참 (Zug überfüllt) | 🟢 고급 | 30% | 🙋 | 17 |
+| 🔀 승강장 변경 (Gleiswechsel) | 🟢 고급 | 30% | ✅ | 16 |
+| 🚦 "신호 장애" 안내 (Signalstörung) | 🟢 고급 | 30% | 🙋 | 16 |
+| 🧍 지정석 있는데 서서 감 (Reservierung weg) | 🔵 희귀 | 12% | 🙋 | 21 |
+| 🤷 전광판과 방송이 서로 다른 말 (Anzeige ≠ Durchsage) | 🔵 희귀 | 12% | 🙋 | 20 |
+| 🐄 선로 위 동물 (Tiere im Gleis) | 🔵 희귀 | 12% | 🙋 | 18 |
+| 💶 60분+ 지연 (보상금 25%) (Verspätung +60) | 🔵 희귀 | 12% | ✅ | 17 |
+| 🏃 환승 놓침 (Anschluss verpasst) | 🔵 희귀 | 12% | ✅ | 17 |
+| 🔁 객차 순서 반대 (umgekehrte Wagenreihung) | 🔵 희귀 | 12% | 🙋 | 16 |
+| 🔄 지연 사유가 중간에 바뀜 (neuer Verspätungsgrund) | 🔵 희귀 | 12% | 🙋 | 15 |
+| 🥵 에어컨/난방 고장 (Klimaanlage defekt) | 🔵 희귀 | 12% | 🙋 | 13 |
+| 👻 내 예약 객차가 아예 없음 (Wagen fehlt) | 🔵 희귀 | 12% | 🙋 | 13 |
+| 🧠 늦은 열차 버리고 탄 다른 열차가 더 빨리 도착 (Plan B war schneller) | 🟣 영웅 | 5% | ✅ | 14 |
+| ❌ 열차 취소 (Zugausfall) | 🟣 영웅 | 5% | ✅ | 13 |
+| 💨 정차 예정역 통과 (Halt entfällt) | 🟣 영웅 | 5% | ✅ | 12 |
+| 🚌 대체버스 탑승 (SEV / Ersatzverkehr) | 🟣 영웅 | 5% | 🙋 | 11 |
+| 🛑 중간역 종착 (endet vorzeitig) | 🟣 영웅 | 5% | ✅ | 10 |
+| ⚡ 환승 2분 이내 성공 (Anschluss erreicht) | 🟠 전설 | 2% | ✅ | 17 |
+| 💰 120분+ 지연 (보상금 50%) (Verspätung +120) | 🟠 전설 | 2% | ✅ | 13 |
+| 🦄 예정보다 일찍 도착 (zu früh angekommen) | 🌈 신화 | 1% | ✅ | 16 |
+| ✨ ICE 정시 도착 (pünktlich) | 🌈 신화 | 1% | ✅ | 14 |
 
 ## 5. 첫 카드 미리보기
 

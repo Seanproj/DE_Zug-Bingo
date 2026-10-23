@@ -80,11 +80,13 @@ share:
 
 # Daily 카드 구성 규칙 (무료 칸 제외 24칸).
 daily_card:
+  # v0 (7/6/6/3/1/1) 시뮬레이션 결과 하루 1줄 확률 2.3% → 너무 어려움.
+  # reports/phase0.md 참고. 현재 값은 축복 라인과 함께 ~20%/일 목표로 튜닝.
   composition:
-    common: 7
+    common: 9
     uncommon: 6
-    rare: 6
-    epic: 3
+    rare: 5
+    epic: 2
     legendary: 1
     mythic: 1
 
@@ -94,5 +96,13 @@ daily_card:
   line_caps:
     - min_tier: 3              # Epic 이상
       max: 1
-    - min_tier: 2              # Rare 이상 (11칸 / 5줄 → 줄당 최대 3)
+    - min_tier: 2              # Rare 이상 (9칸 / 축복 라인 제외 4줄 → 줄당 최대 3)
       max: 3
+
+  # 🫡 축복 라인 (blessed lanes): 무료 칸을 지나는 줄(가로·세로·대각선 4개) 중 count개를
+  # 골라, 그 줄의 칸을 max_tier 이하 등급으로만 채운다. "오늘도 탔다" 칸의 가호.
+  # → 매일 최소한 '현실적으로 노려볼 만한' 줄이 존재하게 만드는 장치.
+  #   UI에서는 이 줄을 은은하게 표시해 첫 목표를 제시한다.
+  blessed_lanes:
+    count: 2
+    max_tier: 0                # Common만

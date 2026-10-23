@@ -2,7 +2,8 @@
 #
 # 필드
 #   id          고유 id (snake_case). 저장 데이터의 키이므로 한 번 배포하면 바꾸지 않는다.
-#   label       한국어 칸 이름
+#   label       한국어 칸 이름 (상세 화면)
+#   short       카드 셀에 들어갈 짧은 이름 (≤ 8자 권장)
 #   de          독일어 원어 병기
 #   emoji       칸 아이콘
 #   rarity      rarity.yaml의 id
@@ -19,6 +20,7 @@ squares:
   # ─────────────── HANDOFF 3장 초안 (23) ───────────────
   - id: delay_5
     label: 5분 이상 지연
+    short: "5분+ 지연"
     de: Verspätung +5
     emoji: "⏱️"
     rarity: common
@@ -30,6 +32,7 @@ squares:
 
   - id: delay_20
     label: 20분+ 지연, 열차 지정 해제
+    short: "20분+ 지연"
     de: Zugbindung aufgehoben
     emoji: "🔓"
     rarity: uncommon
@@ -42,6 +45,7 @@ squares:
 
   - id: delay_60
     label: 60분+ 지연 (보상금 25%)
+    short: "60분+ 지연"
     de: Verspätung +60
     emoji: "💶"
     rarity: rare
@@ -54,6 +58,7 @@ squares:
 
   - id: delay_120
     label: 120분+ 지연 (보상금 50%)
+    short: "120분+ 지연"
     de: Verspätung +120
     emoji: "💰"
     rarity: legendary
@@ -66,6 +71,7 @@ squares:
 
   - id: platform_change
     label: 승강장 변경
+    short: "승강장 변경"
     de: Gleiswechsel
     emoji: "🔀"
     rarity: uncommon
@@ -77,6 +83,7 @@ squares:
 
   - id: cancelled
     label: 열차 취소
+    short: "열차 취소"
     de: Zugausfall
     emoji: "❌"
     rarity: epic
@@ -88,6 +95,7 @@ squares:
 
   - id: short_turn
     label: 중간역 종착
+    short: "중간역 종착"
     de: endet vorzeitig
     emoji: "🛑"
     rarity: epic
@@ -99,6 +107,7 @@ squares:
 
   - id: on_time_ice
     label: ICE 정시 도착
+    short: "ICE 정시 도착"
     de: pünktlich
     emoji: "✨"
     rarity: mythic
@@ -110,6 +119,7 @@ squares:
 
   - id: ersatzverkehr
     label: 대체버스 탑승
+    short: "대체버스"
     de: SEV / Ersatzverkehr
     emoji: "🚌"
     rarity: epic
@@ -120,6 +130,7 @@ squares:
 
   - id: reverse_order
     label: 객차 순서 반대
+    short: "객차 순서 반대"
     de: umgekehrte Wagenreihung
     emoji: "🔁"
     rarity: rare
@@ -130,6 +141,7 @@ squares:
 
   - id: wifi_dead
     label: 와이파이 안 됨
+    short: "와이파이 사망"
     de: WLAN gestört
     emoji: "📶"
     rarity: common
@@ -140,6 +152,7 @@ squares:
 
   - id: bistro_closed
     label: 식당칸 영업 안 함
+    short: "식당칸 휴업"
     de: Bordbistro geschlossen
     emoji: "🥨"
     rarity: uncommon
@@ -150,6 +163,7 @@ squares:
 
   - id: ac_broken
     label: 에어컨/난방 고장
+    short: "에어컨 고장"
     de: Klimaanlage defekt
     emoji: "🥵"
     rarity: rare
@@ -160,6 +174,7 @@ squares:
 
   - id: repair
     label: "\"열차 수리 중\" 안내"
+    short: "\"수리 중\""
     de: Reparatur am Zug
     emoji: "🔧"
     rarity: uncommon
@@ -170,6 +185,7 @@ squares:
 
   - id: signal
     label: "\"신호 장애\" 안내"
+    short: "\"신호 장애\""
     de: Signalstörung
     emoji: "🚦"
     rarity: uncommon
@@ -180,6 +196,7 @@ squares:
 
   - id: priority
     label: "\"타 열차 우선 통과\" 안내"
+    short: "\"우선 통과\""
     de: Vorfahrt eines anderen Zuges
     emoji: "🚄"
     rarity: common
@@ -190,6 +207,7 @@ squares:
 
   - id: apology
     label: 사과 방송 3회 이상
+    short: "사과 방송 ×3"
     de: Wir bitten um Entschuldigung
     emoji: "🙇"
     rarity: common
@@ -200,6 +218,7 @@ squares:
 
   - id: standing
     label: 지정석 있는데 서서 감
+    short: "예약석 증발"
     de: Reservierung weg
     emoji: "🧍"
     rarity: rare
@@ -210,6 +229,7 @@ squares:
 
   - id: missed_conn
     label: 환승 놓침
+    short: "환승 놓침"
     de: Anschluss verpasst
     emoji: "🏃"
     rarity: rare
@@ -221,6 +241,7 @@ squares:
 
   - id: saved_conn
     label: 환승 2분 이내 성공
+    short: "2분 환승 성공"
     de: Anschluss erreicht
     emoji: "⚡"
     rarity: legendary
@@ -232,6 +253,7 @@ squares:
 
   - id: faster_alt
     label: 늦은 열차 버리고 탄 다른 열차가 더 빨리 도착
+    short: "플랜 B 승리"
     de: Plan B war schneller
     emoji: "🧠"
     rarity: epic
@@ -243,6 +265,7 @@ squares:
 
   - id: funkloch
     label: 통신 끊김 구간 진입
+    short: "통신 두절"
     de: Funkloch
     emoji: "📵"
     rarity: common
@@ -254,6 +277,7 @@ squares:
 
   - id: strike_day
     label: 파업일 탑승
+    short: "파업일 탑승"
     de: Streik
     emoji: "🪧"
     rarity: legendary
@@ -264,9 +288,10 @@ squares:
     flavor: 그래도 탔다는 사실 자체가 업적입니다.
     origin: handoff
 
-  # ─────────────── Phase 0 오리지널 제안 (15) ───────────────
+  # ─────────────── Phase 0 오리지널 제안 (18) ───────────────
   - id: delay_inherited
     label: "\"이전 운행 지연\" 안내"
+    short: "\"이전 운행 지연\""
     de: Verspätung aus vorheriger Fahrt
     emoji: "🧳"
     rarity: common
@@ -277,6 +302,7 @@ squares:
 
   - id: wait_oncoming
     label: 반대편 열차 기다리는 중
+    short: "반대편 열차 대기"
     de: Warten auf Gegenzug
     emoji: "↔️"
     rarity: common
@@ -287,6 +313,7 @@ squares:
 
   - id: construction
     label: 공사 구간 서행
+    short: "공사 서행"
     de: Bauarbeiten
     emoji: "🚧"
     rarity: common
@@ -297,6 +324,7 @@ squares:
 
   - id: door_broken
     label: 하필 내 앞 문만 고장
+    short: "내 앞 문 고장"
     de: Tür defekt
     emoji: "🚪"
     rarity: common
@@ -307,6 +335,7 @@ squares:
 
   - id: coffee_out
     label: 커피 머신 고장
+    short: "커피 머신 고장"
     de: Kaffeemaschine defekt
     emoji: "☕"
     rarity: common
@@ -315,8 +344,42 @@ squares:
     flavor: 오늘의 각성은 지연 알림이 대신합니다.
     origin: original
 
+  - id: speaker_garbled
+    label: 안내방송이 하나도 안 들림
+    short: "방송 해독 불가"
+    de: Durchsage unverständlich
+    emoji: "🔊"
+    rarity: common
+    verifiable: false
+    category: announcement
+    flavor: 중요한 내용인 건 확실합니다. 내용은 불확실합니다.
+    origin: original
+
+  - id: backwards_seat
+    label: 역방향 좌석
+    short: "역방향 좌석"
+    de: entgegen der Fahrtrichtung
+    emoji: "🔙"
+    rarity: common
+    verifiable: false
+    category: onboard
+    flavor: 지나간 풍경을 음미하는 철학적 여행.
+    origin: original
+
+  - id: socket_dead
+    label: 콘센트에 전기가 안 들어옴
+    short: "콘센트 정전"
+    de: Steckdose ohne Strom
+    emoji: "🔌"
+    rarity: common
+    verifiable: false
+    category: onboard
+    flavor: 배터리 7%, 남은 여정 2시간. 운명을 받아들입니다.
+    origin: original
+
   - id: toilet_closed
     label: 화장실 사용 불가
+    short: "화장실 폐쇄"
     de: WC außer Betrieb
     emoji: "🚻"
     rarity: uncommon
@@ -327,6 +390,7 @@ squares:
 
   - id: info_follows
     label: "\"추가 안내 예정\"… 끝내 안 옴"
+    short: "\"추가 안내 예정\""
     de: Weitere Informationen folgen
     emoji: "📢"
     rarity: uncommon
@@ -337,6 +401,7 @@ squares:
 
   - id: delay_growing
     label: 지연 시간이 계속 늘어남
+    short: "지연 무한 증식"
     de: Verspätung wächst
     emoji: "📈"
     rarity: uncommon
@@ -349,6 +414,7 @@ squares:
 
   - id: overcrowded
     label: 만석, 통로까지 꽉 참
+    short: "통로까지 만석"
     de: Zug überfüllt
     emoji: "🥫"
     rarity: uncommon
@@ -359,6 +425,7 @@ squares:
 
   - id: display_mismatch
     label: 전광판과 방송이 서로 다른 말
+    short: "전광판 ≠ 방송"
     de: Anzeige ≠ Durchsage
     emoji: "🤷"
     rarity: rare
@@ -369,6 +436,7 @@ squares:
 
   - id: coach_missing
     label: 내 예약 객차가 아예 없음
+    short: "예약 객차 실종"
     de: Wagen fehlt
     emoji: "👻"
     rarity: rare
@@ -379,6 +447,7 @@ squares:
 
   - id: animals_on_track
     label: 선로 위 동물
+    short: "선로 위 동물"
     de: Tiere im Gleis
     emoji: "🐄"
     rarity: rare
@@ -389,6 +458,7 @@ squares:
 
   - id: reason_changed
     label: 지연 사유가 중간에 바뀜
+    short: "사유 변경"
     de: neuer Verspätungsgrund
     emoji: "🔄"
     rarity: rare
@@ -399,6 +469,7 @@ squares:
 
   - id: stop_skipped
     label: 정차 예정역 통과
+    short: "정차역 패싱"
     de: Halt entfällt
     emoji: "💨"
     rarity: epic
@@ -410,6 +481,7 @@ squares:
 
   - id: early_arrival
     label: 예정보다 일찍 도착
+    short: "조기 도착"
     de: zu früh angekommen
     emoji: "🦄"
     rarity: mythic

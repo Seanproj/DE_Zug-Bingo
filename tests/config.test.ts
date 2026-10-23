@@ -42,8 +42,14 @@ describe('config', () => {
 
   it('rejects compositions that do not fill the board', () => {
     const s = sources();
-    s.rarity = s.rarity.replace(/common: 7\n/, 'common: 6\n');
+    s.rarity = s.rarity.replace(/ common: \d+\n/, ' common: 8\n');
     expect(() => parseConfig(s)).toThrow(/sums to 23/);
+  });
+
+  it('rejects blessed lanes the composition cannot fill', () => {
+    const s = sources();
+    s.rarity = s.rarity.replace(/ common: \d+\n/, ' common: 7\n').replace(/ uncommon: \d+\n/, ' uncommon: 8\n');
+    expect(() => parseConfig(s)).toThrow(/blessed_lanes need 8 squares/);
   });
 
   it('rejects unknown achievement stats', () => {

@@ -78,7 +78,8 @@ export function parseConfig(src: RawConfigSources): Config {
     req(!squareById.has(s.id), `duplicate square id "${s.id}"`);
     req(s.id !== game?.board?.free_square?.id, `square id "${s.id}" collides with the free square`);
     squareById.set(s.id, s);
-    req(isStr(s.label) && isStr(s.de) && isStr(s.emoji), `square "${s.id}" needs label, de, emoji`);
+    req(isStr(s.label) && isStr(s.short) && isStr(s.de) && isStr(s.emoji), `square "${s.id}" needs label, short, de, emoji`);
+    req((s.short ?? '').length <= 10, `square "${s.id}" short label is longer than 10 chars`);
     req(rarityById.has(s.rarity), `square "${s.id}" has unknown rarity "${s.rarity}"`);
     req(typeof s.verifiable === 'boolean', `square "${s.id}" needs verifiable: true/false`);
     req(!s.verifiable || isStr(s.verify?.type), `verifiable square "${s.id}" needs verify.type`);
@@ -111,6 +112,16 @@ export function parseConfig(src: RawConfigSources): Config {
     );
     // Rows partition the board, so each row holding ≤ max squares is a hard upper bound.
     req(count <= cap.max * size, `line_caps min_tier ${cap.min_tier}: ${count} squares cannot fit ${cap.max}/line`);
+  }
+
+  const lanes = rarity?.daily_card?.blessed_lanes;
+  if (lanes) {
+    req(Number.isInteger(lanes.count) && lanes.count >= 0 && lanes.count <= 4, 'blessed_lanes.count must be 0..4 (lines through the center)');
+    req(Number.isInteger(lanes.max_tier), 'blessed_lanes.max_tier must be an integer');
+    const low = RARITY_IDS.filter((id) => (rarityById.get(id)?.tier ?? 99) <= lanes.max_tier).reduce((n, id) => n + (comp[id] ?? 0), 0);
+    // Lines through the center only share the free cell, so each lane needs size-1 squares.
+    const need = lanes.count * (size - 1);
+    req(low >= need, `blessed_lanes need ${need} squares of tier ≤ ${lanes.max_tier}, composition has ${low}`);
   }
 
   // ── achievements.yaml

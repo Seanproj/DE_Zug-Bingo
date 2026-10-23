@@ -12,6 +12,7 @@ export function fixtureCard(ids: string[]): Card {
     seed: 'fixture',
     size: 5,
     generatorVersion: 0,
+    blessedLines: [],
     cells: ids.map((id, i) => (i === 12 ? { squareId: config.game.board.free_square.id, free: true } : { squareId: id, free: false })),
   };
 }

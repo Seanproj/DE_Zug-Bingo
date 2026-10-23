@@ -56,6 +56,22 @@ describe('daily card generation', () => {
     }
   });
 
+  it.each(days.slice(0, 30))('%s: blessed lanes pass through the center and hold only low tiers', (key) => {
+    const card = generateDailyCard(config, key);
+    const lanes = config.rarity.daily_card.blessed_lanes!;
+    expect(card.blessedLines).toHaveLength(lanes.count);
+    for (const id of card.blessedLines) {
+      const line = boardLines(card.size).find((l) => l.id === id)!;
+      expect(line.cells).toContain(centerIndex(card.size));
+      for (const i of line.cells) if (!card.cells[i]!.free) expect(tier(card.cells[i]!.squareId)).toBeLessThanOrEqual(lanes.max_tier);
+    }
+  });
+
+  it('blessed lane choice varies across days', () => {
+    const combos = new Set(days.map((k) => generateDailyCard(config, k).blessedLines.join('+')));
+    expect(combos.size).toBe(6); // C(4,2)
+  });
+
   it('uses most of the daily pool across a month (variety)', () => {
     const seen = new Set(days.slice(0, 30).flatMap((k) => generateDailyCard(config, k).cells.map((c) => c.squareId)));
     const pool = config.squares.filter((s) => s.pools.includes('daily'));

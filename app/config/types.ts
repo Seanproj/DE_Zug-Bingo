@@ -26,6 +26,7 @@ export interface VerifyRule {
 export interface Square {
   id: string;
   label: string;
+  short: string;
   de: string;
   emoji: string;
   rarity: RarityId;
@@ -63,12 +64,18 @@ export interface GameConfig {
   };
 }
 
+export interface BlessedLanes {
+  count: number;
+  max_tier: number;
+}
+
 export interface RarityConfig {
   rarities: Rarity[];
   share: { unchecked_emoji: string };
   daily_card: {
     composition: Record<RarityId, number>;
     line_caps: LineCap[];
+    blessed_lanes?: BlessedLanes;
   };
 }
 

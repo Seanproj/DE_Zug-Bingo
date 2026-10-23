@@ -58,6 +58,9 @@ export interface GameConfig {
   locales: { supported: string[]; reference: string; fallback: string };
   board: { size: number; free_square: FreeSquare };
   daily: { timezone: string; epoch: string; seed_prefix: string };
+  /** Which card the app plays: one per day or one per week (Mon–Sun, daily.timezone). */
+  card: { period: 'day' | 'week' };
+  weekly: { epoch: string; seed_prefix: string; active_days: number };
   scoring: {
     verify_multiplier: { auto: number; self: number };
     free_square_points: number;
@@ -72,14 +75,17 @@ export interface BlessedLanes {
   max_tier: number;
 }
 
+export interface CardSpec {
+  composition: Record<RarityId, number>;
+  line_caps: LineCap[];
+  blessed_lanes?: BlessedLanes;
+}
+
 export interface RarityConfig {
   rarities: Rarity[];
   share: { unchecked_emoji: string };
-  daily_card: {
-    composition: Record<RarityId, number>;
-    line_caps: LineCap[];
-    blessed_lanes?: BlessedLanes;
-  };
+  daily_card: CardSpec;
+  weekly_card: CardSpec;
 }
 
 export type Condition =

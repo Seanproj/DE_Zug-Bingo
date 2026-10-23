@@ -4,6 +4,7 @@ import {
   NUMERIC_STATS,
   RARITY_EFFECTS,
   type AchievementsConfig,
+  type CardSpec,
   type CardPool,
   type Condition,
   type Config,
@@ -100,34 +101,38 @@ export function parseConfig(src: RawConfigSources): Config {
     }
   }
 
-  // ── daily card composition must be satisfiable by the daily pool
-  const comp = rarity?.daily_card?.composition ?? ({} as Record<RarityId, number>);
+  // ── card compositions must be satisfiable by the regular ("daily") pool
   const cells = Number.isInteger(size) ? size * size - 1 : 0;
-  const total = RARITY_IDS.reduce((n, id) => n + (comp[id] ?? 0), 0);
-  req(total === cells, `daily_card.composition sums to ${total}, board needs ${cells}`);
-  for (const id of RARITY_IDS) {
-    const available = squares.filter((s) => s.rarity === id && s.pools.includes('daily')).length;
-    req((comp[id] ?? 0) <= available, `daily_card.composition.${id}=${comp[id]} but only ${available} daily squares`);
-  }
-  for (const cap of rarity?.daily_card?.line_caps ?? []) {
-    req(Number.isInteger(cap.min_tier) && Number.isInteger(cap.max) && cap.max >= 1, 'line_caps entries need integer min_tier and max ≥ 1');
-    const count = RARITY_IDS.filter((id) => (rarityById.get(id)?.tier ?? -1) >= cap.min_tier).reduce(
-      (n, id) => n + (comp[id] ?? 0),
-      0,
-    );
-    // Rows partition the board, so each row holding ≤ max squares is a hard upper bound.
-    req(count <= cap.max * size, `line_caps min_tier ${cap.min_tier}: ${count} squares cannot fit ${cap.max}/line`);
-  }
-
-  const lanes = rarity?.daily_card?.blessed_lanes;
-  if (lanes) {
-    req(Number.isInteger(lanes.count) && lanes.count >= 0 && lanes.count <= 4, 'blessed_lanes.count must be 0..4 (lines through the center)');
-    req(Number.isInteger(lanes.max_tier), 'blessed_lanes.max_tier must be an integer');
-    const low = RARITY_IDS.filter((id) => (rarityById.get(id)?.tier ?? 99) <= lanes.max_tier).reduce((n, id) => n + (comp[id] ?? 0), 0);
-    // Lines through the center only share the free cell, so each lane needs size-1 squares.
-    const need = lanes.count * (size - 1);
-    req(low >= need, `blessed_lanes need ${need} squares of tier ≤ ${lanes.max_tier}, composition has ${low}`);
-  }
+  const checkCard = (name: string, spec: CardSpec | undefined) => {
+    if (!spec) return void problems.push(`rarity.${name} is missing`);
+    const comp = spec.composition ?? ({} as Record<RarityId, number>);
+    const total = RARITY_IDS.reduce((n, id) => n + (comp[id] ?? 0), 0);
+    req(total === cells, `${name}.composition sums to ${total}, board needs ${cells}`);
+    for (const id of RARITY_IDS) {
+      const available = squares.filter((s) => s.rarity === id && s.pools.includes('daily')).length;
+      req((comp[id] ?? 0) <= available, `${name}.composition.${id}=${comp[id]} but only ${available} regular squares`);
+    }
+    for (const cap of spec.line_caps ?? []) {
+      req(Number.isInteger(cap.min_tier) && Number.isInteger(cap.max) && cap.max >= 1, `${name}.line_caps entries need integer min_tier and max ≥ 1`);
+      const count = RARITY_IDS.filter((id) => (rarityById.get(id)?.tier ?? -1) >= cap.min_tier).reduce((n, id) => n + (comp[id] ?? 0), 0);
+      // Rows partition the board, so each row holding ≤ max squares is a hard upper bound.
+      req(count <= cap.max * size, `${name}.line_caps min_tier ${cap.min_tier}: ${count} squares cannot fit ${cap.max}/line`);
+    }
+    const lanes = spec.blessed_lanes;
+    if (lanes) {
+      req(Number.isInteger(lanes.count) && lanes.count >= 0 && lanes.count <= 4, `${name}.blessed_lanes.count must be 0..4 (lines through the center)`);
+      req(Number.isInteger(lanes.max_tier), `${name}.blessed_lanes.max_tier must be an integer`);
+      const low = RARITY_IDS.filter((id) => (rarityById.get(id)?.tier ?? 99) <= lanes.max_tier).reduce((n, id) => n + (comp[id] ?? 0), 0);
+      // Lines through the center only share the free cell, so each lane needs size-1 squares.
+      const need = lanes.count * (size - 1);
+      req(low >= need, `${name}.blessed_lanes need ${need} squares of tier ≤ ${lanes.max_tier}, composition has ${low}`);
+    }
+  };
+  checkCard('daily_card', rarity?.daily_card);
+  checkCard('weekly_card', rarity?.weekly_card);
+  req(['day', 'week'].includes(game?.card?.period), 'game.card.period must be day | week');
+  req(/^\d{4}-\d{2}-\d{2}$/.test(game?.weekly?.epoch ?? '') && new Date(`${game?.weekly?.epoch}T12:00:00Z`).getUTCDay() === 1, 'game.weekly.epoch must be a Monday (YYYY-MM-DD)');
+  req(Number.isInteger(game?.weekly?.active_days) && game.weekly.active_days >= 1 && game.weekly.active_days <= 7, 'game.weekly.active_days must be 1..7');
 
   // ── achievements.yaml
   const checkCondition = (c: Condition | undefined, where: string): void => {

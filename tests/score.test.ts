@@ -34,9 +34,9 @@ describe('squarePoints', () => {
 describe('scoreCard', () => {
   it('sums marked cells and ignores the free cell', () => {
     const s = scoreCard(config, card, m([[5, 'self'], [6, 'self'], [12, 'auto']]));
-    expect(s.squarePoints).toBe(20);
+    expect(s.squarePoints).toBe(35); // common 10 + uncommon 25
     expect(s.lineBonus).toBe(0);
-    expect(s.total).toBe(20);
+    expect(s.total).toBe(35);
   });
 
   it('adds line bonus per completed line', () => {

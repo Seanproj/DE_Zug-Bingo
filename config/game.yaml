@@ -9,7 +9,7 @@ locales:
 
 # 카드 생성 알고리즘 버전. RNG/생성 순서/배치 규칙을 바꿔서 같은 날짜의 카드가
 # 달라지게 되면 반드시 올린다 (과거 공유 카드와 불일치가 생기기 때문).
-generator_version: 1
+generator_version: 2           # v2: 현실 확률 반영으로 칸 등급/풀 변경 + 주간 카드
 
 board:
   size: 5                     # 5×5
@@ -18,10 +18,20 @@ board:
     term: Heute wieder Bahn gefahren
     emoji: "🫡"                # 문구는 locales/*.yaml 의 free_square
 
+# 메인 카드 주기. 현실 확률로 시뮬레이션하니 매일 5×5는 하루 빙고 0.4% → 주간 카드가 메인.
+# (reports/balance-weekly.md 참고). 체크는 매일 하고, 같은 주의 체크가 한 카드에 쌓인다.
+card:
+  period: week                # day | week
+
 daily:
-  timezone: Europe/Berlin     # 독일 기준 00시에 새 카드
-  epoch: "2026-10-23"         # 이 날짜가 Zug-Bingo #1
+  timezone: Europe/Berlin     # 독일 기준 00시에 날짜가 바뀐다 (주간 카드도 이 시간대의 월요일 00시)
+  epoch: "2026-10-23"         # 이 날짜가 Daily #1
   seed_prefix: "daily"
+
+weekly:
+  epoch: "2026-10-19"         # 이 주(월요일)가 Zug-Bingo #1
+  seed_prefix: "week"
+  active_days: 5              # 밸런스 시뮬레이션: 한 주의 통근일 수
 
 scoring:
   # 칸 점수 = round(등급 점수 × 배수)

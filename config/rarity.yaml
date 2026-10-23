@@ -80,7 +80,8 @@ rarities:
 share:
   unchecked_emoji: "⬜"
 
-# Daily 카드 구성 규칙 (무료 칸 제외 24칸).
+# Daily 카드 구성 규칙 (무료 칸 제외 24칸). game.yaml card.period: day 일 때만 사용.
+# 현실 확률로는 하루 1줄 ≈ 0.4% — 그래서 메인은 주간 카드.
 daily_card:
   # v0 (7/6/6/3/1/1) 시뮬레이션 결과 하루 1줄 확률 2.3% → 너무 어려움.
   # reports/phase0.md 참고. 현재 값은 축복 라인과 함께 ~20%/일 목표로 튜닝.
@@ -108,3 +109,23 @@ daily_card:
   blessed_lanes:
     count: 2
     max_tier: 0                # Common만
+
+# 주간 카드 (메인, game.yaml card.period: week). 한 주 동안 겪은 일이 쌓인다.
+# 칸별 현실 확률(squares.yaml)을 통근 5일로 누적 → 주당 1줄 이상 ≈ 54%, 2줄 이상 ≈ 10%.
+# 근거: reports/balance-weekly.md
+weekly_card:
+  composition:
+    common: 9
+    uncommon: 6
+    rare: 5
+    epic: 2
+    legendary: 1
+    mythic: 1
+  line_caps:
+    - min_tier: 3
+      max: 1
+    - min_tier: 2
+      max: 3
+  blessed_lanes:
+    count: 2
+    max_tier: 0

@@ -179,6 +179,18 @@ squares:
     label: Arrived ahead of schedule
     short: Early arrival
     flavor: Spacetime is bent. Screenshot required.
+  platform_crowded:
+    label: Platform packed
+    short: Packed platform
+    flavor: The previous train never came, so its passengers are here too.
+  reservation_optional:
+    label: '"Reservation may be released"'
+    short: '"Maybe yours"'
+    flavor: You reserved. Whether the reservation exists is negotiable.
+  eta_shift:
+    label: Arrival forecast changed in the app
+    short: ETA changed
+    flavor: A forecast is just a forecast. The app isn't sure either.
 achievements:
   first_bingo:
     name: First Bingo
@@ -228,13 +240,13 @@ levels:
   bahn_veteran: Rail Veteran
   gleis_legende: Track Legend
 ui:
-  header.daily: Daily card
+  header.daily: This week's card
   header.streak: '{n}-day streak'
   header.score: Score
   header.checked: '{n}/24'
   board.blessed_hint: Gold lines are today's blessed lanes — commons only
   board.one_away: One to go!
-  board.label: Today's bingo card
+  board.label: This week's bingo card
   cell.checked: checked
   cell.auto: auto-verifiable
   sheet.term: Original term
@@ -271,7 +283,7 @@ ui:
   help.blessed: Gold-framed lines are 🫡 blessed lanes — commons only, your best shot today.
   help.rarity: Rarer squares score more. Arriving on time is Mythic.
   help.offline: Checks keep saving while you're offline.
-  help.daily: Everyone gets the same new card at midnight, German time.
+  help.daily: A card lasts the whole week. Everyone gets the same new card on Monday at midnight, German time.
   share.lines_zero: still trying
   share.lines_one: '{n} line!'
   share.lines_other: '{n} lines!'
@@ -280,7 +292,7 @@ ui:
   footer.disclaimer: Unofficial fan project · not affiliated with Deutsche Bahn
   footer.data: 'Daten: Deutsche Bahn (CC BY 4.0)'
   onboard.title: German trains. Now collectible.
-  onboard.body: Delays, cancellations, replacement buses — check off what happened today and complete a bingo.
+  onboard.body: Delays, cancellations, replacement buses — check off what happens during the week and complete a bingo.
   onboard.cta: Start today's card
   tab.today: Today
   tab.collection: Collection
@@ -308,7 +320,7 @@ ui:
   profile.help: How to play
   stat.totalScore: Total score
   stat.cardsPlayed: Days played
-  stat.bingoCards: Bingo days
+  stat.bingoCards: Bingo weeks
   stat.maxLinesOnCard: Most lines
   stat.blackouts: Blackouts
   stat.bestStreak: Best streak
@@ -323,3 +335,11 @@ ui:
   share.saved: Image saved
   share.img_unofficial: Unofficial fan project
   sheet.collected: Collected {n} times so far
+  header.until: until {date}
+  board.checkin: Tap to check in
+  board.checked_in: Checked in ✓
+  toast.checkin: 🫡 Rode today! {n}-day streak
+  toast.new_week: 'New weekly card — #{n}'
+  cell.today: today
+  share.today: today +{n}
+  help.checkin: Tap the 🫡 center every day to check in — your streak continues even on uneventful days.

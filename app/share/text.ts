@@ -2,6 +2,7 @@
 import type { Config } from '../config/types.ts';
 import { evaluateBingo } from '../game/bingo.ts';
 import type { Card } from '../game/card.ts';
+import { isoWeek } from '../game/date.ts';
 import type { Marks } from '../game/marks.ts';
 import { scoreCard } from '../game/score.ts';
 import type { I18n } from '../i18n/index.ts';
@@ -22,7 +23,12 @@ export function shareGrid(config: Config, card: Pick<Card, 'size' | 'cells'>, ma
   return rows.join('\n');
 }
 
-export function shareText(config: Config, i18n: I18n, card: Card, marks: Marks): string {
+/** "#3 · W45" for weekly cards, "#3" for daily ones. */
+export function cardTitle(card: Pick<Card, 'number' | 'period' | 'key'>): string {
+  return card.period === 'week' ? `#${card.number} · W${String(isoWeek(card.key).week).padStart(2, '0')}` : `#${card.number}`;
+}
+
+export function shareText(config: Config, i18n: I18n, card: Card, marks: Marks, extra: { today?: number } = {}): string {
   const bingo = evaluateBingo(card, new Set(marks.keys()));
   const score = scoreCard(config, card, marks);
   const status = bingo.blackout
@@ -32,9 +38,10 @@ export function shareText(config: Config, i18n: I18n, card: Card, marks: Marks):
       : i18n.plural('share.lines', bingo.lines.length);
   const checked = [...marks.keys()].filter((i) => !card.cells[i]!.free).length;
   const lines = [
-    `Zug-Bingo #${card.number} 🚆 ${status}`,
+    `Zug-Bingo ${cardTitle(card)} 🚆 ${status}`,
     shareGrid(config, card, marks),
-    i18n.t('share.footer', { checked: i18n.number(checked), score: i18n.number(score.total) }),
+    i18n.t('share.footer', { checked: i18n.number(checked), score: i18n.number(score.total) }) +
+      (extra.today ? ` · ${i18n.t('share.today', { n: i18n.number(extra.today) })}` : ''),
   ];
   const { hashtag, url } = config.game.share;
   const tail = [hashtag, url].filter(Boolean).join(' ');

@@ -11,7 +11,9 @@
 #   category    delay | cancel | platform | connection | onboard | announcement | network | event | luck
 #   implies     이 칸을 체크하면 함께 체크되는 칸 id 목록
 #   pools       등장하는 카드 종류 (기본: [daily, trip]). event 전용 칸은 Daily에 안 나온다.
-#   probability (선택) 등급 기본 확률 대신 쓸 칸별 발생 확률
+#   probability 평범한 통근자(하루 왕복 2회, 지역+장거리 혼합)가 하루에 겪을 확률 추정치.
+#               지연 계열은 DB 장거리 정시율(2024 62.5% / 2025 60.1%, 6분 기준)에서 역산.
+#               나머지는 보수적 추정 — Phase 3 실데이터로 교체 예정.
 #   origin      handoff = HANDOFF 3장 초안 / original = Phase 0 추가 제안
 
 squares:
@@ -24,6 +26,7 @@ squares:
     verify: { type: delay_min, minutes: 5 }
     category: delay
     origin: handoff
+    probability: 0.4
 
   - id: delay_20
     term: Zugbindung aufgehoben
@@ -34,6 +37,7 @@ squares:
     category: delay
     implies: [delay_5]
     origin: handoff
+    probability: 0.12
 
   - id: delay_60
     term: Verspätung +60
@@ -44,6 +48,7 @@ squares:
     category: delay
     implies: [delay_20, delay_5]
     origin: handoff
+    probability: 0.03
 
   - id: delay_120
     term: Verspätung +120
@@ -54,6 +59,7 @@ squares:
     category: delay
     implies: [delay_60, delay_20, delay_5]
     origin: handoff
+    probability: 0.006
 
   - id: platform_change
     term: Gleiswechsel
@@ -63,6 +69,7 @@ squares:
     verify: { type: platform_change }
     category: platform
     origin: handoff
+    probability: 0.1
 
   - id: cancelled
     term: Zugausfall
@@ -72,6 +79,7 @@ squares:
     verify: { type: cancelled }
     category: cancel
     origin: handoff
+    probability: 0.04
 
   - id: short_turn
     term: endet vorzeitig
@@ -81,6 +89,7 @@ squares:
     verify: { type: short_turn }
     category: cancel
     origin: handoff
+    probability: 0.02
 
   - id: on_time_ice
     term: pünktlich
@@ -90,6 +99,7 @@ squares:
     verify: { type: on_time, train_types: [ICE], max_delay_min: 0 }
     category: luck
     origin: handoff
+    probability: 0.02
 
   - id: ersatzverkehr
     term: SEV / Ersatzverkehr
@@ -98,6 +108,7 @@ squares:
     verifiable: false
     category: cancel
     origin: handoff
+    probability: 0.03
 
   - id: reverse_order
     term: umgekehrte Wagenreihung
@@ -106,6 +117,7 @@ squares:
     verifiable: false
     category: platform
     origin: handoff
+    probability: 0.03
 
   - id: wifi_dead
     term: WLAN gestört
@@ -114,6 +126,7 @@ squares:
     verifiable: false
     category: network
     origin: handoff
+    probability: 0.2
 
   - id: bistro_closed
     term: Bordbistro geschlossen
@@ -122,6 +135,7 @@ squares:
     verifiable: false
     category: onboard
     origin: handoff
+    probability: 0.05
 
   - id: ac_broken
     term: Klimaanlage defekt
@@ -130,6 +144,7 @@ squares:
     verifiable: false
     category: onboard
     origin: handoff
+    probability: 0.05
 
   - id: repair
     term: Reparatur am Zug
@@ -138,6 +153,7 @@ squares:
     verifiable: false
     category: announcement
     origin: handoff
+    probability: 0.06
 
   - id: signal
     term: Signalstörung
@@ -146,14 +162,16 @@ squares:
     verifiable: false
     category: announcement
     origin: handoff
+    probability: 0.08
 
   - id: priority
     term: Vorfahrt eines anderen Zuges
     emoji: "🚄"
-    rarity: common
+    rarity: uncommon
     verifiable: false
     category: announcement
     origin: handoff
+    probability: 0.12
 
   - id: apology
     term: Wir bitten um Entschuldigung
@@ -162,6 +180,7 @@ squares:
     verifiable: false
     category: announcement
     origin: handoff
+    probability: 0.25
 
   - id: standing
     term: Reservierung weg
@@ -170,6 +189,7 @@ squares:
     verifiable: false
     category: onboard
     origin: handoff
+    probability: 0.04
 
   - id: missed_conn
     term: Anschluss verpasst
@@ -179,6 +199,7 @@ squares:
     verify: { type: missed_connection }
     category: connection
     origin: handoff
+    probability: 0.06
 
   - id: saved_conn
     term: Anschluss erreicht
@@ -188,6 +209,7 @@ squares:
     verify: { type: connection_made, max_buffer_min: 2 }
     category: connection
     origin: handoff
+    probability: 0.02
 
   - id: faster_alt
     term: Plan B war schneller
@@ -197,6 +219,7 @@ squares:
     verify: { type: faster_alternative }
     category: connection
     origin: handoff
+    probability: 0.01
 
   - id: funkloch
     term: Funkloch
@@ -206,6 +229,7 @@ squares:
     verify: { type: offline_auto }    # 앱이 오프라인을 감지하면 자동 체크 (셀프 배수)
     category: network
     origin: handoff
+    probability: 0.4
 
   - id: strike_day
     term: Streik
@@ -216,23 +240,26 @@ squares:
     category: event
     pools: [event]
     origin: handoff
+    probability: 0.01
 
-  # ─────────────── Phase 0 오리지널 제안 (18) ───────────────
+  # ─────────────── 오리지널 제안 (21: Phase 0 18 + 주간 전환 3) ───────────────
   - id: delay_inherited
     term: Verspätung aus vorheriger Fahrt
     emoji: "🧳"
-    rarity: common
+    rarity: uncommon
     verifiable: false
     category: announcement
     origin: original
+    probability: 0.12
 
   - id: wait_oncoming
     term: Warten auf Gegenzug
     emoji: "↔️"
-    rarity: common
+    rarity: uncommon
     verifiable: false
     category: announcement
     origin: original
+    probability: 0.06
 
   - id: construction
     term: Bauarbeiten
@@ -241,22 +268,25 @@ squares:
     verifiable: false
     category: announcement
     origin: original
+    probability: 0.15
 
   - id: door_broken
     term: Tür defekt
     emoji: "🚪"
-    rarity: common
+    rarity: uncommon
     verifiable: false
     category: onboard
     origin: original
+    probability: 0.06
 
   - id: coffee_out
     term: Kaffeemaschine defekt
     emoji: "☕"
-    rarity: common
+    rarity: uncommon
     verifiable: false
     category: onboard
     origin: original
+    probability: 0.04
 
   - id: speaker_garbled
     term: Durchsage unverständlich
@@ -265,6 +295,7 @@ squares:
     verifiable: false
     category: announcement
     origin: original
+    probability: 0.2
 
   - id: backwards_seat
     term: entgegen der Fahrtrichtung
@@ -273,14 +304,16 @@ squares:
     verifiable: false
     category: onboard
     origin: original
+    probability: 0.25
 
   - id: socket_dead
     term: Steckdose ohne Strom
     emoji: "🔌"
-    rarity: common
+    rarity: uncommon
     verifiable: false
     category: onboard
     origin: original
+    probability: 0.1
 
   - id: toilet_closed
     term: WC außer Betrieb
@@ -289,6 +322,7 @@ squares:
     verifiable: false
     category: onboard
     origin: original
+    probability: 0.08
 
   - id: info_follows
     term: Weitere Informationen folgen
@@ -297,6 +331,7 @@ squares:
     verifiable: false
     category: announcement
     origin: original
+    probability: 0.1
 
   - id: delay_growing
     term: Verspätung wächst
@@ -307,14 +342,16 @@ squares:
     category: delay
     implies: [delay_5]
     origin: original
+    probability: 0.08
 
   - id: overcrowded
     term: Zug überfüllt
     emoji: "🥫"
-    rarity: uncommon
+    rarity: common
     verifiable: false
     category: onboard
     origin: original
+    probability: 0.15
 
   - id: display_mismatch
     term: Anzeige ≠ Durchsage
@@ -323,6 +360,7 @@ squares:
     verifiable: false
     category: platform
     origin: original
+    probability: 0.06
 
   - id: coach_missing
     term: Wagen fehlt
@@ -331,6 +369,7 @@ squares:
     verifiable: false
     category: platform
     origin: original
+    probability: 0.02
 
   - id: animals_on_track
     term: Tiere im Gleis
@@ -339,6 +378,7 @@ squares:
     verifiable: false
     category: announcement
     origin: original
+    probability: 0.01
 
   - id: reason_changed
     term: neuer Verspätungsgrund
@@ -347,6 +387,7 @@ squares:
     verifiable: false
     category: announcement
     origin: original
+    probability: 0.03
 
   - id: stop_skipped
     term: Halt entfällt
@@ -356,6 +397,7 @@ squares:
     verify: { type: stop_skipped }
     category: cancel
     origin: original
+    probability: 0.01
 
   - id: early_arrival
     term: zu früh angekommen
@@ -365,3 +407,33 @@ squares:
     verify: { type: early_arrival, min_early_min: 1 }
     category: luck
     origin: original
+    probability: 0.01
+
+  # 주간 카드 전환 시 추가 — 정말로 흔한 일상 (하루 25% 이상)
+  - id: platform_crowded
+    term: Bahnsteig überfüllt
+    emoji: "👥"
+    rarity: common
+    verifiable: false
+    category: platform
+    origin: original
+    probability: 0.25
+
+  - id: reservation_optional
+    term: ggf. freigeben
+    emoji: "🎫"
+    rarity: common
+    verifiable: false
+    category: onboard
+    origin: original
+    probability: 0.25
+
+  - id: eta_shift
+    term: Prognose geändert
+    emoji: "📱"
+    rarity: common
+    verifiable: true
+    verify: { type: forecast_changed }
+    category: delay
+    origin: original
+    probability: 0.3

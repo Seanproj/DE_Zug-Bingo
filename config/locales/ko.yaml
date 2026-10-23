@@ -180,6 +180,18 @@ squares:
     label: 예정보다 일찍 도착
     short: 조기 도착
     flavor: 시공간이 뒤틀렸습니다. 스크린샷 필수.
+  platform_crowded:
+    label: 승강장이 인산인해
+    short: 승강장 만원
+    flavor: 앞 열차가 안 왔으니, 앞 열차 승객도 여기 있습니다.
+  reservation_optional:
+    label: 예약 표시에 '필요시 양보'
+    short: '"필요시 양보"'
+    flavor: 예약은 했는데, 예약이 확실한지는 모르겠습니다.
+  eta_shift:
+    label: 앱 도착 예정 시각이 바뀜
+    short: 도착 시각 변경
+    flavor: 예정은 예정일 뿐, 앱도 확신이 없습니다.
 achievements:
   first_bingo:
     name: 첫 빙고
@@ -229,13 +241,13 @@ levels:
   bahn_veteran: 철도 베테랑
   gleis_legende: 선로의 전설
 ui:
-  header.daily: 오늘의 카드
+  header.daily: 이번 주 카드
   header.streak: '{n}일 연속'
   header.score: 점수
   header.checked: '{n}/24칸'
   board.blessed_hint: 금색 줄은 오늘의 축복 라인 — 일반 칸만 모여 있어요
   board.one_away: 한 칸 남음!
-  board.label: 오늘의 빙고 카드
+  board.label: 이번 주 빙고 카드
   cell.checked: 체크됨
   cell.auto: 자동 인증 가능
   sheet.term: 원어
@@ -272,7 +284,7 @@ ui:
   help.blessed: 금색 테두리 줄은 🫡 축복 라인 — 일반 칸만 있어 오늘 가장 노려볼 만해요.
   help.rarity: 희귀한 칸일수록 점수가 높아요. 정시 도착은 무려 신화 등급.
   help.offline: 오프라인에서도 체크는 계속 저장돼요.
-  help.daily: 독일 시간 자정마다 모두에게 같은 새 카드가 나와요.
+  help.daily: 카드는 한 주 동안 이어져요. 매주 월요일 0시(독일 시간)에 모두에게 같은 새 카드가 나와요.
   share.lines_zero: 빙고 도전 중
   share.lines_one: '{n}줄!'
   share.lines_other: '{n}줄!'
@@ -281,7 +293,7 @@ ui:
   footer.disclaimer: 비공식 팬 프로젝트 · Deutsche Bahn과 무관합니다
   footer.data: 'Daten: Deutsche Bahn (CC BY 4.0)'
   onboard.title: 독일 기차, 이제 수집하세요
-  onboard.body: 지연·취소·대체버스… 오늘 겪은 일을 체크하고 빙고를 완성하세요.
+  onboard.body: 지연·취소·대체버스… 한 주 동안 겪은 일을 체크해서 빙고를 완성하세요.
   onboard.cta: 오늘의 카드 시작
   tab.today: 오늘
   tab.collection: 도감
@@ -309,7 +321,7 @@ ui:
   profile.help: 플레이 방법
   stat.totalScore: 누적 점수
   stat.cardsPlayed: 참여한 날
-  stat.bingoCards: 빙고한 날
+  stat.bingoCards: 빙고한 주
   stat.maxLinesOnCard: 최다 줄
   stat.blackouts: 블랙아웃
   stat.bestStreak: 최장 연속
@@ -324,3 +336,11 @@ ui:
   share.saved: 이미지를 저장했어요
   share.img_unofficial: 비공식 팬 프로젝트
   sheet.collected: 지금까지 {n}회 획득
+  header.until: '{date}까지'
+  board.checkin: 탭해서 체크인
+  board.checked_in: 오늘 체크인 ✓
+  toast.checkin: 🫡 오늘도 탔다! {n}일 연속
+  toast.new_week: '새 주간 카드 도착 — #{n}'
+  cell.today: 오늘
+  share.today: 오늘 +{n}칸
+  help.checkin: 가운데 🫡 칸을 매일 탭해서 체크인하세요. 아무 일 없던 날도 연속 참여가 이어져요.

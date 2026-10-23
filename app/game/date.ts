@@ -31,3 +31,26 @@ export function dailyNumber(key: string, epoch: string): number {
 export function addDays(key: string, days: number): string {
   return new Date((toUtcDays(key) + days) * 86_400_000).toISOString().slice(0, 10);
 }
+
+/** Day of week, 0 = Monday … 6 = Sunday. */
+export function weekday(key: string): number {
+  return (new Date(`${key}T12:00:00Z`).getUTCDay() + 6) % 7;
+}
+
+/** Monday (YYYY-MM-DD) of the week containing `key`. */
+export function weekStart(key: string): string {
+  return addDays(key, -weekday(key));
+}
+
+/** ISO-8601 week number (W01–W53) of `key`. */
+export function isoWeek(key: string): { year: number; week: number } {
+  const thursday = addDays(key, 3 - weekday(key));
+  const year = Number(thursday.slice(0, 4));
+  const week = Math.floor(daysBetween(`${year}-01-01`, thursday) / 7) + 1;
+  return { year, week };
+}
+
+/** Zug-Bingo #N for the week containing `key` — the epoch week is #1. */
+export function weeklyNumber(key: string, epochMonday: string): number {
+  return Math.floor(daysBetween(epochMonday, weekStart(key)) / 7) + 1;
+}

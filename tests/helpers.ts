@@ -7,6 +7,7 @@ export { config };
 export function fixtureCard(ids: string[]): Card {
   return {
     kind: 'daily',
+    period: 'day',
     key: '2026-01-01',
     number: 1,
     seed: 'fixture',

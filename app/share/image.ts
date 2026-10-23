@@ -7,6 +7,8 @@ import type { Card } from '../game/card.ts';
 import type { Marks } from '../game/marks.ts';
 import { scoreCard } from '../game/score.ts';
 import type { I18n } from '../i18n/index.ts';
+import { addDays } from '../game/date.ts';
+import { cardTitle } from './text.ts';
 
 export const SHARE_W = 1080;
 export const SHARE_H = 1350;
@@ -107,11 +109,13 @@ export function drawShareImage(ctx: CanvasRenderingContext2D, { config, i18n, ca
   ctx.fillStyle = '#9aa6bd';
   ctx.font = `700 30px ${MONO}`;
   ctx.letterSpacing = '8px';
-  ctx.fillText(`ZUG-BINGO #${card.number}`, L, 120);
+  ctx.fillText(`ZUG-BINGO ${cardTitle(card)}`, L, 120);
   ctx.letterSpacing = '0px';
   ctx.fillStyle = '#5f6b85';
   ctx.font = `600 28px ${MONO}`;
-  const date = new Intl.DateTimeFormat(i18n.locale, { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${card.key}T12:00:00Z`));
+  const fmt = new Intl.DateTimeFormat(i18n.locale, { month: 'short', day: 'numeric', timeZone: 'UTC' });
+  const at = (k: string) => new Date(`${k}T12:00:00Z`);
+  const date = card.period === 'week' ? fmt.formatRange(at(card.key), at(addDays(card.key, 6))) : fmt.format(at(card.key));
   ctx.textAlign = 'right';
   ctx.fillText(date, R, 120);
   ctx.textAlign = 'left';

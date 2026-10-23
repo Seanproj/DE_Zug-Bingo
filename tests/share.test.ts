@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { generateDailyCard } from '../app/game/card.ts';
+import { generateDailyCard, generateWeeklyCard } from '../app/game/card.ts';
 import type { VerifyMethod } from '../app/game/marks.ts';
 import { createI18n } from '../app/i18n/index.ts';
 import { shareGrid, shareText } from '../app/share/text.ts';
@@ -37,7 +37,14 @@ describe('shareText', () => {
   it('shows a no-line status and a footer with checked count and score', () => {
     const text = shareText(config, createI18n(config, 'en'), card, m([5, 6])).split('\n');
     expect(text[0]).toBe('Zug-Bingo #1 🚆 still trying');
-    expect(text[6]).toBe('2 squares · 20 pts');
+    expect(text[6]).toBe('2 squares · 35 pts');
+  });
+
+  it('labels weekly cards with the ISO week and today’s additions', () => {
+    const weekly = generateWeeklyCard(config, '2026-10-21');
+    const text = shareText(config, createI18n(config, 'ko'), weekly, m([0, 1]), { today: 2 }).split('\n');
+    expect(text[0]).toBe('Zug-Bingo #1 · W43 🚆 빙고 도전 중');
+    expect(text[6]).toMatch(/· 오늘 \+2칸$/);
   });
 
   it('works for a generated daily card', () => {

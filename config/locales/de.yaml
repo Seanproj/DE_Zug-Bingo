@@ -180,6 +180,18 @@ squares:
     label: Zu früh angekommen
     short: Zu früh!
     flavor: Die Raumzeit ist verbogen. Screenshot Pflicht.
+  platform_crowded:
+    label: Bahnsteig überfüllt
+    short: Voller Bahnsteig
+    flavor: Der Zug davor kam nicht – seine Fahrgäste sind also auch hier.
+  reservation_optional:
+    label: Anzeige „ggf. freigeben“
+    short: „ggf. freigeben“
+    flavor: Reserviert ist reserviert. Außer, wenn nicht.
+  eta_shift:
+    label: Prognose in der App geändert
+    short: Prognose neu
+    flavor: Eine Prognose ist eben nur eine Prognose.
 achievements:
   first_bingo:
     name: Erstes Bingo
@@ -229,13 +241,13 @@ levels:
   bahn_veteran: Bahn-Veteran
   gleis_legende: Gleis-Legende
 ui:
-  header.daily: Tageskarte
+  header.daily: Wochenkarte
   header.streak: '{n} Tage in Folge'
   header.score: Punkte
   header.checked: '{n}/24'
   board.blessed_hint: Goldene Reihen sind heute gesegnet — nur gewöhnliche Felder
   board.one_away: Noch eins!
-  board.label: Heutige Bingo-Karte
+  board.label: Bingo-Karte dieser Woche
   cell.checked: abgehakt
   cell.auto: automatisch prüfbar
   sheet.term: Originalbegriff
@@ -272,7 +284,7 @@ ui:
   help.blessed: Gold umrandete Reihen sind 🫡 gesegnet — nur gewöhnliche Felder, deine beste Chance heute.
   help.rarity: Seltene Felder bringen mehr Punkte. Pünktlichkeit ist mythisch.
   help.offline: Auch offline wird jeder Haken gespeichert.
-  help.daily: Um Mitternacht (deutsche Zeit) bekommen alle dieselbe neue Karte.
+  help.daily: Eine Karte gilt eine Woche. Montags um Mitternacht (deutsche Zeit) gibt es für alle dieselbe neue Karte.
   share.lines_zero: noch dran
   share.lines_one: '{n} Reihe!'
   share.lines_other: '{n} Reihen!'
@@ -281,7 +293,7 @@ ui:
   footer.disclaimer: Inoffizielles Fanprojekt · keine Verbindung zur Deutschen Bahn
   footer.data: 'Daten: Deutsche Bahn (CC BY 4.0)'
   onboard.title: Bahnfahren? Jetzt zum Sammeln.
-  onboard.body: Verspätung, Ausfall, Ersatzverkehr — hake ab, was heute passiert ist, und hol dir ein Bingo.
+  onboard.body: Verspätung, Ausfall, Ersatzverkehr — hake ab, was dir diese Woche passiert, und hol dir ein Bingo.
   onboard.cta: Tageskarte starten
   tab.today: Heute
   tab.collection: Sammlung
@@ -309,7 +321,7 @@ ui:
   profile.help: Spielanleitung
   stat.totalScore: Gesamtpunkte
   stat.cardsPlayed: Gespielte Tage
-  stat.bingoCards: Bingo-Tage
+  stat.bingoCards: Bingo-Wochen
   stat.maxLinesOnCard: Meiste Reihen
   stat.blackouts: Blackouts
   stat.bestStreak: Längste Serie
@@ -324,3 +336,11 @@ ui:
   share.saved: Bild gespeichert
   share.img_unofficial: Inoffizielles Fanprojekt
   sheet.collected: Bisher {n}× gesammelt
+  header.until: bis {date}
+  board.checkin: Antippen zum Einchecken
+  board.checked_in: Eingecheckt ✓
+  toast.checkin: 🫡 Heute gefahren! {n} Tage in Folge
+  toast.new_week: 'Neue Wochenkarte — #{n}'
+  cell.today: heute
+  share.today: heute +{n}
+  help.checkin: Tippe täglich auf die 🫡 Mitte zum Einchecken – so bleibt deine Serie auch an ruhigen Tagen.

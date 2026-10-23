@@ -28,9 +28,13 @@ export function squareProbability(config: Config, squareId: string): number {
   return sq.probability ?? config.rarityById.get(sq.rarity)!.probability;
 }
 
-export function simulateCard(config: Config, card: Card, trials = 20_000, seed = 'balance'): CardDifficulty {
+/**
+ * `days` accumulates each square over several independent days: P = 1 − (1 − p)^days
+ * (a weekly card with 5 commute days → days = 5).
+ */
+export function simulateCard(config: Config, card: Card, trials = 20_000, seed = 'balance', days = 1): CardDifficulty {
   const rng = createRng(`${seed}:${card.seed}`);
-  const probs = card.cells.map((c) => (c.free ? 1 : squareProbability(config, c.squareId)));
+  const probs = card.cells.map((c) => (c.free ? 1 : 1 - Math.pow(1 - squareProbability(config, c.squareId), days)));
   const implied = card.cells.map((_, i) => impliedCells(config, card, i));
 
   let line1 = 0,

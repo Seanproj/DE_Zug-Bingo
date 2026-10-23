@@ -1,7 +1,7 @@
 // Card generation. Pure and deterministic: same seed + same config ⇒ same card.
 import type { BlessedLanes, CardPool, Config, LineCap, RarityId, Square } from '../config/types.ts';
 import { boardLines, centerIndex, linesByCell } from './board.ts';
-import { dailyNumber } from './date.ts';
+import { dailyNumber, weekStart, weeklyNumber } from './date.ts';
 import { createRng, sample, shuffle, type Rng } from './rng.ts';
 
 export interface CardCell {
@@ -11,9 +11,11 @@ export interface CardCell {
 
 export interface Card {
   kind: CardPool;
-  /** Daily: YYYY-MM-DD. */
+  /** day = one card per date, week = one card per Monday–Sunday */
+  period: 'day' | 'week';
+  /** YYYY-MM-DD — the date (day) or the Monday (week). */
   key: string;
-  /** Daily: Zug-Bingo #N. */
+  /** Zug-Bingo #N within its period series. */
   number: number;
   seed: string;
   size: number;
@@ -106,7 +108,7 @@ function place(rng: Rng, config: Config, picked: Square[], lineCaps: LineCap[], 
   return { grid, blessedLines };
 }
 
-export function generateCard(config: Config, opts: GenerateOptions): Omit<Card, 'key' | 'number'> {
+export function generateCard(config: Config, opts: GenerateOptions): Omit<Card, 'key' | 'number' | 'period'> {
   const { size, free_square } = config.game.board;
   const rng = createRng(`${opts.seed}#v${config.game.generator_version}`);
 
@@ -140,5 +142,24 @@ export function generateDailyCard(config: Config, key: string): Card {
     lineCaps: config.rarity.daily_card.line_caps,
     blessedLanes: config.rarity.daily_card.blessed_lanes,
   });
-  return { ...card, key, number: dailyNumber(key, config.game.daily.epoch) };
+  return { ...card, period: 'day', key, number: dailyNumber(key, config.game.daily.epoch) };
+}
+
+/** The shared card for the week (Mon–Sun) containing `key`. */
+export function generateWeeklyCard(config: Config, key: string): Card {
+  const monday = weekStart(key);
+  const spec = config.rarity.weekly_card;
+  const card = generateCard(config, {
+    seed: `${config.game.weekly.seed_prefix}:${monday}`,
+    pool: 'daily',
+    composition: spec.composition,
+    lineCaps: spec.line_caps,
+    blessedLanes: spec.blessed_lanes,
+  });
+  return { ...card, period: 'week', key: monday, number: weeklyNumber(monday, config.game.weekly.epoch) };
+}
+
+/** The card the app plays on `today`, per game.yaml card.period. */
+export function currentCard(config: Config, today: string): Card {
+  return config.game.card.period === 'week' ? generateWeeklyCard(config, today) : generateDailyCard(config, today);
 }

@@ -83,3 +83,49 @@ describe('daily card generation', () => {
     expect(generateDailyCard(shuffled, '2026-11-11')).toEqual(generateDailyCard(config, '2026-11-11'));
   });
 });
+
+import { generateWeeklyCard } from '../app/game/card.ts';
+import { isoWeek, weekStart, weekday, weeklyNumber } from '../app/game/date.ts';
+
+describe('weeks', () => {
+  it('finds Monday and ISO week numbers', () => {
+    expect(weekday('2026-10-19')).toBe(0);
+    expect(weekday('2026-10-25')).toBe(6);
+    expect(weekStart('2026-10-25')).toBe('2026-10-19');
+    expect(weekStart('2026-10-19')).toBe('2026-10-19');
+    expect(isoWeek('2026-10-23')).toEqual({ year: 2026, week: 43 });
+    expect(isoWeek('2027-01-01')).toEqual({ year: 2026, week: 53 });
+    expect(isoWeek('2026-01-01')).toEqual({ year: 2026, week: 1 });
+  });
+
+  it('numbers weeks from the epoch Monday', () => {
+    expect(weeklyNumber('2026-10-23', '2026-10-19')).toBe(1);
+    expect(weeklyNumber('2026-10-26', '2026-10-19')).toBe(2);
+  });
+});
+
+describe('weekly card generation', () => {
+  it('is the same card for every day of the week and changes on Monday', () => {
+    const mon = generateWeeklyCard(config, '2026-10-19');
+    expect(generateWeeklyCard(config, '2026-10-25')).toEqual(mon);
+    expect(mon.key).toBe('2026-10-19');
+    expect(mon.period).toBe('week');
+    expect(mon.number).toBe(1);
+    expect(generateWeeklyCard(config, '2026-10-26').cells).not.toEqual(mon.cells);
+  });
+
+  it('differs from the daily card of the same date', () => {
+    expect(generateWeeklyCard(config, '2026-10-19').cells).not.toEqual(generateDailyCard(config, '2026-10-19').cells);
+  });
+
+  it('is pinned (regression guard — bump generator_version if this changes on purpose)', () => {
+    expect(generateWeeklyCard(config, '2026-10-19').cells.map((c) => c.squareId)).toMatchSnapshot();
+  });
+
+  it.each(Array.from({ length: 26 }, (_, i) => addDays('2026-10-19', i * 7)))('%s: exact weekly composition', (key) => {
+    const card = generateWeeklyCard(config, key);
+    const counts: Record<string, number> = {};
+    for (const c of card.cells) if (!c.free) counts[config.squareById.get(c.squareId)!.rarity] = (counts[config.squareById.get(c.squareId)!.rarity] ?? 0) + 1;
+    expect(counts).toEqual(config.rarity.weekly_card.composition);
+  });
+});

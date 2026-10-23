@@ -49,7 +49,7 @@ squares:
     flavor: You may need a witness statement.
   ersatzverkehr:
     label: Took the rail replacement bus
-    short: Replacement bus
+    short: Bus instead
     flavor: A motorway tour, included with your rail ticket.
   reverse_order:
     label: Coaches in reverse order

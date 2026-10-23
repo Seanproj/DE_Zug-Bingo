@@ -74,7 +74,7 @@ squares:
     flavor: Hoffentlich nicht während der Fahrt.
   signal:
     label: Durchsage „Signalstörung“
-    short: „Signalstörung“
+    short: "„Signal\u00ADstörung“"
     flavor: Auch Signale brauchen mal einen freien Tag.
   priority:
     label: Durchsage „Vorfahrt eines anderen Zuges“

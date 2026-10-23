@@ -69,6 +69,8 @@ export interface PeriodUpdate {
   checkin?: boolean;
   freeId: string;
   generatorVersion?: number;
+  /** squares proven today that are not on this card (collection only); added to today once */
+  extra?: { squareId: string; method: VerifyMethod }[];
 }
 
 /**
@@ -76,7 +78,7 @@ export interface PeriodUpdate {
  * disappear from whichever day held them, auto-verification upgrades in place. Returns only
  * the records that changed (today's record is created when needed).
  */
-export function updatePeriodDays({ card, days, today, next, now, checkin, freeId, generatorVersion }: PeriodUpdate): DayRecord[] {
+export function updatePeriodDays({ card, days, today, next, now, checkin, freeId, generatorVersion, extra = [] }: PeriodUpdate): DayRecord[] {
   const want = new Map<string, VerifyMethod>();
   for (const [cell, method] of next) {
     const c = card.cells[cell];
@@ -100,6 +102,12 @@ export function updatePeriodDays({ card, days, today, next, now, checkin, freeId
       });
     if (isToday) {
       for (const [squareId, method] of want) if (!seen.has(squareId)) marks.push({ squareId, method, at: now });
+      for (const e of extra) {
+        if (onCard.has(e.squareId)) continue;
+        const i = marks.findIndex((m) => m.squareId === e.squareId);
+        if (i < 0) marks.push({ squareId: e.squareId, method: e.method, at: now });
+        else if (e.method === 'auto' && marks[i]!.method !== 'auto') marks[i] = { ...marks[i]!, method: 'auto' };
+      }
       const hasCheckin = marks.some((m) => m.squareId === freeId);
       if (checkin === true && !hasCheckin) marks = [{ squareId: freeId, method: 'self', at: now }, ...marks];
       if (checkin === false && hasCheckin) marks = marks.filter((m) => m.squareId !== freeId);

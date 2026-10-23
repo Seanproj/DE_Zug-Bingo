@@ -344,3 +344,47 @@ ui:
   cell.today: heute
   share.today: heute +{n}
   help.checkin: Tippe täglich auf die 🫡 Mitte zum Einchecken – so bleibt deine Serie auch an ruhigen Tagen.
+  tab.trip: Fahrten
+  trip.title: Meine Fahrten
+  trip.wallet: 🪙 {n}
+  trip.wallet_hint: Spielpunkte für Tipps · kein echtes Geld · +{n} pro Check-in
+  trip.train: Zug
+  trip.train_placeholder: ICE 123 · RE 5 · S3
+  trip.station: Zielbahnhof
+  trip.station_placeholder: Bahnhof suchen
+  trip.time: Planmäßige Ankunft
+  trip.add: Fahrt hinzufügen
+  trip.check: Live prüfen
+  trip.recheck: Erneut prüfen
+  trip.empty: Füge deinen Zug hinzu – Echtzeitdaten verifizieren Felder automatisch (Punkte ×{mult}).
+  trip.pending: Noch nicht angekommen · erwartet {delay}
+  trip.arrived: Angekommen
+  trip.on_time: pünktlich
+  trip.cancelled: Fällt aus
+  trip.platform: Gleis {from} → {to}
+  trip.verified: '✅ Automatisch verifiziert: {list}'
+  trip.none_verified: Diesmal nichts verifiziert
+  trip.not_found: Diesen Zug haben wir um diese Zeit nicht gefunden. Bitte Nummer und Uhrzeit prüfen.
+  trip.error: Prüfserver nicht erreichbar. Bitte gleich nochmal versuchen.
+  trip.offline: 📵 Funkloch — wir prüfen automatisch, sobald du wieder online bist
+  trip.mock: Testdaten
+  trip.unsupported_note: Anschlüsse, vorzeitiges Ende u. Ä. bitte vorerst selbst abhaken.
+  trip.invalid_train: Bitte Zugnummer prüfen (z. B. ICE 123)
+  trip.pick_station: Bitte einen Bahnhof aus der Liste wählen
+  predict.title: Verspätung tippen
+  predict.bucket.on_time: Pünktlich (<5 Min.)
+  predict.bucket.d5: 5–19 Min.
+  predict.bucket.d20: 20–59 Min.
+  predict.bucket.d60: 60+ Min.
+  predict.bucket.cancelled: Ausfall
+  predict.odds: ×{odds}
+  predict.place: '{stake}🪙 setzen'
+  predict.placed: 🎯 {bucket} · {stake}🪙 → {payout}🪙 bei Treffer
+  predict.won: 🎯 Richtig getippt! +{payout}🪙
+  predict.lost: Daneben — es war {bucket}
+  predict.no_points: Nicht genug Punkte
+  toast.verified: ✅ Automatisch verifiziert +{n} (×{mult})
+  toast.bet_won: 🎯 Tipp richtig! +{payout}🪙
+  cell.verified: verifiziert
+  cell.stamp: GEPRÜFT
+  help.trip: Füge unter „Fahrten“ deinen Zug hinzu – nach der Ankunft verifizieren Echtzeitdaten Felder automatisch (Punkte ×1,5).

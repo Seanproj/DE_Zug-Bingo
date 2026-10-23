@@ -7,6 +7,7 @@ import { currentCard } from './card.ts';
 import { marksFromRecords, unionRecords, type DayRecord } from './day.ts';
 import { scoreCard } from './score.ts';
 import { computeStreak } from './streak.ts';
+import { tripTotals, type TripRecord } from './trips.ts';
 
 export interface CollectionEntry {
   count: number;
@@ -24,7 +25,7 @@ export interface Progress {
  * lines and score are recomputed per card (a day or a week, per game.yaml card.period) from the
  * union of that card's days. A day with only the 🫡 check-in still counts as played.
  */
-export function aggregate(config: Config, days: Iterable<DayRecord>, today: string): Progress {
+export function aggregate(config: Config, days: Iterable<DayRecord>, today: string, trips: readonly TripRecord[] = []): Progress {
   const stats = emptyStats();
   const collection = new Map<string, CollectionEntry>();
   const played: string[] = [];
@@ -62,5 +63,10 @@ export function aggregate(config: Config, days: Iterable<DayRecord>, today: stri
   stats.dailyStreak = streak.current;
   stats.bestStreak = streak.best;
   stats.distinctSquares = collection.size;
+  const t = tripTotals(trips);
+  stats.betWins = t.betWins;
+  stats.totalDelayMinutes = t.totalDelayMinutes;
+  stats.lineTrips = t.lineTrips;
+  stats.stationVisits = t.stationVisits;
   return { stats, collection };
 }

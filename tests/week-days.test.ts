@@ -69,4 +69,12 @@ describe('updatePeriodDays', () => {
     for (const d of changed) merged.set(d.key, d);
     expect(marksFromRecords(card, unionRecords([...merged.values()].map((d) => d.marks)))).toEqual(new Map(next));
   });
+
+  it('adds off-card squares proven today to the collection, once', () => {
+    const off = config.squares.find((s) => s.pools.includes('daily') && !card.cells.some((c) => c.squareId === s.id))!.id;
+    const changed = updatePeriodDays({ card, days: [mon], today: '2026-10-21', next: new Map([[0, 'self'], [1, 'self']]), now: 'N', freeId: free, extra: [{ squareId: off, method: 'auto' }] });
+    expect(changed[0]!.marks).toEqual([{ squareId: off, method: 'auto', at: 'N' }]);
+    const again = updatePeriodDays({ card, days: [mon, changed[0]!], today: '2026-10-21', next: new Map([[0, 'self'], [1, 'self']]), now: 'M', freeId: free, extra: [{ squareId: off, method: 'auto' }] });
+    expect(again).toEqual([]);
+  });
 });

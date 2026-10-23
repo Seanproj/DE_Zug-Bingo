@@ -343,3 +343,47 @@ ui:
   cell.today: today
   share.today: today +{n}
   help.checkin: Tap the 🫡 center every day to check in — your streak continues even on uneventful days.
+  tab.trip: Trips
+  trip.title: My trips
+  trip.wallet: 🪙 {n}
+  trip.wallet_hint: Game points for predictions · not real money · +{n} per check-in
+  trip.train: Train
+  trip.train_placeholder: ICE 123 · RE 5 · S3
+  trip.station: Arrival station
+  trip.station_placeholder: Search station
+  trip.time: Scheduled arrival
+  trip.add: Add trip
+  trip.check: Check live
+  trip.recheck: Check again
+  trip.empty: Add the train you ride and live data will verify squares for you (score ×{mult}).
+  trip.pending: Not arrived yet · expected {delay}
+  trip.arrived: Arrived
+  trip.on_time: on time
+  trip.cancelled: Cancelled
+  trip.platform: Platform {from} → {to}
+  trip.verified: '✅ Auto-verified: {list}'
+  trip.none_verified: Nothing verified this time
+  trip.not_found: Couldn't find that train around this time. Check the number and time.
+  trip.error: Can't reach the verification server. Try again in a moment.
+  trip.offline: 📵 Funkloch — will check again once you are back online
+  trip.mock: Mock data
+  trip.unsupported_note: Connections, early terminations and similar squares are self-report for now.
+  trip.invalid_train: Check the train number format (e.g. ICE 123)
+  trip.pick_station: Pick a station from the list
+  predict.title: Predict the delay
+  predict.bucket.on_time: On time (<5 min)
+  predict.bucket.d5: 5–19 min
+  predict.bucket.d20: 20–59 min
+  predict.bucket.d60: 60+ min
+  predict.bucket.cancelled: Cancelled
+  predict.odds: ×{odds}
+  predict.place: Bet {stake}🪙
+  predict.placed: 🎯 {bucket} · {stake}🪙 → {payout}🪙 if right
+  predict.won: 🎯 Called it! +{payout}🪙
+  predict.lost: Missed — it was {bucket}
+  predict.no_points: Not enough points
+  toast.verified: ✅ Auto-verified +{n} (×{mult})
+  toast.bet_won: 🎯 Prediction right! +{payout}🪙
+  cell.verified: verified
+  cell.stamp: VERIFIED
+  help.trip: Add your train in Trips — after arrival, live data verifies squares automatically (score ×1.5).

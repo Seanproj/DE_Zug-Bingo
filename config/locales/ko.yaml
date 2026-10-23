@@ -344,3 +344,47 @@ ui:
   cell.today: 오늘
   share.today: 오늘 +{n}칸
   help.checkin: 가운데 🫡 칸을 매일 탭해서 체크인하세요. 아무 일 없던 날도 연속 참여가 이어져요.
+  tab.trip: 여정
+  trip.title: 내 여정
+  trip.wallet: 🪙 {n}
+  trip.wallet_hint: 예측용 게임 포인트 · 실제 돈 아님 · 체크인마다 +{n}
+  trip.train: 열차
+  trip.train_placeholder: ICE 123 · RE 5 · S3
+  trip.station: 도착역
+  trip.station_placeholder: 역 이름 검색
+  trip.time: 도착 예정 시각
+  trip.add: 여정 추가
+  trip.check: 실시간 확인
+  trip.recheck: 다시 확인
+  trip.empty: 탈 열차를 추가하면 실시간 데이터로 칸이 자동 인증돼요 (점수 ×{mult}).
+  trip.pending: 아직 도착 전 · 예상 {delay}
+  trip.arrived: 도착
+  trip.on_time: 정시
+  trip.cancelled: 운행 취소
+  trip.platform: 승강장 {from} → {to}
+  trip.verified: '✅ 자동 인증: {list}'
+  trip.none_verified: 이번엔 인증된 칸이 없어요
+  trip.not_found: 이 시간대에 그 열차를 찾지 못했어요. 열차 번호와 시각을 확인해 주세요.
+  trip.error: 인증 서버에 연결할 수 없어요. 잠시 후 다시 시도해 주세요.
+  trip.offline: 📵 Funkloch — 연결되면 자동으로 다시 확인해요
+  trip.mock: 모의 데이터
+  trip.unsupported_note: 환승·중간역 종착 같은 칸은 아직 셀프 체크로 해 주세요.
+  trip.invalid_train: '열차 번호 형식을 확인해 주세요 (예: ICE 123)'
+  trip.pick_station: 목록에서 역을 골라 주세요
+  predict.title: 지연 예측
+  predict.bucket.on_time: 정시 (5분 미만)
+  predict.bucket.d5: 5–19분
+  predict.bucket.d20: 20–59분
+  predict.bucket.d60: 60분 이상
+  predict.bucket.cancelled: 운행 취소
+  predict.odds: ×{odds}
+  predict.place: '{stake}🪙 걸기'
+  predict.placed: 🎯 {bucket} · {stake}🪙 → 적중 시 {payout}🪙
+  predict.won: 🎯 적중! +{payout}🪙
+  predict.lost: 빗나감 — 결과는 {bucket}
+  predict.no_points: 포인트가 부족해요
+  toast.verified: ✅ 자동 인증 +{n}칸 (×{mult})
+  toast.bet_won: 🎯 예측 적중! +{payout}🪙
+  cell.verified: 자동 인증
+  cell.stamp: 인증
+  help.trip: 여정 탭에서 탈 열차를 추가하면, 도착 후 실시간 데이터로 칸이 자동 인증돼요 (점수 ×1.5).

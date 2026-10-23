@@ -157,6 +157,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border: 1.5px dashed color-mix(in oklab, var(--gold) 75%, transparent);
 }
 .cell--free .cell__label { color: var(--gold-ink); }
+.cell--free { cursor: pointer; }
+.cell__checkin { font: 700 clamp(7px, 1.9vw, 9px)/1.1 var(--mono); color: var(--gold-ink); opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.cell--free.is-awaiting { animation: deal 460ms var(--ease-pop) both, invite 2.2s ease-in-out 600ms infinite; }
+.cell--free.is-checked-in {
+  border-style: solid;
+  background: radial-gradient(circle at 50% 30%, color-mix(in oklab, var(--gold) 70%, white 10%), color-mix(in oklab, var(--gold) 55%, black 25%));
+  box-shadow: 0 6px 22px -8px var(--gold), inset 0 1px 0 rgb(255 255 255 / 0.4);
+}
+.cell--free.is-checked-in .cell__label, .cell--free.is-checked-in .cell__checkin { color: #2a1d00; }
+.cell__today {
+  position: absolute; top: 6px; left: 6px; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--checked-ink); box-shadow: 0 0 0 2px color-mix(in oklab, var(--rc) 70%, white 30%);
+}
+.cell.r-common .cell__today { background: var(--lit-ink); }
 .cell.is-blessed:not(.is-checked) { box-shadow: 0 0 0 1.5px color-mix(in oklab, var(--gold) 38%, transparent), 0 0 16px -8px var(--gold); }
 
 /* ✓ checked: the square is "punched" — filled with its rarity colour */
@@ -470,6 +484,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @keyframes gold-glow { 0% { box-shadow: 0 0 0 0 rgb(255 190 80 / 0.9); } 100% { box-shadow: 0 0 0 22px rgb(255 190 80 / 0); } }
 @keyframes flash { from { opacity: 1; } to { opacity: 0; } }
 @keyframes new-glow { 50% { box-shadow: 0 0 22px -2px #ff6ad5; } }
+@keyframes invite { 50% { box-shadow: 0 0 0 3px color-mix(in oklab, var(--gold) 55%, transparent), 0 0 24px -4px var(--gold); } }
 @keyframes beckon { 50% { opacity: 0.35; } }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes breathe { 50% { opacity: 0.65; } }

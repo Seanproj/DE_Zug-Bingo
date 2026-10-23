@@ -16,11 +16,15 @@ interface BoardProps {
   /** lines to animate as just-completed */
   freshLines: ReadonlySet<string>;
   oneAway: ReadonlySet<number>;
+  /** cells checked today (multi-day cards) */
+  today: ReadonlySet<number>;
+  /** 🫡 free-square check-in done today */
+  checkedIn: boolean;
   onTap(cell: number, el: HTMLElement): void;
   onHold(cell: number): void;
 }
 
-export function Board({ config, i18n, card, marks, lines, fresh, freshLines, oneAway, onTap, onHold }: BoardProps) {
+export function Board({ config, i18n, card, marks, lines, fresh, freshLines, oneAway, today, checkedIn, onTap, onHold }: BoardProps) {
   const geometry = boardLines(card.size);
   const blessedCells = new Set(card.blessedLines.flatMap((id) => geometry.find((l) => l.id === id)!.cells));
   return (
@@ -42,6 +46,8 @@ export function Board({ config, i18n, card, marks, lines, fresh, freshLines, one
                   fresh={fresh.has(i)}
                   blessed={blessedCells.has(i)}
                   oneAway={oneAway.has(i)}
+                  isToday={card.period === 'week' && today.has(i)}
+                  checkedIn={checkedIn}
                   onTap={onTap}
                   onHold={onHold}
                 />
@@ -65,11 +71,13 @@ interface CellProps {
   fresh: boolean;
   blessed: boolean;
   oneAway: boolean;
+  isToday: boolean;
+  checkedIn: boolean;
   onTap(cell: number, el: HTMLElement): void;
   onHold(cell: number): void;
 }
 
-function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, oneAway, onTap, onHold }: CellProps) {
+function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, oneAway, isToday, checkedIn, onTap, onHold }: CellProps) {
   const text = i18n.square(squareId);
   const square = config.squareById.get(squareId);
   const rarity = square ? config.rarityById.get(square.rarity)! : undefined;
@@ -84,6 +92,8 @@ function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, on
     fresh && 'is-fresh',
     blessed && 'is-blessed',
     oneAway && 'is-one-away',
+    isToday && 'is-today',
+    free && (checkedIn ? 'is-checked-in' : 'is-awaiting'),
   ]
     .filter(Boolean)
     .join(' ');
@@ -93,6 +103,8 @@ function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, on
     rarity && i18n.rarity(rarity.id),
     checked && !free && i18n.t('cell.checked'),
     oneAway && i18n.t('board.one_away'),
+    isToday && i18n.t('cell.today'),
+    free && (checkedIn ? i18n.t('board.checked_in') : i18n.t('board.checkin')),
   ]
     .filter(Boolean)
     .join(', ');
@@ -100,13 +112,13 @@ function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, on
     <div
       id={`cell-${index}`}
       role="gridcell"
-      tabIndex={free ? -1 : 0}
+      tabIndex={0}
       aria-label={aria}
       aria-selected={checked}
       class={cls}
       data-fx={rarity?.effect}
       style={{ '--i': index, '--rc': rarity?.color, '--rg': rarity?.glow }}
-      {...(free ? {} : press)}
+      {...press}
     >
       <span class="cell__emoji" aria-hidden="true">
         {square?.emoji ?? config.game.board.free_square.emoji}
@@ -114,6 +126,7 @@ function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, on
       <span class="cell__label" aria-hidden="true">
         {text.short}
       </span>
+      {free && <span class="cell__checkin" aria-hidden="true">{checkedIn ? i18n.t('board.checked_in') : i18n.t('board.checkin')}</span>}
       {term && (
         <span class="cell__term" aria-hidden="true">
           {term}
@@ -125,6 +138,7 @@ function Cell({ config, i18n, index, squareId, free, checked, fresh, blessed, on
         </span>
       )}
       {checked && !free && <span class="cell__stamp" aria-hidden="true" />}
+      {isToday && <span class="cell__today" aria-hidden="true" />}
     </div>
   );
 }

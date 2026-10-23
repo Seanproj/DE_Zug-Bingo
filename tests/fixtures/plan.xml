@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<timetable station="Frankfurt(Main)Hbf">
+  <s id="-123456789-2610211801-5">
+    <tl f="F" t="p" o="80" c="ICE" n="123"/>
+    <ar pt="2610211801" pp="7" ppth="Köln Hbf|Siegburg/Bonn|Frankfurt(M) Flughafen Fernbf"/>
+    <dp pt="2610211806" pp="7" ppth="Mannheim Hbf|Stuttgart Hbf"/>
+  </s>
+  <s id="99887766-2610211812-3">
+    <tl f="S" t="p" o="800337" c="S" n="35123"/>
+    <ar pt="2610211812" pp="103" l="3" ppth="Bad Soden(Taunus)|Frankfurt-Rödelheim"/>
+    <dp pt="2610211813" pp="103" l="3" ppth="Frankfurt Hauptwache|Darmstadt Hbf"/>
+  </s>
+  <s id="555-2610211830-1"><tl c="RE" n="4511"/><dp pt="2610211830" pp="14" l="5" ps="c"/></s>
+</timetable>

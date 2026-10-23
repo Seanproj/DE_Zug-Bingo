@@ -2,7 +2,11 @@ import { defineConfig } from 'vitest/config';
 import { VitePWA } from 'vite-plugin-pwa';
 import { yamlPlugin } from './scripts/vite-plugin-yaml.ts';
 
+const api = { '/api': { target: 'http://127.0.0.1:8787', changeOrigin: true } };
+
 export default defineConfig({
+  server: { proxy: api },
+  preview: { proxy: api },
   plugins: [
     yamlPlugin(),
     VitePWA({
@@ -27,6 +31,7 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
         navigateFallback: 'index.html',
+        navigateFallbackDenylist: [/^\/api\//],
       },
     }),
   ],

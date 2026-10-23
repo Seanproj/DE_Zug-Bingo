@@ -11,7 +11,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "report:balance": "tsx scripts/balance-report.ts"
+    "report:balance": "tsx scripts/balance-report.ts",
+    "worker:dev": "tsx scripts/worker-dev.ts",
+    "worker:deploy": "cd worker && npx wrangler deploy"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
